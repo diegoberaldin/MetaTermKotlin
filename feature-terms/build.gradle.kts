@@ -1,11 +1,10 @@
-
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
 }
 
 group = "feature.terms"
-version = "1.0-SNAPSHOT"
+version = libs.versions.appVersion.get()
 
 repositories {
     google()
@@ -22,24 +21,25 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
+                implementation(compose.materialIconsExtended)
 
                 implementation(compose.foundation)
                 implementation(compose.animation)
 
-                implementation("moe.tlaster:precompose:1.3.14")
+                implementation(libs.precompose)
+                implementation(libs.koin)
+
+                implementation(project(":core-common"))
+                implementation(project(":core-data"))
+                implementation(project(":core-persistence"))
+                implementation(project(":core-repository"))
+                implementation(project(":core-localization"))
+
+                api(project(":feature-terms:filter"))
+                api(project(":feature-terms:detail"))
+                api(project(":feature-terms:list"))
             }
         }
         val jvmTest by getting
     }
 }
-
-//compose.desktop {
-//    application {
-//        mainClass = "MainKt"
-//        nativeDistributions {
-//            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-//            packageName = "feature-terms"
-//            packageVersion = "1.0.0"
-//        }
-//    }
-//}

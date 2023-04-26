@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="main-jvm-1.0-SNAPSHOT">
+    <output-path>$PROJECT_DIR$/feature-base/main/build/libs</output-path>
+    <root id="archive" name="main-jvm-1.0-SNAPSHOT.jar" />
+  </artifact>
+</component>

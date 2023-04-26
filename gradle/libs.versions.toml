@@ -1,0 +1,43 @@
+[versions]
+androidx_datastore = "1.0.0"
+exposed = "0.41.1"
+h2 = "2.1.214"
+koin = "3.2.0"
+kotlinx_serialization = "1.5.0"
+log4j = "2.20.0"
+precompose = "1.3.14"
+redundent = "1.9.0"
+sl4j = "1.7.30"
+
+appVersion = "1.0.0"
+buildNumber = "1"
+
+[libraries]
+# DI
+koin = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin_test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
+
+# navigation
+precompose = { module = "moe.tlaster:precompose", version.ref = "precompose" }
+
+# AndroidX
+androidx_datastore = { module = "androidx.datastore:datastore-preferences-core", version.ref = "androidx_datastore" }
+
+# persistence
+h2database = { module = "com.h2database:h2", version.ref = "h2" }
+exposed_core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }
+exposed_dao = { module = "org.jetbrains.exposed:exposed-dao", version.ref = "exposed" }
+exposed_jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
+
+# serialization
+kotlinx_serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx_serialization" }
+redundent = { module = "org.redundent:kotlin-xml-builder", version.ref = "redundent" }
+
+# logging
+log4j_api = { module = "org.apache.logging.log4j:log4j-api", version.ref = "log4j" }
+log4j_core = { module = "org.apache.logging.log4j:log4j-core", version.ref = "log4j" }
+log4j_impl = { module = "org.apache.logging.log4j:log4j-slf4j2-impl", version.ref = "log4j" }
+sl4j_api = { module = "org.slf4j:slf4j-api", version.ref = "sl4j" }
+
+[bundles]
+log4j = ["sl4j.api", "log4j.api", "log4j.core", "log4j.impl"]

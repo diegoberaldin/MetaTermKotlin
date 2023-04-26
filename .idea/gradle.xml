@@ -1,23 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/core-common" />
+            <option value="$PROJECT_DIR$/core-data" />
+            <option value="$PROJECT_DIR$/core-localization" />
+            <option value="$PROJECT_DIR$/core-persistence" />
+            <option value="$PROJECT_DIR$/core-repository" />
+            <option value="$PROJECT_DIR$/feature-base" />
+            <option value="$PROJECT_DIR$/feature-base/intro" />
+            <option value="$PROJECT_DIR$/feature-base/main" />
+            <option value="$PROJECT_DIR$/feature-termbases" />
+            <option value="$PROJECT_DIR$/feature-termbases/create" />
+            <option value="$PROJECT_DIR$/feature-termbases/definitionmodel" />
+            <option value="$PROJECT_DIR$/feature-termbases/edit" />
+            <option value="$PROJECT_DIR$/feature-termbases/inputmodel" />
+            <option value="$PROJECT_DIR$/feature-termbases/management" />
+            <option value="$PROJECT_DIR$/feature-termbases/metadata" />
+            <option value="$PROJECT_DIR$/feature-termbases/statistics" />
             <option value="$PROJECT_DIR$/feature-terms" />
+            <option value="$PROJECT_DIR$/feature-terms/detail" />
+            <option value="$PROJECT_DIR$/feature-terms/filter" />
+            <option value="$PROJECT_DIR$/feature-terms/list" />
           </set>
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/feature-terms" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/feature-terms/filter" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/feature-terms" />
+            <option value="$PROJECT_DIR$/feature-terms/core-common" />
+            <option value="$PROJECT_DIR$/feature-terms/core-data" />
+            <option value="$PROJECT_DIR$/feature-terms/core-localization" />
+            <option value="$PROJECT_DIR$/feature-terms/core-persistence" />
+            <option value="$PROJECT_DIR$/feature-terms/core-repository" />
+            <option value="$PROJECT_DIR$/feature-terms/filter" />
           </set>
         </option>
       </GradleProjectSettings>

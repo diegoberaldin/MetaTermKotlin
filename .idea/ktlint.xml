@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="KtlintProjectConfiguration">
+    <enableKtlint>false</enableKtlint>
+    <treatAsErrors>false</treatAsErrors>
+    <formatOnSave>true</formatOnSave>
+    <disabledRules>
+      <list>
+        <option value="paren-spacing" />
+      </list>
+    </disabledRules>
+  </component>
+</project>
