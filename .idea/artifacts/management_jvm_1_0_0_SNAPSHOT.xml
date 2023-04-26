@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="management-jvm-1.0.0-SNAPSHOT">
+    <output-path>$PROJECT_DIR$/feature-termbases/management/build/libs</output-path>
+    <root id="archive" name="management-jvm-1.0.0-SNAPSHOT.jar">
+      <element id="module-output" name="MetaTerm.feature-termbases.management.jvmMain" />
+    </root>
+  </artifact>
+</component>
