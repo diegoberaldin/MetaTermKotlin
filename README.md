@@ -1,4 +1,7 @@
+<p align="center"><img width="310" src="https://user-images.githubusercontent.com/2738294/235072055-603950db-78b3-4011-8a4e-2f870783f423.png" /></p>
+
 # MetaTermKotlin
+
 An open soure terminology management solution.
 
 ## Rationale
@@ -46,6 +49,13 @@ Edit termbase
 
 ## Technologies
 
-This project was also created as a playground to experiment with some technologies I wanted to learn. It is a pure Kotlin project taking advantage of Kotlin multiplatform, even though no native code was needed and it's all JVM flavoured.
-The UI layer is written in Jetpack Compose, using the desktop porting of the library which is still experimental but reliable though. In order to have navigation and MVVM, I chose the Precomposed library by [Tlaster](https://tlaster.github.io/PreCompose/)
-The persistence layer was written with JetBrains's Exposed library, combined with the JDBC driver and an embedded H2 database.
+This project was also created as a playground to experiment with some frameworks and libraries I wanted to learn (and play a little with). It is a pure Kotlin project taking advantage of the *Kotlin multiplatform* technology, even though no native code was needed and it's all in the JVM flavour.
+The UI layer is written in *Jetpack Compose*, using the desktop porting of the library which is still experimental (but reliable though).
+In order to have navigation and MVVM in a desktop/multiplatform, I chose the *Precomposed* library by [Tlaster](https://tlaster.github.io/PreCompose/).
+The persistence layer was written with JetBrains's *Exposed* library, combined with the JDBC driver and an embedded *H2 database*. Dependency injection is obtained with *Koin* but as a thin layer with no annotation processing and other bells and whistles.
+
+Since this is an open field for experimentation, I am willing to accept change proposals/suggestions and even to rewrite entire layers of the application architecture just for fun (I already switched SQLite -> H2 for persistence and Kodein -> Koin for DI during the development stages).
+
+## Trivia
+
+The name "MetaTerm" is a pun between the name of well known commercial solutions and the Greek verb μεταφράζω meaning "to translate". In my dreams, I would like to create a similar project MetaLine for text alignment and translation memory management but that's another story completely.
