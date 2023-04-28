@@ -3,10 +3,14 @@ An open soure terminology management solution.
 
 ## Rationale
 
-Once upon a time, when my career as a software devoper had not started yet, I happened to work in the field of professional translation. At that time, no free and open source solutions existed, the only tools that were available were expensive and hard to use.
-This is an attempt to provide an alternate solution as free software. This is still mostly work in progress, so feel free to experiment, report bugs and suggest possible improvements. This project is developed in my free time, so please be patient.
+Once upon a time, when my career as a software developer had not started yet, I happened to work in the field of professional translation. At that time, no free and open source solutions existed, the only tools that were available were expensive and hard to use.
+Here is an attempt to provide an alternate solution as free software. This is still mostly work in progress, so feel free to experiment, report bugs and suggest possible improvements. This project is developed in my free time, so please be patient.
 
 ## Functions
+MetaTerm is intended as a concept-oriented terminology management tool, allowing glossary makers to create terminological entries for concepts (rather than for terms), each of which can have multiple lemmata for multiple languages (when more terms for the same language coexist in the same entries they are to be considered alternatives or parasynonyms).
+Each entry, language or term within a language can be described by one or more properties, whose name, level and type can be defined for each termbase in the definition model, in order to guarantee a flexible structure depending on the domain or the user's requirements.
+The structure of the form for term insertion can be customized as well, as it is referred to as the input model (configurable for each termbase too).
+Entries can be filtered according to a fuzzy or exact match on their descriptive fields or lemmata. Fields that are marked for inclusion in search are fuzzily matched against the content of the search field in the main toolbar.
 
 ### Entry management
 
@@ -40,4 +44,8 @@ Create a new termbase
 Edit termbase
 <img width="912" alt="dialog_edit" src="https://user-images.githubusercontent.com/2738294/234402945-71c5e34f-b478-4660-bcdb-e00743c354ba.png">
 
+## Technologies
 
+This project was also created as a playground to experiment with some technologies I wanted to learn. It is a pure Kotlin project taking advantage of Kotlin multiplatform, even though no native code was needed and it's all JVM flavoured.
+The UI layer is written in Jetpack Compose, using the desktop porting of the library which is still experimental but reliable though. In order to have navigation and MVVM, I chose the Precomposed library by [Tlaster](https://tlaster.github.io/PreCompose/)
+The persistence layer was written with JetBrains's Exposed library, combined with the JDBC driver and an embedded H2 database.
