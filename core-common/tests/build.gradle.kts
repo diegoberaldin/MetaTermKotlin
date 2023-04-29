@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.compose")
 }
 
-group = "core.common"
+group = "core.common.tests"
 version = libs.versions.appVersion.get()
 
 repositories {
@@ -21,11 +21,10 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
+                implementation(compose.materialIconsExtended)
 
-                implementation(libs.koin)
-                implementation(libs.androidx.datastore)
-
-                api(libs.bundles.log4j)
+                implementation(project(":core-common"))
+                implementation(kotlin("test-junit5"))
             }
         }
     }

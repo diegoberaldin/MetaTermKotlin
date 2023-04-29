@@ -13,3 +13,9 @@ pluginManagement {
 }
 
 rootProject.name = "MetaTerm"
+
+include(
+    ":tests",
+)
+
+project(":tests").projectDir = File("./tests")
