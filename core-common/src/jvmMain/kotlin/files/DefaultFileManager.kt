@@ -3,7 +3,7 @@ package files
 import java.io.File
 import java.util.*
 
-internal object DefaultFileManager : FileManager {
+object DefaultFileManager : FileManager {
 
     private const val DIR_NAME = "MetaTerm"
     private val separator = System.getProperty("file.separator")
