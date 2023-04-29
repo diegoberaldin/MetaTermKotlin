@@ -28,7 +28,6 @@ import di.mainKoinModule
 import di.repositoryKoinModule
 import di.termbasesKoinModule
 import di.termsKoinModule
-import di.useCaseKoinModule
 import log.LogManager
 import moe.tlaster.precompose.PreComposeWindow
 import moe.tlaster.precompose.ui.viewModel
@@ -64,7 +63,6 @@ private val koin = startKoin {
         commonKoinModule,
         databaseKoinModule,
         repositoryKoinModule,
-        useCaseKoinModule,
 
         mainKoinModule,
         termbasesKoinModule,

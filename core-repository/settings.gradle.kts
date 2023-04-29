@@ -20,6 +20,7 @@ include(
     ":core-data",
     ":core-localization",
     ":repo",
+    ":usecase",
 )
 project(":core-common").projectDir = File("../core-common")
 project(":core-persistence").projectDir = File("../core-persistence")
@@ -27,3 +28,4 @@ project(":core-data").projectDir = File("../core-data")
 project(":core-localization").projectDir = File("../core-localization")
 
 project(":repo").projectDir = File("./repo")
+project(":usecase").projectDir = File("./usecase")

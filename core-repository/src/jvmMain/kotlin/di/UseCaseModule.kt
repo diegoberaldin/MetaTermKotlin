@@ -19,7 +19,7 @@ import usecase.ImportCsvUseCase
 import usecase.ImportTbxUseCase
 import usecase.SearchTermsUseCase
 
-val useCaseKoinModule = module {
+internal val useCaseKoinModule = module {
     single {
         val entryRepository: EntryRepository by inject()
         val languageRepository: LanguageRepository by inject()
