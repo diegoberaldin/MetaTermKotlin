@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.compose")
 }
 
-group = "core.repository"
+group = "core.repository.usecase"
 version = libs.versions.appVersion.get()
 
 repositories {
@@ -21,16 +21,16 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
+                implementation(compose.materialIconsExtended)
 
-                implementation(libs.koin)
+                implementation(libs.redundent)
 
                 implementation(project(":core-common"))
                 implementation(project(":core-data"))
                 implementation(project(":core-persistence"))
                 implementation(project(":core-localization"))
 
-                api(project(":core-repository:repo"))
-                api(project(":core-repository:usecase"))
+                implementation(project(":core-repository:repo"))
             }
         }
         val jvmTest by getting
