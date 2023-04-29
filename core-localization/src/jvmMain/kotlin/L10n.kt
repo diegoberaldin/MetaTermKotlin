@@ -2,7 +2,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
 
-object L10n {
+internal object L10n {
 
     @OptIn(ExperimentalSerializationApi::class)
     private val localizables: List<LocalizableString> by lazy {
