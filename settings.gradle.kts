@@ -21,6 +21,7 @@ include(
     ":core-data",
     ":core-persistence",
     ":core-repository",
+    ":core-repository:repo",
     ":core-localization",
     ":feature-base",
     ":feature-base:intro",
