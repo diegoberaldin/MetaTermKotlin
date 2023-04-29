@@ -12,4 +12,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "core-common"
+rootProject.name = "MetaTerm"
