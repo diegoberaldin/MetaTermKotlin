@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="DefaultFileManagerTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <module name="MetaTerm.core-common.tests.jvmMain" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="files.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="files" />
+    <option name="MAIN_CLASS_NAME" value="files.DefaultFileManagerTest" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="class" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

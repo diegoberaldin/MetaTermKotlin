@@ -12,7 +12,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "MetaTerm"
+rootProject.name = "feature-base"
 
 include(
     "core-common",

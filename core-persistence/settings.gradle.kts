@@ -12,7 +12,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "MetaTerm"
+rootProject.name = "core.persistence"
 
 include(
     "core-data",

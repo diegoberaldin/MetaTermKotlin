@@ -12,7 +12,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "MetaTerm"
+rootProject.name = "core-common"
 
 include(
     ":tests",

@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withTimeoutOrNull
 import java.io.File
 
-internal class DefaultTemporaryKeyStore(
+class DefaultTemporaryKeyStore(
     private val fileManager: FileManager,
 ) : TemporaryKeyStore {
 
