@@ -83,9 +83,13 @@ internal val useCaseKoinModule = module {
     single {
         val entryRepository: EntryRepository by inject()
         val termRepository: TermRepository by inject()
+        val propertyRepository: PropertyRepository by inject()
+        val termPropertyValueRepository: TermPropertyValueRepository by inject()
         ExportTbxUseCase(
             termRepository = termRepository,
             entryRepository = entryRepository,
+            propertyRepository = propertyRepository,
+            termPropertyValueRepository = termPropertyValueRepository,
         )
     }
     single {
