@@ -39,5 +39,6 @@ include(
     ":feature-termbases:inputmodel",
     ":feature-termbases:create",
     ":feature-termbases:edit",
-)
 
+    ":core-common:tests",
+)
