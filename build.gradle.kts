@@ -45,6 +45,7 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(project(":core-common:tests"))
+                implementation(project(":core-localization:tests"))
             }
         }
     }
