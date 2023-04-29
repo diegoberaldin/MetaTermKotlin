@@ -14,3 +14,9 @@ pluginManagement {
 
 
 rootProject.name = "core-localization"
+
+include(
+    ":tests",
+)
+
+project(":tests").projectDir = File("./tests")

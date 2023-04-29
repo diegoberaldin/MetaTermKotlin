@@ -41,4 +41,5 @@ include(
     ":feature-termbases:edit",
 
     ":core-common:tests",
+    ":core-localization:tests",
 )
