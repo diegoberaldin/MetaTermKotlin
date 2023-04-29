@@ -35,9 +35,9 @@ kotlin {
                 implementation(project(":core-repository"))
                 implementation(project(":core-localization"))
 
-                api(project(":feature-terms:filter"))
                 api(project(":feature-terms:detail"))
                 api(project(":feature-terms:list"))
+                api(project(":feature-terms:filter"))
             }
         }
         val jvmTest by getting

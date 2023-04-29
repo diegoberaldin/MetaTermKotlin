@@ -12,4 +12,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = "MetaTerm"
+
+rootProject.name = "core-localization"
