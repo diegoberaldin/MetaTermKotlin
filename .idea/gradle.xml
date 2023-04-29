@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/core-localization" />
             <option value="$PROJECT_DIR$/core-persistence" />
             <option value="$PROJECT_DIR$/core-repository" />
+            <option value="$PROJECT_DIR$/core-repository/repo" />
             <option value="$PROJECT_DIR$/feature-base" />
             <option value="$PROJECT_DIR$/feature-base/intro" />
             <option value="$PROJECT_DIR$/feature-base/main" />
