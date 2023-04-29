@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 
-internal object DefaultNotificationCenter : NotificationCenter {
+object DefaultNotificationCenter : NotificationCenter {
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private val _events = MutableSharedFlow<NotificationCenter.Event>()
