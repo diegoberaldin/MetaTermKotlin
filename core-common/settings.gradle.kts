@@ -15,7 +15,7 @@ pluginManagement {
 rootProject.name = "core-common"
 
 include(
-    ":tests",
+    "tests",
 )
 
 project(":tests").projectDir = File("./tests")

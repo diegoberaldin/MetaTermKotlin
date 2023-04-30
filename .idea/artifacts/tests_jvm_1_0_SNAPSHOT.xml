@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="tests-jvm-1.0-SNAPSHOT">
-    <output-path>$PROJECT_DIR$/core-localization/tests/build/libs</output-path>
+    <output-path>$PROJECT_DIR$/core-persistence/tests/build/libs</output-path>
     <root id="archive" name="tests-jvm-1.0-SNAPSHOT.jar" />
   </artifact>
 </component>

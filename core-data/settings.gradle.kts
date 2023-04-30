@@ -15,6 +15,6 @@ pluginManagement {
 rootProject.name = "core-data"
 
 include(
-    ":core-localization"
+    "core-localization"
 )
 project(":core-localization").projectDir = File("../core-localization")

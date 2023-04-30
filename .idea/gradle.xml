@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/core-localization" />
             <option value="$PROJECT_DIR$/core-localization/tests" />
             <option value="$PROJECT_DIR$/core-persistence" />
+            <option value="$PROJECT_DIR$/core-persistence/tests" />
             <option value="$PROJECT_DIR$/core-repository" />
             <option value="$PROJECT_DIR$/core-repository/repo" />
             <option value="$PROJECT_DIR$/core-repository/usecase" />

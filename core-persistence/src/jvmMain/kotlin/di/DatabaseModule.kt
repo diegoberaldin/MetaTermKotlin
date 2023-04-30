@@ -30,7 +30,7 @@ val databaseKoinModule = module {
     }
     single {
         val db: AppDatabase = get()
-        db.entryProperyValueDao()
+        db.entryPropertyValueDao()
     }
     single {
         val db: AppDatabase = get()

@@ -16,8 +16,11 @@ rootProject.name = "core.persistence"
 
 include(
     "core-data",
-    "core-common"
+    "core-common",
+    "tests",
 )
 project(":core-data").projectDir = File("../core-data")
 project(":core-common").projectDir = File("../core-common")
+
+project(":tests").projectDir = File(".tests")
 
