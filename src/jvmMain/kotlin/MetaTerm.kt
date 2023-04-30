@@ -28,6 +28,8 @@ import di.mainKoinModule
 import di.repositoryKoinModule
 import di.termbasesKoinModule
 import di.termsKoinModule
+import keystore.TemporaryKeyStore
+import kotlinx.coroutines.runBlocking
 import log.LogManager
 import moe.tlaster.precompose.PreComposeWindow
 import moe.tlaster.precompose.ui.viewModel
@@ -57,6 +59,7 @@ import ui.screens.main.MainViewModel
 import ui.theme.MetaTermTheme
 import ui.theme.SelectedBackground
 import ui.theme.Spacing
+import java.util.Locale
 
 private val koin = startKoin {
     modules(
@@ -137,11 +140,18 @@ private fun App(viewModel: AppViewModel) {
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() = application {
+    // init log
     val log: LogManager = koin.get()
     log.debug("App initialized")
-
     Thread.setDefaultUncaughtExceptionHandler { t, e ->
         log.exception("Exception in ${t.name}", cause = e)
+    }
+
+    // init l10n
+    val keyStore: TemporaryKeyStore = koin.get()
+    runBlocking {
+        val currentLang = keyStore.get("lang", Locale.getDefault().language)
+        L10n.setLanguage(currentLang)
     }
 
     PreComposeWindow(
