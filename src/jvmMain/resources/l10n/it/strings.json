@@ -9,79 +9,79 @@
   },
   {
     "key": "menu_termbase_new",
-    "value": "New…"
+    "value": "Nuovo…"
   },
   {
     "key": "menu_termbase_edit",
-    "value": "Edit…"
+    "value": "Modifica…"
   },
   {
     "key": "menu_entry_new",
-    "value": "New entry…"
+    "value": "Nuova scheda…"
   },
   {
     "key": "menu_entry_edit",
-    "value": "Edit"
+    "value": "Modifica"
   },
   {
     "key": "menu_entry_save",
-    "value": "Save"
+    "value": "Salva"
   },
   {
     "key": "menu_entry_close_edit",
-    "value": "Close edit"
+    "value": "Termina modifica"
   },
   {
     "key": "menu_entry_delete",
-    "value": "Delete"
+    "value": "Elimina"
   },
   {
     "key": "menu_termbase_manage",
-    "value": "Manage termbases…"
+    "value": "Gestione termbase…"
   },
   {
     "key": "menu_termbase_settings",
-    "value": "Settings…"
+    "value": "Impostazioni…"
   },
   {
     "key": "menu_termbase_statistics",
-    "value": "Statistics…"
+    "value": "Statistiche…"
   },
   {
     "key": "menu_termbase_import",
-    "value": "Import"
+    "value": "Importa"
   },
   {
     "key": "menu_termbase_import_csv",
-    "value": "From CSV…"
+    "value": "Da CSV…"
   },
   {
     "key": "menu_termbase_import_tbx",
-    "value": "From TBX…"
+    "value": "Da TBX…"
   },
   {
     "key": "menu_termbase_export",
-    "value": "Export"
+    "value": "Esporta"
   },
   {
     "key": "menu_termbase_export_csv",
-    "value": "To CSV…"
+    "value": "In CSV…"
   },
   {
     "key": "menu_termbase_export_tbx",
-    "value": "To TBX…"
+    "value": "In TBX…"
   },
   {
     "key": "menu_entry",
-    "value": "Entry"
+    "value": "Scheda"
   },
   {
     "key": "button_close",
-    "value": "Close"
+    "value": "Chiudi"
   },
   {
     "key": "button_cancel",
-    "value": "Cancel"
+    "value": "Annulla"
   },
   {
     "key": "button_ok",
@@ -89,35 +89,35 @@
   },
   {
     "key": "button_prev",
-    "value": "Previous"
+    "value": "Precedente"
   },
   {
     "key": "button_next",
-    "value": "Next"
+    "value": "Successivo"
   },
   {
     "key": "button_edit",
-    "value": "Edit"
+    "value": "Modifica"
   },
   {
     "key": "button_delete",
-    "value": "Delete"
+    "value": "Elimina"
   },
   {
     "key": "button_open",
-    "value": "Open"
+    "value": "Apri"
   },
   {
     "key": "button_apply",
-    "value": "Apply"
+    "value": "Applica"
   },
   {
     "key": "context_menu_edit",
-    "value": "Edit"
+    "value": "Modifica"
   },
   {
     "key": "context_menu_delete",
-    "value": "Delete"
+    "value": "Elimina"
   },
   {
     "key": "status_bar_termbase",
@@ -125,135 +125,39 @@
   },
   {
     "key": "status_bar_entry",
-    "value": "entry"
+    "value": "scheda"
   },
   {
     "key": "status_bar_entries",
-    "value": "entries"
-  },
-  {
-    "key": "language_english",
-    "value": "English"
-  },
-  {
-    "key": "language_italian",
-    "value": "Italian"
-  },
-  {
-    "key": "language_spanish",
-    "value": "Spanish"
-  },
-  {
-    "key": "language_french",
-    "value": "French"
-  },
-  {
-    "key": "language_german",
-    "value": "German"
-  },
-  {
-    "key": "language_greek",
-    "value": "Greek"
-  },
-  {
-    "key": "language_romanian",
-    "value": "Romanian"
-  },
-  {
-    "key": "language_dutch",
-    "value": "Dutch"
-  },
-  {
-    "key": "language_danish",
-    "value": "Danish"
-  },
-  {
-    "key": "language_portuguese",
-    "value": "Portuguese"
-  },
-  {
-    "key": "language_finnish",
-    "value": "Finnish"
-  },
-  {
-    "key": "language_swedish",
-    "value": "Swedish"
-  },
-  {
-    "key": "language_czech",
-    "value": "Czech"
-  },
-  {
-    "key": "language_estonian",
-    "value": "Estonian"
-  },
-  {
-    "key": "language_hungarian",
-    "value": "Hungarian"
-  },
-  {
-    "key": "language_latvian",
-    "value": "Latvian"
-  },
-  {
-    "key": "language_lithuanian",
-    "value": "Lithuanian"
-  },
-  {
-    "key": "language_maltese",
-    "value": "Maltese"
-  },
-  {
-    "key": "language_polish",
-    "value": "Polish"
-  },
-  {
-    "key": "language_slovak",
-    "value": "Slovak"
-  },
-  {
-    "key": "language_slovenian",
-    "value": "Slovenian"
-  },
-  {
-    "key": "language_bulgarian",
-    "value": "Bulgarian"
-  },
-  {
-    "key": "language_irish",
-    "value": "Irish"
-  },
-  {
-    "key": "language_croatian",
-    "value": "Croatian"
+    "value": "schede"
   },
   {
     "key": "toolbar_switch_languages_tooltip",
-    "value": "Switch source and target languages"
+    "value": "Inverti direzione linguistica"
   },
   {
     "key": "toolbar_entry_title",
-    "value": "Entry"
+    "value": "Scheda"
   },
   {
     "key": "toolbar_create_entry_tooltip",
-    "value": "Create new entry"
+    "value": "Crea nuova scheda"
   },
   {
     "key": "toolbar_delete_entry_tooltip",
-    "value": "Delete entry"
+    "value": "Elimina scheda"
   },
   {
     "key": "toolbar_entry_save",
-    "value": "Save current entry"
+    "value": "Salva scheda attuale"
   },
   {
     "key": "term_detail_add_term",
-    "value": "Add term"
+    "value": "Aggiungi termine"
   },
   {
     "key": "term_detail_add_property",
-    "value": "Add property"
+    "value": "Aggiungi proprietà"
   },
   {
     "key": "term_detail_title_lemma",
@@ -261,254 +165,254 @@
   },
   {
     "key": "term_detail_title_entry",
-    "value": "Entry"
+    "value": "Scheda"
   },
   {
     "key": "term_detail_title_property",
-    "value": "Property"
+    "value": "Proprietà"
   },
   {
     "key": "dialog_title_error",
-    "value": "Error"
+    "value": "Errore"
   },
   {
     "key": "dialog_title_create_termbase",
-    "value": "Create termbase"
+    "value": "Crea termbase"
   },
   {
     "key": "dialog_title_edit_termbase",
-    "value": "Edit termbase"
+    "value": "Modifica termbase"
   },
   {
     "key": "create_termbase_step1_field_name",
-    "value": "Name"
+    "value": "Nome"
   },
   {
     "key": "create_termbase_step1_field_description",
-    "value": "Description"
+    "value": "Descrizione"
   },
   {
     "key": "create_termbase_step1_field_languages",
-    "value": "Languages"
+    "value": "Lingue"
   },
   {
     "key": "dialog_title_manage_termbases",
-    "value": "Manage termbases"
+    "value": "Gestione termbases"
   },
   {
     "key": "error_missing_name",
-    "value": "Please insert a name for the termbase"
+    "value": "Inserisci un nome per il termbase"
   },
   {
     "key": "error_missing_language",
-    "value": "Please select at least one language"
+    "value": "Seleziona almeno una lingua"
   },
   {
     "key": "definition_model_add_property",
-    "value": "Add property"
+    "value": "Aggiungi proprietà"
   },
   {
     "key": "definition_model_property_name",
-    "value": "Name"
+    "value": "Nome"
   },
   {
     "key": "definition_model_property_type",
-    "value": "Type"
+    "value": "Tipo"
   },
   {
     "key": "definition_model_type_text",
-    "value": "Text"
+    "value": "Testo"
   },
   {
     "key": "definition_model_type_image",
-    "value": "Image"
+    "value": "Immagine"
   },
   {
     "key": "definition_model_type_picklist",
-    "value": "Picklist"
+    "value": "Scelta multipla"
   },
   {
     "key": "definition_model_property_picklist_values",
-    "value": "Picklist values"
+    "value": "Valori scelta multipla"
   },
   {
     "key": "toolbar_search_title",
-    "value": "Search"
+    "value": "Cerca"
   },
   {
     "key": "toolbar_search_placeholder",
-    "value": "Search…"
+    "value": "Cerca…"
   },
   {
     "key": "definition_model_property_level",
-    "value": "Level"
+    "value": "Livello"
   },
   {
     "key": "property_level_entry",
-    "value": "Entry"
+    "value": "Scheda"
   },
   {
     "key": "property_level_language",
-    "value": "Language"
+    "value": "Lingua"
   },
   {
     "key": "property_level_term",
-    "value": "Term"
+    "value": "Termine"
   },
   {
     "key": "toolbar_enter_edit_mode",
-    "value": "Open edit mode"
+    "value": "Apri modalità modifica"
   },
   {
     "key": "toolbar_exit_edit_mode",
-    "value": "Exit edit mode"
+    "value": "Esci modalità modifica"
   },
   {
     "key": "toolbar_open_filter",
-    "value": "Change filter configuration"
+    "value": "Modifica configurazione filtri"
   },
   {
     "key": "empty_properties_placeholder",
-    "value": "(no available properties)"
+    "value": "(nessuna proprietà disponile)"
   },
   {
     "key": "empty_term_placeholder",
-    "value": "(no term)"
+    "value": "(nessun termine)"
   },
   {
     "key": "term_detail_button_pick_image",
-    "value": "Pick an image"
+    "value": "Seleziona un'immagine"
   },
   {
     "key": "dialog_title_select_image",
-    "value": "Select image"
+    "value": "Seleziona image"
   },
   {
     "key": "insert_value_placeholder",
-    "value": "Insert value"
+    "value": "Inseirsci valore"
   },
   {
     "key": "dialog_title_export",
-    "value": "Choose export destination"
+    "value": "Seleziona destinazione"
   },
   {
     "key": "dialog_create_termbase_step_2_title",
-    "value": "Define the entry structure for the termbase"
+    "value": "Definisci la struttura delle schede per il termbase"
   },
   {
     "key": "insert_value_placeholder",
-    "value": "Insert"
+    "value": "Inserisci"
   },
   {
     "key": "manage_termbase_intro",
-    "value": "The following list contains all the termbases. Please select each entry to operate on it."
+    "value": "Seleziona un termbase dall'elenco per aprirlo e modificarlo."
   },
   {
     "key": "app_intro_title",
-    "value": "Thank you for using MetaTerm!"
+    "value": "Grazie per utilizzare MetaTerm!"
   },
   {
     "key": "app_intro",
-    "value": "You do not have any termbase opened. Please open a termbase to start."
+    "value": "Nessun database aperto. Apri un termbase per iniziare."
   },
   {
     "key": "dialog_title_termbase_statistics",
-    "value": "Termbase statistics"
+    "value": "Statistiche termbase"
   },
   {
     "key": "dialog_statistics_section_general",
-    "value": "General data"
+    "value": "Informazioni generali"
   },
   {
     "key": "dialog_statistics_section_languages",
-    "value": "Languages"
+    "value": "Lingue"
   },
   {
     "key": "dialog_statistics_item_total_languages",
-    "value": "Total number of languages:"
+    "value": "Numero totale di lingue:"
   },
   {
     "key": "dialog_statistics_item_total_entries",
-    "value": "Total number of entries:"
+    "value": "Numero totale di schede:"
   },
   {
     "key": "dialog_statistics_item_total_terms",
-    "value": "Total number or terms:"
+    "value": "Numero totale di termini:"
   },
   {
     "key": "dialog_statistics_item_language_terms",
-    "value": "Number or terms:"
+    "value": "Numero di termini:"
   },
   {
     "key": "dialog_statistics_item_language_completion",
-    "value": "Completion:"
+    "value": "Completamento:"
   },
   {
     "key": "dialog_edit_termbase_tab_1",
-    "value": "Metadata"
+    "value": "Metadati"
   },
   {
     "key": "dialog_edit_termbase_tab_2",
-    "value": "Definition model"
+    "value": "Modello di definizione"
   },
   {
     "key": "dialog_edit_termbase_tab_3",
-    "value": "Input model"
+    "value": "Modello di inserimento"
   },
   {
     "key": "dialog_create_termbase_step_3_title",
-    "value": "Choose the properties to include when creating new entries"
+    "value": "Seleziona le proprietà da includere nell'inserimento di nuove schede"
   },
   {
     "key": "dialog_title_filter",
-    "value": "Filter termbase"
+    "value": "Filtra termbase"
   },
   {
     "key": "dialog_filter_intro",
-    "value": "Select the properties you wish your terms to be filtered for and configure the match filters."
+    "value": "Seelziona le proprietà su cui filtrare i termini e configura le corrispondenze sui campi."
   },
   {
     "key": "dialog_filter_property_placeholder",
-    "value": "Please select a lemma or a property to configure the corresponding filter."
+    "value": "Seleziona un lemma o una proprietà per configurare il filtro corrispondente."
   },
   {
     "key": "dialog_filter_header_field_descriptor",
-    "value": "Field descriptor"
+    "value": "Descrittore di campo"
   },
   {
     "key": "dialog_filter_header_match_config",
-    "value": "Match configuration"
+    "value": "Configurazione corrispondenza"
   },
   {
     "key": "dialog_filter_header_match_value_title",
-    "value": "Value"
+    "value": "Valore"
   },
   {
     "key": "dialog_filter_header_match_value_placeholder",
-    "value": "Insert a value"
+    "value": "Inserisci un valore"
   },
   {
     "key": "dialog_filter_header_match_picklist_placeholder",
-    "value": "(select a value)"
+    "value": "(seleziona un valore)"
   },
   {
     "key": "dialog_filter_message_no_filter",
-    "value": "No filter configuration for available type"
+    "value": "Nessuna configurazioen di filtraggio disponibile per il tipo"
   },
   {
     "key": "tooltip_clear_current_filter",
-    "value": "Clear current filter"
+    "value": "Rimuovi filtro attuale"
   },
   {
     "key": "tooltip_clear_all_filters",
-    "value": "Clear all filters"
+    "value": "Rimuovi tutti i filtri"
   },
   {
     "key": "definition_model_placeholder",
-    "value": "Please select an existing property or create a new one."
+    "value": "Seleziona una proprietà esistente o creane una di nuova."
   },
   {
     "key": "term_detail_placeholder",
-    "value": "Please select a term to edit an exiting entry or create a new one."
+    "value": "Seleziona un termine per modificare una scheda esistente o creane una di nuova."
   }
 ]

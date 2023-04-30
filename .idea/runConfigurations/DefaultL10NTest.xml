@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="L10nTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+  <configuration default="false" name="DefaultL10NTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
     <module name="MetaTerm.core-localization.tests.jvmMain" />
     <option name="PACKAGE_NAME" value="" />
-    <option name="MAIN_CLASS_NAME" value="L10nTest" />
+    <option name="MAIN_CLASS_NAME" value="DefaultL10NTest" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="class" />
     <method v="2">
