@@ -1,32 +1,13 @@
-import dao.TermbaseDAO
+package dao
+
+import AppDatabase
+import MockFileManager
 import data.TermbaseModel
-import files.FileManager
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.runBlocking
-import java.io.File
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
-
-private object MockFileManager : FileManager {
-
-    private lateinit var file: File
-
-    override fun getFilePath(vararg components: String): String = file.path
-
-    fun setup() {
-        try {
-            file = File.createTempFile("test", ".db")
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    fun teardown() {
-        file.delete()
-    }
-}
 
 class TermbaseDAOTest {
 
@@ -119,19 +100,22 @@ class TermbaseDAOTest {
         val model1 = TermbaseModel(name = "test 1")
         val model2 = TermbaseModel(name = "test 2")
         runBlocking {
+            // when empty
             val flow = sut.observeAll()
             val l0 = flow.first()
             assert(l0.isEmpty())
 
+            // after 1 insertion
             sut.create(model1)
             val l1 = flow.first()
             assert(l1.size == 1)
 
+            // after 2 insertions
             val id = sut.create(model2)
             val l2 = flow.first()
             assert(l2.size == 2)
 
-
+            // after 1 deletion
             sut.delete(model1.copy(id = id))
             val l3 = flow.first()
             assert(l3.size == 1)
