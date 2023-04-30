@@ -1,20 +1,18 @@
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.decodeFromStream
+import files.DefaultFileManager
+import keystore.DefaultTemporaryKeyStore
+import kotlinx.coroutines.runBlocking
 
-internal object L10n {
+object L10n {
 
-    @OptIn(ExperimentalSerializationApi::class)
-    private val localizables: List<LocalizableString> by lazy {
-        L10n::class.java.getResourceAsStream("strings.json")?.use {
-            Json.decodeFromStream(it)
-        } ?: emptyList()
+    private val default = DefaultLocalization()
+
+    fun setLanguage(lang: String) {
+        default.setLanguage(lang)
     }
 
-    internal fun get(key: String): String {
-        return localizables.firstOrNull { it.key == key }?.value ?: key
-    }
+    fun get(key: String): String = default.get(key)
 }
+
 
 fun String.localized(): String {
     return L10n.get(this)
