@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="list-jvm-1.0.0-SNAPSHOT">
-    <output-path>$PROJECT_DIR$/feature-terms/list/build/libs</output-path>
-    <root id="archive" name="list-jvm-1.0.0-SNAPSHOT.jar">
-      <element id="module-output" name="MetaTerm.feature-terms.list.jvmMain" />
-    </root>
-  </artifact>
-</component>
