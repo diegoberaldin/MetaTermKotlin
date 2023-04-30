@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="EntryDAOTest" type="JUnit" factoryName="JUnit">
+    <module name="MetaTerm.core-persistence.tests.jvmMain" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="notification.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="dao" />
+    <option name="MAIN_CLASS_NAME" value="dao.EntryDAOTest" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="class" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
