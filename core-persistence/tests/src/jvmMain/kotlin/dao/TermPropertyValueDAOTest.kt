@@ -3,7 +3,6 @@ package dao
 import AppDatabase
 import MockFileManager
 import data.EntryModel
-import data.LanguageModel
 import data.PropertyLevel
 import data.PropertyModel
 import data.PropertyValueModel
@@ -19,8 +18,6 @@ class TermPropertyValueDAOTest {
     private lateinit var appDb: AppDatabase
     private lateinit var sut: TermPropertyValueDAO
     private var propertyId: Int = 0
-    private var entryId: Int = 0
-    private var languageId: Int = 0
     private var termId: Int = 0
 
     @BeforeTest
@@ -35,7 +32,6 @@ class TermPropertyValueDAOTest {
         val termbaseDAO = appDb.termbaseDao()
         val propertyDAO = appDb.propertyDao()
         val entryDAO = appDb.entryDao()
-        val languageDAO = appDb.languageDao()
         val termDAO = appDb.termDao()
         runBlocking {
             val termbaseId = termbaseDAO.create(TermbaseModel(name = "test"))
@@ -47,8 +43,7 @@ class TermPropertyValueDAOTest {
                         level = PropertyLevel.LANGUAGE
                     )
                 )
-            entryId = entryDAO.create(EntryModel(termbaseId = termbaseId))
-            languageId = languageDAO.create(LanguageModel(termbaseId = termbaseId, code = "en"))
+            val entryId = entryDAO.create(EntryModel(termbaseId = termbaseId))
             termId = termDAO.create(TermModel(entryId = entryId, lemma = "test", lang = "en"))
         }
     }
