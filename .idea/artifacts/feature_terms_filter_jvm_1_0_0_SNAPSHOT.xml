@@ -1,6 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="feature-terms-filter-jvm-1.0.0-SNAPSHOT">
-    <output-path>$PROJECT_DIR$/feature-terms/filter/build/libs</output-path>
-    <root id="archive" name="feature-terms-filter-jvm-1.0.0-SNAPSHOT.jar" />
-  </artifact>
-</component>

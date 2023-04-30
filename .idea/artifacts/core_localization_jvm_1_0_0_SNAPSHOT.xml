@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="core-localization-jvm-1.0.0-SNAPSHOT">
-    <output-path>$PROJECT_DIR$/core-localization/build/libs</output-path>
-    <root id="archive" name="core-localization-jvm-1.0.0-SNAPSHOT.jar">
-      <element id="module-output" name="MetaTerm.core-localization.jvmMain" />
-    </root>
-  </artifact>
-</component>

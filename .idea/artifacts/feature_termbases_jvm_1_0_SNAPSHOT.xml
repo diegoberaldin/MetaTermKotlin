@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="feature-termbases-jvm-1.0-SNAPSHOT">
-    <output-path>$PROJECT_DIR$/feature-termbases/build/libs</output-path>
-    <root id="archive" name="feature-termbases-jvm-1.0-SNAPSHOT.jar">
-      <element id="module-output" name="MetaTerm.feature-termbases.jvmMain" />
-    </root>
-  </artifact>
-</component>

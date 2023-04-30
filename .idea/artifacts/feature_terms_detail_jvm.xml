@@ -1,6 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="feature-terms-detail-jvm">
-    <output-path>$PROJECT_DIR$/feature-terms/detail/build/libs</output-path>
-    <root id="archive" name="feature-terms-detail-jvm.jar" />
-  </artifact>
-</component>
