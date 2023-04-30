@@ -137,95 +137,95 @@
   },
   {
     "key": "language_italian",
-    "value": "Italian"
+    "value": "Italiano"
   },
   {
     "key": "language_spanish",
-    "value": "Spanish"
+    "value": "Español"
   },
   {
     "key": "language_french",
-    "value": "French"
+    "value": "Français"
   },
   {
     "key": "language_german",
-    "value": "German"
+    "value": "Deutsch"
   },
   {
     "key": "language_greek",
-    "value": "Greek"
+    "value": "Ελληνικά"
   },
   {
     "key": "language_romanian",
-    "value": "Romanian"
+    "value": "Română"
   },
   {
     "key": "language_dutch",
-    "value": "Dutch"
+    "value": "Nederlands"
   },
   {
     "key": "language_danish",
-    "value": "Danish"
+    "value": "Dansk"
   },
   {
     "key": "language_portuguese",
-    "value": "Portuguese"
+    "value": "Português"
   },
   {
     "key": "language_finnish",
-    "value": "Finnish"
+    "value": "Suomi"
   },
   {
     "key": "language_swedish",
-    "value": "Swedish"
+    "value": "Svenska"
   },
   {
     "key": "language_czech",
-    "value": "Czech"
+    "value": "Čeština"
   },
   {
     "key": "language_estonian",
-    "value": "Estonian"
+    "value": "Eesti"
   },
   {
     "key": "language_hungarian",
-    "value": "Hungarian"
+    "value": "Magyar"
   },
   {
     "key": "language_latvian",
-    "value": "Latvian"
+    "value": "Latviešu"
   },
   {
     "key": "language_lithuanian",
-    "value": "Lithuanian"
+    "value": "Lietuvių"
   },
   {
     "key": "language_maltese",
-    "value": "Maltese"
+    "value": "Malti"
   },
   {
     "key": "language_polish",
-    "value": "Polish"
+    "value": "Polski"
   },
   {
     "key": "language_slovak",
-    "value": "Slovak"
+    "value": "Slovenčina"
   },
   {
     "key": "language_slovenian",
-    "value": "Slovenian"
+    "value": "Slovenščina"
   },
   {
     "key": "language_bulgarian",
-    "value": "Bulgarian"
+    "value": "Вългарски"
   },
   {
     "key": "language_irish",
-    "value": "Irish"
+    "value": "Gaeilge"
   },
   {
     "key": "language_croatian",
-    "value": "Croatian"
+    "value": "Hrvatski"
   },
   {
     "key": "toolbar_switch_languages_tooltip",
@@ -401,7 +401,7 @@
   },
   {
     "key": "manage_termbase_intro",
-    "value": "The following list contains all the termbases. Please select each entry to operate on it."
+    "value": "Please select a termbase from the list to open and edit it."
   },
   {
     "key": "app_intro_title",
@@ -465,7 +465,7 @@
   },
   {
     "key": "dialog_filter_intro",
-    "value": "Select the properties you wish your terms to be filtered for and configure the match filters."
+    "value": "Select the properties you wish your terms to be filtered against and configure the match filters."
   },
   {
     "key": "dialog_filter_property_placeholder",
