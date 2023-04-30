@@ -46,7 +46,7 @@ class EntryDAOTest {
     }
 
     @Test
-    fun givenExistingEntryWhenEntryGeyByIdIsCalledThenValueIsReturned() {
+    fun givenExistingEntryWhenGeyByIdIsCalledThenValueIsReturned() {
         val model = EntryModel(termbaseId = termbaseId)
         runBlocking {
             val id = sut.create(model)
