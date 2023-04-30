@@ -23,7 +23,8 @@ import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 
-internal class AppDatabase(
+class AppDatabase(
+    private val filename: String = FILE_NAME,
     private val fileManager: FileManager,
 ) {
     companion object {
@@ -33,8 +34,12 @@ internal class AppDatabase(
         private const val FILE_NAME = "main"
     }
 
-    private val setup by lazy {
-        val appFileName = fileManager.getFilePath(FILE_NAME)
+    init {
+        setup()
+    }
+
+    private fun setup() {
+        val appFileName = fileManager.getFilePath(filename)
         Database.connect("jdbc:$PROTO:$appFileName$EXTRA_PARAMS", driver = DRIVER)
 
         transaction {
@@ -53,10 +58,6 @@ internal class AppDatabase(
         }
     }
 
-    init {
-        setup
-    }
-
     fun termbaseDao() = TermbaseDAO()
 
     fun entryDao() = EntryDAO()
@@ -65,7 +66,7 @@ internal class AppDatabase(
 
     fun termDao() = TermDAO()
 
-    fun entryProperyValueDao() = EntryPropertyValueDAO()
+    fun entryPropertyValueDao() = EntryPropertyValueDAO()
 
     fun languagePropertyValueDao() = LanguagePropertyValueDAO()
 

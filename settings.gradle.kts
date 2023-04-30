@@ -42,4 +42,5 @@ include(
 
     ":core-common:tests",
     ":core-localization:tests",
+    ":core-persistence:tests",
 )
