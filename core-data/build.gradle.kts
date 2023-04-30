@@ -25,6 +25,5 @@ kotlin {
                 implementation(project(":core-localization"))
             }
         }
-        val jvmTest by getting
     }
 }

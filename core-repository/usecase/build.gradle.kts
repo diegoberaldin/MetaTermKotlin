@@ -33,6 +33,5 @@ kotlin {
                 implementation(project(":core-repository:repo"))
             }
         }
-        val jvmTest by getting
     }
 }

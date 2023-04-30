@@ -33,6 +33,5 @@ kotlin {
                 implementation(project(":core-data"))
             }
         }
-        val jvmTest by getting
     }
 }

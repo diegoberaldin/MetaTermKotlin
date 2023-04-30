@@ -33,6 +33,5 @@ kotlin {
                 api(project(":core-repository:usecase"))
             }
         }
-        val jvmTest by getting
     }
 }
