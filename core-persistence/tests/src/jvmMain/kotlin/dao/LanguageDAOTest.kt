@@ -4,11 +4,14 @@ import AppDatabase
 import MockFileManager
 import data.LanguageModel
 import data.TermbaseModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class LanguageDAOTest {
 
     private lateinit var appDb: AppDatabase
@@ -36,75 +39,63 @@ class LanguageDAOTest {
     }
 
     @Test
-    fun givenEmptyTermbaseWhenLanguageCreatedThenRowIsCreated() {
+    fun givenEmptyTermbaseWhenLanguageCreatedThenRowIsCreated() = runTest {
         val model = LanguageModel(termbaseId = termbaseId, code = "en")
-        runBlocking {
-            val id = sut.create(model)
-            assert(id > 0)
-        }
+        val id = sut.create(model)
+        assert(id > 0)
     }
 
     @Test
-    fun givenExistingLanguageWhenGeyByIdIsCalledThenValueIsReturned() {
+    fun givenExistingLanguageWhenGeyByIdIsCalledThenValueIsReturned() = runTest {
         val model = LanguageModel(termbaseId = termbaseId, code = "en")
-        runBlocking {
-            val id = sut.create(model)
+        val id = sut.create(model)
 
-            val res = sut.getById(id)
-            assert(res != null)
-            assert(res?.code == "en")
-        }
+        val res = sut.getById(id)
+        assert(res != null)
+        assert(res?.code == "en")
     }
 
     @Test
-    fun givenExistingLanguageWhenGeyByCodeIsCalledThenValueIsReturned() {
+    fun givenExistingLanguageWhenGeyByCodeIsCalledThenValueIsReturned() = runTest {
         val model = LanguageModel(termbaseId = termbaseId, code = "en")
-        runBlocking {
-            sut.create(model)
+        sut.create(model)
 
-            val res = sut.getByCode(code = "en", termbaseId = termbaseId)
-            assert(res != null)
-            assert(res?.code == "en")
-        }
+        val res = sut.getByCode(code = "en", termbaseId = termbaseId)
+        assert(res != null)
+        assert(res?.code == "en")
     }
 
     @Test
-    fun givenNonExistingLanguageWhenGeyByCodeIsCalledThenValueIsReturned() {
+    fun givenNonExistingLanguageWhenGeyByCodeIsCalledThenValueIsReturned() = runTest {
         val model = LanguageModel(termbaseId = termbaseId, code = "en")
-        runBlocking {
-            sut.create(model)
+        sut.create(model)
 
-            val res = sut.getByCode(code = "it", termbaseId = termbaseId)
-            assert(res == null)
-        }
+        val res = sut.getByCode(code = "it", termbaseId = termbaseId)
+        assert(res == null)
     }
 
     @Test
-    fun givenExistingLanguageWhenLanguageIsDeletedThenNoValueIsReturned() {
+    fun givenExistingLanguageWhenLanguageIsDeletedThenNoValueIsReturned() = runTest {
         val model = LanguageModel(termbaseId = termbaseId, code = "en")
-        runBlocking {
-            val id = sut.create(model)
-            val old = sut.getById(id)
-            assert(old != null)
+        val id = sut.create(model)
+        val old = sut.getById(id)
+        assert(old != null)
 
-            sut.delete(model.copy(id = id))
+        sut.delete(model.copy(id = id))
 
-            val res = sut.getById(id)
-            assert(res == null)
-        }
+        val res = sut.getById(id)
+        assert(res == null)
     }
 
     @Test
-    fun givenExistingLanguagesWhenGetAllIsCalledThenAllValuesReturned() {
+    fun givenExistingLanguagesWhenGetAllIsCalledThenAllValuesReturned() = runTest {
         val model = LanguageModel(termbaseId = termbaseId, code = "en")
         val model2 = LanguageModel(termbaseId = termbaseId, code = "it")
-        runBlocking {
-            sut.create(model)
-            sut.create(model2)
+        sut.create(model)
+        sut.create(model2)
 
-            val res = sut.getAll(termbaseId = termbaseId)
+        val res = sut.getAll(termbaseId = termbaseId)
 
-            assert(res.size == 2)
-        }
+        assert(res.size == 2)
     }
 }

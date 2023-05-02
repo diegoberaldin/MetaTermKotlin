@@ -3,12 +3,14 @@ package dao
 import AppDatabase
 import MockFileManager
 import data.TermbaseModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class TermbaseDAOTest {
 
     private lateinit var appDb: AppDatabase
@@ -30,95 +32,82 @@ class TermbaseDAOTest {
     }
 
     @Test
-    fun givenDaoWhenTermbaseCreatedThenRowIsCreated() {
+    fun givenDaoWhenTermbaseCreatedThenRowIsCreated() = runTest {
         val model = TermbaseModel(name = "test")
-        runBlocking {
-            val id = sut.create(model)
-            assert(id > 0)
-        }
+        val id = sut.create(model)
+        assert(id > 0)
     }
 
     @Test
-    fun givenExistingTermbaseWhenGetByIdIsCalledThenMatchingValueIsReturned() {
+    fun givenExistingTermbaseWhenGetByIdIsCalledThenMatchingValueIsReturned() = runTest {
         val model = TermbaseModel(name = "test")
-        runBlocking {
-            val id = sut.create(model)
+        val id = sut.create(model)
 
-            val res = sut.getById(id)
-            assert(res != null)
-            assert(res?.name == "test")
-        }
+        val res = sut.getById(id)
+        assert(res != null)
+        assert(res?.name == "test")
     }
 
     @Test
-    fun givenExistingTermbaseWhenUpdatedThenMatchingValueIsReturned() {
+    fun givenExistingTermbaseWhenUpdatedThenMatchingValueIsReturned() = runTest {
         val model = TermbaseModel(name = "test")
-        runBlocking {
-            val id = sut.create(model)
-            val old = sut.getById(id) ?: throw AssertionError()
-            val new = old.copy(name = "test 2")
+        val id = sut.create(model)
+        val old = sut.getById(id) ?: throw AssertionError()
+        val new = old.copy(name = "test 2")
 
-            sut.update(new)
+        sut.update(new)
 
-            val res = sut.getById(id)
-            assert(res != null)
-            assert(res?.name == "test 2")
-        }
+        val res = sut.getById(id)
+        assert(res != null)
+        assert(res?.name == "test 2")
     }
 
     @Test
-    fun givenExistingTermbasesWhenGetAllIsCalledThenAllValuesAreReturned() {
+    fun givenExistingTermbasesWhenGetAllIsCalledThenAllValuesAreReturned() = runTest {
         val model1 = TermbaseModel(name = "test 1")
         val model2 = TermbaseModel(name = "test 2")
-        runBlocking {
-            sut.create(model1)
-            sut.create(model2)
+        sut.create(model1)
+        sut.create(model2)
 
-            val res = sut.getAll()
+        val res = sut.getAll()
 
-            assert(res.size == 2)
-        }
+        assert(res.size == 2)
     }
 
     @Test
-    fun givenExistingTermbasesWhenDeleteCalledThenDbIsRemoved() {
-        val model1 = TermbaseModel(name = "test 1")
-        val model2 = TermbaseModel(name = "test 2")
-        runBlocking {
-            val id = sut.create(model1)
+    fun givenExistingTermbasesWhenDeleteCalledThenDbIsRemoved() = runTest {
+        val model1 = TermbaseModel(name = "test")
+        val id = sut.create(model1)
 
-            val tb = sut.getById(id) ?: throw AssertionError()
-            sut.delete(tb)
+        val tb = sut.getById(id) ?: throw AssertionError()
+        sut.delete(tb)
 
-            val res = sut.getById(id)
-            assert(res == null)
-        }
+        val res = sut.getById(id)
+        assert(res == null)
     }
 
     @Test
-    fun givenExistingTermbasesWhenObservedValuesChangeAccordingly() {
+    fun givenExistingTermbasesWhenObservedValuesChangeAccordingly() = runTest {
         val model1 = TermbaseModel(name = "test 1")
         val model2 = TermbaseModel(name = "test 2")
-        runBlocking {
-            // when empty
-            val flow = sut.observeAll()
-            val l0 = flow.first()
-            assert(l0.isEmpty())
+        // when empty
+        val flow = sut.observeAll()
+        val l0 = flow.first()
+        assert(l0.isEmpty())
 
-            // after 1 insertion
-            sut.create(model1)
-            val l1 = flow.first()
-            assert(l1.size == 1)
+        // after 1 insertion
+        sut.create(model1)
+        val l1 = flow.first()
+        assert(l1.size == 1)
 
-            // after 2 insertions
-            val id = sut.create(model2)
-            val l2 = flow.first()
-            assert(l2.size == 2)
+        // after 2 insertions
+        val id = sut.create(model2)
+        val l2 = flow.first()
+        assert(l2.size == 2)
 
-            // after 1 deletion
-            sut.delete(model1.copy(id = id))
-            val l3 = flow.first()
-            assert(l3.size == 1)
-        }
+        // after 1 deletion
+        sut.delete(model1.copy(id = id))
+        val l3 = flow.first()
+        assert(l3.size == 1)
     }
 }

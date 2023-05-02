@@ -39,11 +39,9 @@ class EntryRepositoryTest {
     }
 
     @Test
-    fun givenRepositoryEmptyWhenGetAllInvokedThenAllEntriesAreReturned() {
-        runBlocking {
-            val res = sut.getAll(termbaseId)
-            assert(res.isEmpty())
-        }
+    fun givenRepositoryEmptyWhenGetAllInvokedThenAllEntriesAreReturned() = runTest {
+        val res = sut.getAll(termbaseId)
+        assert(res.isEmpty())
     }
 
     @Test

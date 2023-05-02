@@ -20,8 +20,6 @@ kotlin {
     sourceSets {
         val jvmMain by getting {
             dependencies {
-                implementation(compose.desktop.currentOs)
-                implementation(compose.materialIconsExtended)
                 implementation(libs.kotlinx.coroutines.test)
 
                 implementation(project(":core-common"))

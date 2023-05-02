@@ -8,11 +8,14 @@ import data.PropertyLevel
 import data.PropertyModel
 import data.PropertyValueModel
 import data.TermbaseModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class LanguagePropertyValueDAOTest {
 
     private lateinit var appDb: AppDatabase
@@ -55,74 +58,64 @@ class LanguagePropertyValueDAOTest {
     }
 
     @Test
-    fun givenEmptyTermbaseWhenPropertyValueIsCreatedThenRowIsCreated() {
+    fun givenEmptyTermbaseWhenPropertyValueIsCreatedThenRowIsCreated() = runTest {
         val model = PropertyValueModel(propertyId = propertyId, value = "test")
-        runBlocking {
-            val id = sut.create(model = model, entryId = entryId, languageId = languageId)
-            assert(id > 0)
-        }
+        val id = sut.create(model = model, entryId = entryId, languageId = languageId)
+        assert(id > 0)
     }
 
     @Test
-    fun givenExistingPropertyValueWhenGetByIdIsCalledThenValueIsReturned() {
+    fun givenExistingPropertyValueWhenGetByIdIsCalledThenValueIsReturned() = runTest {
         val model = PropertyValueModel(propertyId = propertyId, value = "test")
-        runBlocking {
-            val id = sut.create(model = model, entryId = entryId, languageId = languageId)
+        val id = sut.create(model = model, entryId = entryId, languageId = languageId)
 
-            val res = sut.getById(id)
-            assert(res != null)
-            assert(res?.value == "test")
-        }
+        val res = sut.getById(id)
+        assert(res != null)
+        assert(res?.value == "test")
     }
 
     @Test
-    fun givenExistingPropertyValuesWhenGetAllIsCalledThenValueIsReturned() {
+    fun givenExistingPropertyValuesWhenGetAllIsCalledThenValueIsReturned() = runTest {
         val values = listOf(
             PropertyValueModel(propertyId = propertyId, value = "test 1"),
             PropertyValueModel(propertyId = propertyId, value = "test 2"),
             PropertyValueModel(propertyId = propertyId, value = "test 3"),
         )
-        runBlocking {
-            for (v in values) {
-                sut.create(model = v, entryId = entryId, languageId = languageId)
-            }
-
-            val res = sut.getAll(
-                languageId = languageId,
-                entryId = entryId,
-            )
-            assert(res.size == values.size)
+        for (v in values) {
+            sut.create(model = v, entryId = entryId, languageId = languageId)
         }
+
+        val res = sut.getAll(
+            languageId = languageId,
+            entryId = entryId,
+        )
+        assert(res.size == values.size)
     }
 
     @Test
-    fun givenExistingPropertyValueWhenIsDeletedThenNoValueIsReturned() {
+    fun givenExistingPropertyValueWhenIsDeletedThenNoValueIsReturned() = runTest {
         val model = PropertyValueModel(propertyId = propertyId, value = "test")
-        runBlocking {
-            val id = sut.create(model = model, entryId = entryId, languageId = languageId)
-            val old = sut.getById(id)
-            assert(old != null)
+        val id = sut.create(model = model, entryId = entryId, languageId = languageId)
+        val old = sut.getById(id)
+        assert(old != null)
 
-            sut.delete(model.copy(id = id))
+        sut.delete(model.copy(id = id))
 
-            val res = sut.getById(id)
-            assert(res == null)
-        }
+        val res = sut.getById(id)
+        assert(res == null)
     }
 
     @Test
-    fun givenExistingPropertyValueWhenIsUpdatedThenNoValueIsReturned() {
+    fun givenExistingPropertyValueWhenIsUpdatedThenNoValueIsReturned() = runTest {
         val model = PropertyValueModel(propertyId = propertyId, value = "test")
-        runBlocking {
-            val id = sut.create(model = model, entryId = entryId, languageId = languageId)
-            val old = sut.getById(id)
-            assert(old != null)
+        val id = sut.create(model = model, entryId = entryId, languageId = languageId)
+        val old = sut.getById(id)
+        assert(old != null)
 
-            sut.update(model.copy(id = id, value = "test 2"))
+        sut.update(model.copy(id = id, value = "test 2"))
 
-            val res = sut.getById(id)
-            assert(res != null)
-            assert(res?.value == "test 2")
-        }
+        val res = sut.getById(id)
+        assert(res != null)
+        assert(res?.value == "test 2")
     }
 }

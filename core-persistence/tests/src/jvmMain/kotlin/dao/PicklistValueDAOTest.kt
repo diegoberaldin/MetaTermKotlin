@@ -6,11 +6,14 @@ import data.PicklistValueModel
 import data.PropertyModel
 import data.PropertyType
 import data.TermbaseModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class PicklistValueDAOTest {
 
     private lateinit var appDb: AppDatabase
@@ -40,49 +43,43 @@ class PicklistValueDAOTest {
     }
 
     @Test
-    fun givenEmptyTermbaseWhenPicklistValuesCreatedThenRowsAreCreated() {
+    fun givenEmptyTermbaseWhenPicklistValuesCreatedThenRowsAreCreated() = runTest {
         val values = listOf(
             PicklistValueModel(propertyId = propertyId, value = "first"),
             PicklistValueModel(propertyId = propertyId, value = "second"),
             PicklistValueModel(propertyId = propertyId, value = "third"),
         )
-        runBlocking {
-            val res = sut.insertAll(values = values, propertyId = propertyId)
-            assert(res.size == values.size)
-        }
+        val res = sut.insertAll(values = values, propertyId = propertyId)
+        assert(res.size == values.size)
     }
 
     @Test
-    fun givenExistingPicklistValuesWhenGetAllIsCalledThenCorrectValuesAreReturned() {
+    fun givenExistingPicklistValuesWhenGetAllIsCalledThenCorrectValuesAreReturned() = runTest {
         val values = listOf(
             PicklistValueModel(propertyId = propertyId, value = "first"),
             PicklistValueModel(propertyId = propertyId, value = "second"),
             PicklistValueModel(propertyId = propertyId, value = "third"),
         )
-        runBlocking {
-            sut.insertAll(values = values, propertyId = propertyId)
+        sut.insertAll(values = values, propertyId = propertyId)
 
-            val res = sut.getAll(propertyId = propertyId)
-            assert(res.size == values.size)
-            assert(res.minByOrNull { it.value }?.value == "first")
-        }
+        val res = sut.getAll(propertyId = propertyId)
+        assert(res.size == values.size)
+        assert(res.minByOrNull { it.value }?.value == "first")
     }
 
     @Test
-    fun givenExistingPicklistValuesWhenAreDeletedThenNoValueIsReturned() {
+    fun givenExistingPicklistValuesWhenAreDeletedThenNoValueIsReturned() = runTest {
         val values = listOf(
             PicklistValueModel(propertyId = propertyId, value = "first"),
             PicklistValueModel(propertyId = propertyId, value = "second"),
             PicklistValueModel(propertyId = propertyId, value = "third"),
         )
-        runBlocking {
-            sut.insertAll(values = values, propertyId = propertyId)
-            val oldRes = sut.getAll(propertyId = propertyId)
-            assert(oldRes.size == values.size)
+        sut.insertAll(values = values, propertyId = propertyId)
+        val oldRes = sut.getAll(propertyId = propertyId)
+        assert(oldRes.size == values.size)
 
-            sut.deleteAll(propertyId = propertyId)
-            val res = sut.getAll(propertyId = propertyId)
-            assert(res.isEmpty())
-        }
+        sut.deleteAll(propertyId = propertyId)
+        val res = sut.getAll(propertyId = propertyId)
+        assert(res.isEmpty())
     }
 }
