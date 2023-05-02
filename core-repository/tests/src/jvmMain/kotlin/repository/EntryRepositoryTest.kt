@@ -4,15 +4,17 @@ import AppDatabase
 import MockFileManager
 import data.EntryModel
 import data.TermbaseModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.withTimeout
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.time.Duration.Companion.seconds
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class EntryRepositoryTest {
 
     private lateinit var sut: EntryRepository
@@ -45,55 +47,45 @@ class EntryRepositoryTest {
     }
 
     @Test
-    fun givenRepositoryWhenCreateAndGetAllInvokedThenAllEntriesAreReturned() {
-        runBlocking {
-            sut.create(EntryModel(termbaseId = termbaseId))
+    fun givenRepositoryWhenCreateAndGetAllInvokedThenAllEntriesAreReturned() = runTest {
+        sut.create(EntryModel(termbaseId = termbaseId))
 
-            val res = sut.getAll(termbaseId)
-            assert(res.size == 1)
-        }
+        val res = sut.getAll(termbaseId)
+        assert(res.size == 1)
     }
 
     @Test
-    fun givenRepositoryWhenCreateThenRowIsInserted() {
-        runBlocking {
-            val id = sut.create(EntryModel(termbaseId = termbaseId))
-            assert(id > 0)
-        }
+    fun givenRepositoryWhenCreateThenRowIsInserted() = runTest {
+        val id = sut.create(EntryModel(termbaseId = termbaseId))
+        assert(id > 0)
     }
 
     @Test
-    fun givenRepositoryWhenCountAllInvokedThenCorrectNumberIsReturned() {
-        runBlocking {
-            sut.create(EntryModel(termbaseId = termbaseId))
-            sut.create(EntryModel(termbaseId = termbaseId))
+    fun givenRepositoryWhenCountAllInvokedThenCorrectNumberIsReturned() = runTest {
+        sut.create(EntryModel(termbaseId = termbaseId))
+        sut.create(EntryModel(termbaseId = termbaseId))
 
-            val res = sut.countAll(termbaseId = termbaseId)
-            assert(res == 2L)
-        }
+        val res = sut.countAll(termbaseId = termbaseId)
+        assert(res == 2L)
     }
 
     @Test
-    fun givenRepositoryWhenGetByIdInvokedThenCorrectEntryIsReturned() {
-        runBlocking {
-            val id = sut.create(EntryModel(termbaseId = termbaseId))
+    fun givenRepositoryWhenGetByIdInvokedThenCorrectEntryIsReturned() = runTest {
+        val id = sut.create(EntryModel(termbaseId = termbaseId))
 
-            val res = sut.getById(id)
+        val res = sut.getById(id)
 
-            assert(res != null)
-        }
+        assert(res != null)
     }
 
     @Test
-    fun givenRepositoryWhenDeleteThenNoEntryCanBeFound() {
-        runBlocking {
-            val id = sut.create(EntryModel(termbaseId = termbaseId))
+    fun givenRepositoryWhenDeleteThenNoEntryCanBeFound() = runTest {
+        val id = sut.create(EntryModel(termbaseId = termbaseId))
 
-            sut.delete((EntryModel(id = id, termbaseId = termbaseId)))
+        sut.delete((EntryModel(id = id, termbaseId = termbaseId)))
 
-            val res = sut.getById(id)
-            assert(res == null)
-        }
+        val res = sut.getById(id)
+        assert(res == null)
     }
 
     @Test()
@@ -116,25 +108,23 @@ class EntryRepositoryTest {
     }
 
     @Test
-    fun givenRepositoryWhenObservingEntriesThenValuesAreEmitted() {
-        runBlocking {
-            withTimeout(5.seconds) {
-                val flow = sut.observeEntries(termbaseId = termbaseId)
-                val list0 = flow.first()
-                assert(list0.isEmpty())
+    fun givenRepositoryWhenObservingEntriesThenValuesAreEmitted() = runTest {
+        withTimeout(5.seconds) {
+            val flow = sut.observeEntries(termbaseId = termbaseId)
+            val list0 = flow.first()
+            assert(list0.isEmpty())
 
-                sut.create(EntryModel(termbaseId = termbaseId))
-                val list1 = flow.first()
-                assert(list1.size == 1)
+            sut.create(EntryModel(termbaseId = termbaseId))
+            val list1 = flow.first()
+            assert(list1.size == 1)
 
-                val id = sut.create(EntryModel(termbaseId = termbaseId))
-                val list2 = flow.first()
-                assert(list2.size == 2)
+            val id = sut.create(EntryModel(termbaseId = termbaseId))
+            val list2 = flow.first()
+            assert(list2.size == 2)
 
-                sut.delete(EntryModel(termbaseId = termbaseId, id = id))
-                val list3 = flow.first()
-                assert(list3.size == 1)
-            }
+            sut.delete(EntryModel(termbaseId = termbaseId, id = id))
+            val list3 = flow.first()
+            assert(list3.size == 1)
         }
     }
 }

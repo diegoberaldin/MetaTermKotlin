@@ -22,6 +22,7 @@ kotlin {
             dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation(compose.materialIconsExtended)
+                implementation(libs.kotlinx.coroutines.test)
 
                 implementation(project(":core-common"))
                 implementation(project(":core-data"))
