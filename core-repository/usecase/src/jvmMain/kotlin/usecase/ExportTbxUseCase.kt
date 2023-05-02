@@ -2,17 +2,15 @@ package usecase
 
 import data.EntryModel
 import data.PropertyLevel
-import data.TermModel
 import data.TermbaseModel
 import org.redundent.kotlin.xml.xml
 import repository.EntryRepository
 import repository.PropertyRepository
 import repository.TermPropertyValueRepository
 import repository.TermRepository
+import usecase.dto.TermWithDefinition
 import java.io.File
 import java.io.FileWriter
-
-private data class TermWithDefinition(val term: TermModel, val definition: String? = null)
 
 class ExportTbxUseCase(
     private val entryRepository: EntryRepository,
