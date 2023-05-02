@@ -5,9 +5,11 @@ import MockFileManager
 import data.TermbaseModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeout
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.time.Duration.Companion.seconds
 
 class TermbaseRepositoryTest {
 
@@ -28,7 +30,7 @@ class TermbaseRepositoryTest {
     }
 
     @Test
-    fun givenRepositoryWhenEmptyAndGetAllInvokedThenAllTermbasesAreReturned() {
+    fun givenEmptyRepositoryWhenGetAllInvokedThenAllTermbasesAreReturned() {
         runBlocking {
             val res = sut.getAll()
             assert(res.isEmpty())
@@ -95,21 +97,23 @@ class TermbaseRepositoryTest {
     @Test
     fun givenRepositoryWhenObservingAllTermbasesThenCorrectDataIsEmitted() {
         runBlocking {
-            val flow = sut.all
-            val list0 = flow.first()
-            assert(list0.isEmpty())
+            withTimeout(5.seconds) {
+                val flow = sut.all
+                val list0 = flow.first()
+                assert(list0.isEmpty())
 
-            sut.create(TermbaseModel(name = "test 1"))
-            val list1 = flow.first()
-            assert(list1.size == 1)
+                sut.create(TermbaseModel(name = "test 1"))
+                val list1 = flow.first()
+                assert(list1.size == 1)
 
-            val id = sut.create(TermbaseModel(name = "test 2"))
-            val list2 = flow.first()
-            assert(list2.size == 2)
+                val id = sut.create(TermbaseModel(name = "test 2"))
+                val list2 = flow.first()
+                assert(list2.size == 2)
 
-            sut.delete(TermbaseModel(name = "test 2", id = id))
-            val list3 = flow.first()
-            assert(list3.size == 1)
+                sut.delete(TermbaseModel(name = "test 2", id = id))
+                val list3 = flow.first()
+                assert(list3.size == 1)
+            }
         }
     }
 }

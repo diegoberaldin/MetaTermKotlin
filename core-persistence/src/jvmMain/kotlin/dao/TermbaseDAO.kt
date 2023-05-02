@@ -57,6 +57,8 @@ class TermbaseDAO {
                 val value = getAll()
                 trySend(value)
                 delay(1000)
+            } else {
+                break
             }
         }
     }

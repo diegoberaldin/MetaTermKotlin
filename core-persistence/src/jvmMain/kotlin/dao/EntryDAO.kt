@@ -5,7 +5,6 @@ import entities.EntryEntity
 import entities.EntryEntity.termbaseId
 import entities.TermEntity
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.isActive
 import org.jetbrains.exposed.sql.ResultRow
@@ -52,12 +51,14 @@ class EntryDAO {
             .count()
     }
 
-    fun observeAll(termbaseId: Int): Flow<List<EntryModel>> = channelFlow {
+    fun observeAll(termbaseId: Int) = channelFlow {
         while (true) {
             if (isActive) {
                 val result = getAll(termbaseId)
                 trySend(result)
                 delay(1000)
+            } else {
+                break
             }
         }
     }
