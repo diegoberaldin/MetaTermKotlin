@@ -46,6 +46,8 @@ kotlin {
             dependencies {
                 implementation(project(":core-common:tests"))
                 implementation(project(":core-localization:tests"))
+                implementation(project(":core-persistence:tests"))
+                implementation(project(":core-repository:tests"))
             }
         }
     }

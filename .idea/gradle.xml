@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/core-persistence/tests" />
             <option value="$PROJECT_DIR$/core-repository" />
             <option value="$PROJECT_DIR$/core-repository/repo" />
+            <option value="$PROJECT_DIR$/core-repository/tests" />
             <option value="$PROJECT_DIR$/core-repository/usecase" />
             <option value="$PROJECT_DIR$/feature-base" />
             <option value="$PROJECT_DIR$/feature-base/intro" />
