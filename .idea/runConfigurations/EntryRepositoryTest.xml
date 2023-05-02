@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="EntryRepositoryTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <module name="MetaTerm.core-repository.tests.jvmMain" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="repository.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="repository" />
+    <option name="MAIN_CLASS_NAME" value="repository.EntryRepositoryTest" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="class" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
