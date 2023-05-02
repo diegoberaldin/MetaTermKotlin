@@ -1,23 +1,25 @@
 package ui.dialog.create
 
+import com.arkivanov.essenty.instancekeeper.InstanceKeeper
+import coroutines.CoroutineDispatcherProvider
 import data.InputDescriptorModel
 import data.LanguageModel
 import data.PropertyModel
 import data.TermbaseModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.updateAndGet
 import kotlinx.coroutines.launch
-import moe.tlaster.precompose.viewmodel.ViewModel
-import moe.tlaster.precompose.viewmodel.viewModelScope
 import notification.NotificationCenter
 import repository.InputDescriptorRepository
 import repository.LanguageRepository
 import repository.PropertyRepository
 import repository.TermbaseRepository
-import coroutines.CoroutineDispatcherProvider
 import kotlin.math.max
 
 class CreateTermbaseViewModel(
@@ -27,7 +29,7 @@ class CreateTermbaseViewModel(
     private val propertyRepository: PropertyRepository,
     private val inputDescriptorRepository: InputDescriptorRepository,
     private val notificationCenter: NotificationCenter,
-) : ViewModel() {
+) : InstanceKeeper.Instance {
 
     companion object {
         const val STEPS = 3
@@ -42,6 +44,7 @@ class CreateTermbaseViewModel(
     private var properties: List<PropertyModel> = emptyList()
     private var inputDescriptors: List<InputDescriptorModel> = emptyList()
     private var openNewlyCreated: Boolean = false
+    private val viewModelScope = CoroutineScope(SupervisorJob())
 
     val uiState = combine(
         step,
@@ -58,6 +61,10 @@ class CreateTermbaseViewModel(
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = CreateTermbaseUiState(),
     )
+
+    override fun onDestroy() {
+        viewModelScope.cancel()
+    }
 
     fun reset() {
         step.value = 0

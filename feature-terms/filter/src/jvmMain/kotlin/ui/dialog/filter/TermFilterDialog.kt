@@ -31,13 +31,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.rememberWindowState
 import data.LanguageModel
 import data.SearchCriterion
 import data.TermbaseModel
 import kotlinx.coroutines.launch
 import localized
-import moe.tlaster.precompose.PreComposeWindow
 import ui.components.CustomSpinner
 import ui.components.CustomTextField
 import ui.components.CustomTooltipArea
@@ -57,7 +57,7 @@ fun TermFilterDialog(
     onClose: () -> Unit,
 ) {
     MetaTermTheme {
-        PreComposeWindow(
+        Window(
             title = "dialog_title_filter".localized(),
             state = rememberWindowState(width = Dp.Unspecified, height = Dp.Unspecified),
             resizable = false,

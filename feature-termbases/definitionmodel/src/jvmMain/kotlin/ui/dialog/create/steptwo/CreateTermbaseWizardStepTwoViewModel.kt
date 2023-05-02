@@ -1,11 +1,15 @@
 package ui.dialog.create.steptwo
 
+import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import coroutines.CoroutineDispatcherProvider
 import data.PicklistValueModel
 import data.PropertyLevel
 import data.PropertyModel
 import data.PropertyType
 import data.TermbaseModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -15,15 +19,13 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.updateAndGet
 import kotlinx.coroutines.launch
-import moe.tlaster.precompose.viewmodel.ViewModel
-import moe.tlaster.precompose.viewmodel.viewModelScope
 import repository.PropertyRepository
 import kotlin.math.max
 
 class CreateTermbaseWizardStepTwoViewModel(
     private val dispatcherProvider: CoroutineDispatcherProvider,
     private val propertyRepository: PropertyRepository,
-) : ViewModel() {
+) : InstanceKeeper.Instance {
 
     private val items = MutableStateFlow<List<CreateTermbaseStepTwoItem>>(emptyList())
     private val selectedProperty = MutableStateFlow<PropertyModel?>(null)
@@ -35,6 +37,7 @@ class CreateTermbaseWizardStepTwoViewModel(
 
     private val _done = MutableSharedFlow<List<PropertyModel>>()
     val done = _done.asSharedFlow()
+    private val viewModelScope = CoroutineScope(SupervisorJob())
 
     val uiState = combine(
         items,
@@ -67,6 +70,10 @@ class CreateTermbaseWizardStepTwoViewModel(
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = CreteTermbaseStepTwoEditPropertyState(),
     )
+
+    override fun onDestroy() {
+        viewModelScope.cancel()
+    }
 
     fun reset() {
         items.value = emptyList()

@@ -26,10 +26,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.rememberWindowState
 import data.TermbaseModel
 import localized
-import moe.tlaster.precompose.PreComposeWindow
 import ui.theme.MetaTermTheme
 import ui.theme.Spacing
 
@@ -41,7 +41,7 @@ fun ManageTermbasesDialog(
     onEdit: (TermbaseModel) -> Unit,
 ) {
     MetaTermTheme {
-        PreComposeWindow(
+        Window(
             title = "dialog_title_manage_termbases".localized(),
             state = rememberWindowState(width = Dp.Unspecified, height = Dp.Unspecified),
             resizable = false,

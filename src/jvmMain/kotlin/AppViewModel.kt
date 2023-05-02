@@ -1,6 +1,10 @@
+import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import coroutines.CoroutineDispatcherProvider
 import data.TermbaseModel
 import keystore.TemporaryKeyStore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -10,8 +14,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.updateAndGet
 import kotlinx.coroutines.launch
 import log.LogManager
-import moe.tlaster.precompose.viewmodel.ViewModel
-import moe.tlaster.precompose.viewmodel.viewModelScope
 import notification.NotificationCenter
 import repository.EntryRepository
 import repository.PropertyRepository
@@ -35,7 +37,7 @@ class AppViewModel(
     private val notificationCenter: NotificationCenter,
     private val temporaryKeystore: TemporaryKeyStore,
     private val log: LogManager,
-) : ViewModel() {
+) : InstanceKeeper.Instance {
 
     companion object {
         private const val LAST_OPENED_TERMBASE_ID_KEY = "lastOpenTermbaseId"
@@ -46,6 +48,7 @@ class AppViewModel(
 
     private val currentTermbase = MutableStateFlow<TermbaseModel?>(null)
     private val openedTermbases = MutableStateFlow<List<TermbaseModel>>(emptyList())
+    private val viewModelScope = CoroutineScope(SupervisorJob())
 
     val uiState = combine(
         currentTermbase,
@@ -99,6 +102,10 @@ class AppViewModel(
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        viewModelScope.cancel()
     }
 
     private suspend fun openTermbase(termbaseId: Int) {

@@ -1,8 +1,12 @@
 package ui.dialog.create.stepone
 
+import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import coroutines.CoroutineDispatcherProvider
 import data.LanguageModel
 import data.TermbaseModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -13,8 +17,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import localized
-import moe.tlaster.precompose.viewmodel.ViewModel
-import moe.tlaster.precompose.viewmodel.viewModelScope
 import repository.FlagsRepository
 import repository.LanguageNameRepository
 import repository.LanguageRepository
@@ -24,7 +26,7 @@ class CreateTermbaseWizardStepOneViewModel(
     private val languageRepository: LanguageRepository,
     private val languageNameRepository: LanguageNameRepository,
     private val flagsRepository: FlagsRepository,
-) : ViewModel() {
+) : InstanceKeeper.Instance {
 
     private val name = MutableStateFlow("")
     private val description = MutableStateFlow("")
@@ -37,6 +39,7 @@ class CreateTermbaseWizardStepOneViewModel(
 
     private val _done = MutableSharedFlow<Pair<TermbaseModel, List<LanguageModel>>>()
     val done = _done.asSharedFlow()
+    private val viewModelScope = CoroutineScope(SupervisorJob())
 
     val uiState = combine(
         name,
@@ -83,6 +86,10 @@ class CreateTermbaseWizardStepOneViewModel(
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = CreateTermbaseLanguageUiState(),
     )
+
+    override fun onDestroy() {
+        viewModelScope.cancel()
+    }
 
     fun reset() {
         val languages = languageRepository.getDefaultLanguages().map {

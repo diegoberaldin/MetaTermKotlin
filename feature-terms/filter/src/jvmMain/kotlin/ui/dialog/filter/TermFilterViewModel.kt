@@ -1,5 +1,6 @@
 package ui.dialog.filter
 
+import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import data.LanguageModel
 import data.PropertyLevel
 import data.PropertyType
@@ -15,13 +16,14 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.updateAndGet
 import kotlinx.coroutines.launch
 import localized
-import moe.tlaster.precompose.viewmodel.ViewModel
-import moe.tlaster.precompose.viewmodel.viewModelScope
 import repository.FlagsRepository
 import repository.LanguageNameRepository
 import repository.LanguageRepository
 import repository.PropertyRepository
 import coroutines.CoroutineDispatcherProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 
 class TermFilterViewModel(
     private val dispatcherProvider: CoroutineDispatcherProvider,
@@ -29,7 +31,7 @@ class TermFilterViewModel(
     private val languageRepository: LanguageRepository,
     private val flagsRepository: FlagsRepository,
     private val languageNameRepository: LanguageNameRepository,
-) : ViewModel() {
+) : InstanceKeeper.Instance {
 
     private var termbaseId: Int = 0
     private var sourceLanguage: LanguageModel? = null
@@ -49,6 +51,7 @@ class TermFilterViewModel(
     private val _done = MutableSharedFlow<List<SearchCriterion>>()
     val done = _done.asSharedFlow()
     private val configurations = MutableStateFlow(mapOf<FilterableItem, FilterConfiguration>())
+    private val viewModelScope = CoroutineScope(SupervisorJob())
 
     val propertiesUiState = combine(
         filterableItems, selectedItem, configurations
@@ -83,6 +86,10 @@ class TermFilterViewModel(
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = TermFilterUiState(),
     )
+
+    override fun onDestroy() {
+        viewModelScope.cancel()
+    }
 
     private suspend fun loadCriteria(criteria: List<SearchCriterion>) {
         val properties = propertyRepository.getAll(termbaseId)

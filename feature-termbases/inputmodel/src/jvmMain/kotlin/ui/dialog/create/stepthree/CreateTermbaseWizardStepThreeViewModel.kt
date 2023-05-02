@@ -1,11 +1,15 @@
 package ui.dialog.create.stepthree
 
+import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import coroutines.CoroutineDispatcherProvider
 import data.InputDescriptorModel
 import data.LanguageModel
 import data.PropertyLevel
 import data.PropertyModel
 import data.TermbaseModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -15,8 +19,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.updateAndGet
 import kotlinx.coroutines.launch
-import moe.tlaster.precompose.viewmodel.ViewModel
-import moe.tlaster.precompose.viewmodel.viewModelScope
 import repository.FlagsRepository
 import repository.InputDescriptorRepository
 import repository.LanguageNameRepository
@@ -30,12 +32,13 @@ class CreateTermbaseWizardStepThreeViewModel(
     private val languageNameRepository: LanguageNameRepository,
     private val flagsRepository: FlagsRepository,
     private val inputDescriptorRepository: InputDescriptorRepository,
-) : ViewModel() {
+) : InstanceKeeper.Instance {
 
     private val items = MutableStateFlow<List<CreateTermbaseWizardStepThreeItem>>(emptyList())
     private val _done = MutableSharedFlow<List<InputDescriptorModel>>()
     val done = _done.asSharedFlow()
     private var termbaseId: Int = 0
+    private val viewModelScope = CoroutineScope(SupervisorJob())
 
     val uiState = combine(items) {
         CreateTermbaseWizardStepThreeUiState(
@@ -46,6 +49,10 @@ class CreateTermbaseWizardStepThreeViewModel(
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = CreateTermbaseWizardStepThreeUiState(),
     )
+
+    override fun onDestroy() {
+        viewModelScope.cancel()
+    }
 
     fun reset() {
         items.value = emptyList()
