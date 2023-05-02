@@ -15,13 +15,13 @@ pluginManagement {
 rootProject.name = "core-repository"
 
 include(
-    ":core-common",
-    ":core-persistence",
-    ":core-data",
-    ":core-localization",
-    ":repo",
-    ":usecase",
-    ":tests",
+    "core-common",
+    "core-persistence",
+    "core-data",
+    "core-localization",
+    "repo",
+    "usecase",
+    "tests",
 )
 project(":core-common").projectDir = File("../core-common")
 project(":core-persistence").projectDir = File("../core-persistence")
