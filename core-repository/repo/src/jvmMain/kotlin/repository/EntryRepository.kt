@@ -5,6 +5,7 @@ import data.EntryModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 class EntryRepository(
     private val entryDAO: EntryDAO,
@@ -28,7 +29,7 @@ class EntryRepository(
         entryDAO.delete(entry)
     }
 
-    fun observeEntries(termbaseId: Int): Flow<List<EntryModel>> = entryDAO.observeAll(termbaseId)
+    fun observeEntries(termbaseId: Int): Flow<List<EntryModel>> = entryDAO.observeAll(termbaseId).distinctUntilChanged()
 
     suspend fun getById(id: Int): EntryModel? = entryDAO.getById(entryId = id)
 

@@ -21,7 +21,7 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
-                implementation(compose.materialIconsExtended)
+                implementation(libs.kotlinx.coroutines.test)
 
                 implementation(project(":core-common"))
                 implementation(kotlin("test-junit5"))

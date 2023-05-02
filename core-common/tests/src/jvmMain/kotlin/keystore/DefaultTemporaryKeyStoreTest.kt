@@ -1,7 +1,8 @@
 package keystore
 
 import files.FileManager
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import java.io.File
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
@@ -21,6 +22,7 @@ private object MockFileManager : FileManager {
     }
 }
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class DefaultTemporaryKeyStoreTest {
 
     private var sut = DefaultTemporaryKeyStore(fileManager = MockFileManager)
@@ -36,172 +38,142 @@ class DefaultTemporaryKeyStoreTest {
     }
 
     @Test
-    fun givenEmptyStoreWhenQueriedIntThenDefaultValueIsReturned() {
+    fun givenEmptyStoreWhenQueriedIntThenDefaultValueIsReturned() = runTest {
         val key = "intKey"
-        runBlocking {
-            val retrieved = sut.get(key, 0)
-            assert(retrieved == 0)
-        }
+        val retrieved = sut.get(key, 0)
+        assert(retrieved == 0)
     }
 
     @Test
-    fun givenSavedIntWhenQueriedWithSameKeyThenCorrectValueIsReturned() {
+    fun givenSavedIntWhenQueriedWithSameKeyThenCorrectValueIsReturned() = runTest {
         val value = 42
         val key = "intKey"
-        runBlocking {
-            sut.save(key, value)
+        sut.save(key, value)
 
-            val retrieved = sut.get(key, 0)
-            assert(retrieved == value)
-        }
+        val retrieved = sut.get(key, 0)
+        assert(retrieved == value)
     }
 
     @Test
-    fun givenSavedIntWhenQueriedWithDifferentKeyThenDefaultValueIsReturned() {
+    fun givenSavedIntWhenQueriedWithDifferentKeyThenDefaultValueIsReturned() = runTest {
         val value = 42
         val key = "intKey"
         val otherKey = "intKey2"
-        runBlocking {
-            sut.save(key, value)
+        sut.save(key, value)
 
-            val retrieved = sut.get(otherKey, 0)
-            assert(retrieved == 0)
-        }
+        val retrieved = sut.get(otherKey, 0)
+        assert(retrieved == 0)
     }
 
     @Test
-    fun givenEmptyStoreWhenQueriedFloatThenDefaultValueIsReturned() {
+    fun givenEmptyStoreWhenQueriedFloatThenDefaultValueIsReturned() = runTest {
         val key = "intKey"
-        runBlocking {
-            val retrieved = sut.get(key, 0f)
-            assert(retrieved == 0f)
-        }
+        val retrieved = sut.get(key, 0f)
+        assert(retrieved == 0f)
     }
 
     @Test
-    fun givenSavedFloatWhenQueriedWithSameKeyThenCorrectValueIsReturned() {
+    fun givenSavedFloatWhenQueriedWithSameKeyThenCorrectValueIsReturned() = runTest {
         val value = 42f
         val key = "floatKey"
-        runBlocking {
-            sut.save(key, value)
+        sut.save(key, value)
 
-            val retrieved = sut.get(key, 0f)
-            assert(retrieved == value)
-        }
+        val retrieved = sut.get(key, 0f)
+        assert(retrieved == value)
     }
 
     @Test
-    fun givenSavedFloatWhenQueriedWithDifferentKeyThenDefaultValueIsReturned() {
+    fun givenSavedFloatWhenQueriedWithDifferentKeyThenDefaultValueIsReturned() = runTest {
         val value = 42f
         val key = "floatKey"
         val otherKey = "floatKey2"
-        runBlocking {
-            sut.save(key, value)
+        sut.save(key, value)
 
-            val retrieved = sut.get(otherKey, 0f)
-            assert(retrieved == 0f)
-        }
+        val retrieved = sut.get(otherKey, 0f)
+        assert(retrieved == 0f)
     }
 
     @Test
-    fun givenEmptyStoreWhenQueriedDoubleThenDefaultValueIsReturned() {
+    fun givenEmptyStoreWhenQueriedDoubleThenDefaultValueIsReturned() = runTest {
         val key = "doubleKey"
-        runBlocking {
-            val retrieved = sut.get(key, 0.0)
-            assert(retrieved == 0.0)
-        }
+        val retrieved = sut.get(key, 0.0)
+        assert(retrieved == 0.0)
     }
 
     @Test
-    fun givenSavedDoubleWhenQueriedWithSameKeyThenCorrectValueIsReturned() {
+    fun givenSavedDoubleWhenQueriedWithSameKeyThenCorrectValueIsReturned() = runTest {
         val value = 42.0
         val key = "doubleKey"
-        runBlocking {
-            sut.save(key, value)
+        sut.save(key, value)
 
-            val retrieved = sut.get(key, 0.0)
-            assert(retrieved == value)
-        }
+        val retrieved = sut.get(key, 0.0)
+        assert(retrieved == value)
     }
 
     @Test
-    fun givenSavedDoubleWhenQueriedWithDifferentKeyThenDefaultValueIsReturned() {
+    fun givenSavedDoubleWhenQueriedWithDifferentKeyThenDefaultValueIsReturned() = runTest {
         val value = 42.0
         val key = "doubleKey"
         val otherKey = "doubleKey2"
-        runBlocking {
-            sut.save(key, value)
+        sut.save(key, value)
 
-            val retrieved = sut.get(otherKey, 0.0)
-            assert(retrieved == 0.0)
-        }
+        val retrieved = sut.get(otherKey, 0.0)
+        assert(retrieved == 0.0)
     }
 
     @Test
-    fun givenEmptyStoreWhenQueriedBoolThenDefaultValueIsReturned() {
+    fun givenEmptyStoreWhenQueriedBoolThenDefaultValueIsReturned() = runTest {
         val key = "boolKey"
-        runBlocking {
-            val retrieved = sut.get(key, false)
-            assert(!retrieved)
-        }
+        val retrieved = sut.get(key, false)
+        assert(!retrieved)
     }
 
     @Test
-    fun givenSavedBoolWhenQueriedWithSameKeyThenCorrectValueIsReturned() {
+    fun givenSavedBoolWhenQueriedWithSameKeyThenCorrectValueIsReturned() = runTest {
         val value = true
         val key = "boolKey"
-        runBlocking {
-            sut.save(key, value)
+        sut.save(key, value)
 
-            val retrieved = sut.get(key, false)
-            assert(retrieved == value)
-        }
+        val retrieved = sut.get(key, false)
+        assert(retrieved == value)
     }
 
     @Test
-    fun givenSavedBoolWhenQueriedWithDifferentKeyThenDefaultValueIsReturned() {
+    fun givenSavedBoolWhenQueriedWithDifferentKeyThenDefaultValueIsReturned() = runTest {
         val value = true
         val key = "boolKey"
         val otherKey = "boolKey2"
-        runBlocking {
-            sut.save(key, value)
+        sut.save(key, value)
 
-            val retrieved = sut.get(otherKey, false)
-            assert(!retrieved)
-        }
+        val retrieved = sut.get(otherKey, false)
+        assert(!retrieved)
     }
 
     @Test
-    fun givenEmptyStoreWhenQueriedStringThenDefaultValueIsReturned() {
+    fun givenEmptyStoreWhenQueriedStringThenDefaultValueIsReturned() = runTest {
         val key = "stringKey"
-        runBlocking {
-            val retrieved = sut.get(key, "")
-            assert(retrieved == "")
-        }
+        val retrieved = sut.get(key, "")
+        assert(retrieved == "")
     }
 
     @Test
-    fun givenSavedStoreWhenQueriedWithSameKeyThenCorrectValueIsReturned() {
+    fun givenSavedStoreWhenQueriedWithSameKeyThenCorrectValueIsReturned() = runTest {
         val value = "value"
         val key = "stringKey"
-        runBlocking {
-            sut.save(key, value)
+        sut.save(key, value)
 
-            val retrieved = sut.get(key, "")
-            assert(retrieved == value)
-        }
+        val retrieved = sut.get(key, "")
+        assert(retrieved == value)
     }
 
     @Test
-    fun givenSavedStringWhenQueriedWithDifferentKeyThenDefaultValueIsReturned() {
+    fun givenSavedStringWhenQueriedWithDifferentKeyThenDefaultValueIsReturned() = runTest {
         val value = "value"
         val key = "stringKey"
         val otherKey = "stringKey2"
-        runBlocking {
-            sut.save(key, value)
+        sut.save(key, value)
 
-            val retrieved = sut.get(otherKey, "")
-            assert(retrieved == "")
-        }
+        val retrieved = sut.get(otherKey, "")
+        assert(retrieved == "")
     }
 }

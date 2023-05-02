@@ -6,11 +6,14 @@ import data.PropertyLevel
 import data.PropertyModel
 import data.PropertyType
 import data.TermbaseModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class PropertyDAOTest {
 
     private lateinit var appDb: AppDatabase
@@ -38,134 +41,114 @@ class PropertyDAOTest {
     }
 
     @Test
-    fun givenEmptyTermbaseWhenPropertyCreatedThenRowIsCreated() {
+    fun givenEmptyTermbaseWhenPropertyCreatedThenRowIsCreated() = runTest {
         val model = PropertyModel(termbaseId = termbaseId, name = "prop")
-        runBlocking {
-            val id = sut.create(model)
-            assert(id > 0)
-        }
+        val id = sut.create(model)
+        assert(id > 0)
     }
 
     @Test
-    fun givenExistingEntryLevelPropertyWhenGeyByIdIsCalledThenValueIsReturned() {
+    fun givenExistingEntryLevelPropertyWhenGeyByIdIsCalledThenValueIsReturned() = runTest {
         val model = PropertyModel(termbaseId = termbaseId, name = "prop", level = PropertyLevel.ENTRY)
-        runBlocking {
-            val id = sut.create(model)
+        val id = sut.create(model)
 
-            val res = sut.getById(id)
-            assert(res != null)
-            assert(res?.name == "prop")
-            assert(res?.level == PropertyLevel.ENTRY)
-        }
+        val res = sut.getById(id)
+        assert(res != null)
+        assert(res?.name == "prop")
+        assert(res?.level == PropertyLevel.ENTRY)
     }
 
     @Test
-    fun givenExistingLanguageLevelPropertyWhenGeyByIdIsCalledThenValueIsReturned() {
+    fun givenExistingLanguageLevelPropertyWhenGeyByIdIsCalledThenValueIsReturned() = runTest {
         val model = PropertyModel(termbaseId = termbaseId, name = "prop", level = PropertyLevel.LANGUAGE)
-        runBlocking {
-            val id = sut.create(model)
+        val id = sut.create(model)
 
-            val res = sut.getById(id)
-            assert(res != null)
-            assert(res?.name == "prop")
-            assert(res?.level == PropertyLevel.LANGUAGE)
-        }
+        val res = sut.getById(id)
+        assert(res != null)
+        assert(res?.name == "prop")
+        assert(res?.level == PropertyLevel.LANGUAGE)
     }
 
     @Test
-    fun givenExistingTermLevelPropertyWhenGeyByIdIsCalledThenValueIsReturned() {
+    fun givenExistingTermLevelPropertyWhenGeyByIdIsCalledThenValueIsReturned() = runTest {
         val model = PropertyModel(termbaseId = termbaseId, name = "prop", level = PropertyLevel.TERM)
-        runBlocking {
-            val id = sut.create(model)
+        val id = sut.create(model)
 
-            val res = sut.getById(id)
-            assert(res != null)
-            assert(res?.name == "prop")
-            assert(res?.level == PropertyLevel.TERM)
-        }
+        val res = sut.getById(id)
+        assert(res != null)
+        assert(res?.name == "prop")
+        assert(res?.level == PropertyLevel.TERM)
     }
 
     @Test
-    fun givenExistingTextPropertyWhenGeyByIdIsCalledThenValueIsReturned() {
+    fun givenExistingTextPropertyWhenGeyByIdIsCalledThenValueIsReturned() = runTest {
         val model = PropertyModel(termbaseId = termbaseId, name = "prop", type = PropertyType.TEXT)
-        runBlocking {
-            val id = sut.create(model)
+        val id = sut.create(model)
 
-            val res = sut.getById(id)
-            assert(res != null)
-            assert(res?.name == "prop")
-            assert(res?.type == PropertyType.TEXT)
-        }
+        val res = sut.getById(id)
+        assert(res != null)
+        assert(res?.name == "prop")
+        assert(res?.type == PropertyType.TEXT)
     }
 
     @Test
-    fun givenExistingPicklistPropertyWhenGeyByIdIsCalledThenValueIsReturned() {
+    fun givenExistingPicklistPropertyWhenGeyByIdIsCalledThenValueIsReturned() = runTest {
         val model = PropertyModel(termbaseId = termbaseId, name = "prop", type = PropertyType.PICKLIST)
-        runBlocking {
-            val id = sut.create(model)
+        val id = sut.create(model)
 
-            val res = sut.getById(id)
-            assert(res != null)
-            assert(res?.name == "prop")
-            assert(res?.type == PropertyType.PICKLIST)
-        }
+        val res = sut.getById(id)
+        assert(res != null)
+        assert(res?.name == "prop")
+        assert(res?.type == PropertyType.PICKLIST)
     }
 
     @Test
-    fun givenExistingImagePropertyWhenGeyByIdIsCalledThenValueIsReturned() {
+    fun givenExistingImagePropertyWhenGeyByIdIsCalledThenValueIsReturned() = runTest {
         val model = PropertyModel(termbaseId = termbaseId, name = "prop", type = PropertyType.IMAGE)
-        runBlocking {
-            val id = sut.create(model)
+        val id = sut.create(model)
 
-            val res = sut.getById(id)
-            assert(res != null)
-            assert(res?.name == "prop")
-            assert(res?.type == PropertyType.IMAGE)
-        }
+        val res = sut.getById(id)
+        assert(res != null)
+        assert(res?.name == "prop")
+        assert(res?.type == PropertyType.IMAGE)
     }
 
     @Test
-    fun givenExistingPropertyWhenPropertyIsDeletedThenNoValueIsReturned() {
+    fun givenExistingPropertyWhenPropertyIsDeletedThenNoValueIsReturned() = runTest {
         val model = PropertyModel(termbaseId = termbaseId, name = "prop")
-        runBlocking {
-            val id = sut.create(model)
-            val old = sut.getById(id)
-            assert(old != null)
+        val id = sut.create(model)
+        val old = sut.getById(id)
+        assert(old != null)
 
-            sut.delete(model.copy(id = id))
+        sut.delete(model.copy(id = id))
 
-            val res = sut.getById(id)
-            assert(res == null)
-        }
+        val res = sut.getById(id)
+        assert(res == null)
     }
 
     @Test
-    fun givenExistingPropertyWhenPropertyIsUpdatedThenNoValueIsReturned() {
+    fun givenExistingPropertyWhenPropertyIsUpdatedThenNoValueIsReturned() = runTest {
         val model = PropertyModel(termbaseId = termbaseId, name = "prop")
-        runBlocking {
-            val id = sut.create(model)
-            val old = sut.getById(id)
-            assert(old != null)
+        val id = sut.create(model)
+        val old = sut.getById(id)
+        assert(old != null)
 
-            sut.update(model.copy(id = id, name = "prop 2"))
+        sut.update(model.copy(id = id, name = "prop 2"))
 
-            val res = sut.getById(id)
-            assert(res != null)
-            assert(res?.name == "prop 2")
-        }
+        val res = sut.getById(id)
+        assert(res != null)
+        assert(res?.name == "prop 2")
     }
 
     @Test
-    fun givenExistingPropertiesWhenGetAllIsCalledThenAllValuesReturned() {
+    fun givenExistingPropertiesWhenGetAllIsCalledThenAllValuesReturned() = runTest {
         val model = PropertyModel(termbaseId = termbaseId, name = "prop 1")
         val model2 = PropertyModel(termbaseId = termbaseId, name = "prop 2")
-        runBlocking {
-            sut.create(model)
-            sut.create(model2)
+        sut.create(model)
+        sut.create(model2)
 
-            val res = sut.getAll(termbaseId = termbaseId)
+        val res = sut.getAll(termbaseId = termbaseId)
 
-            assert(res.size == 2)
-        }
+        assert(res.size == 2)
     }
 }

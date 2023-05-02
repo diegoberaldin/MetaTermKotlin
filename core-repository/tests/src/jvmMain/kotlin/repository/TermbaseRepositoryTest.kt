@@ -3,12 +3,16 @@ package repository
 import AppDatabase
 import MockFileManager
 import data.TermbaseModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.withTimeout
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.time.Duration.Companion.seconds
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class TermbaseRepositoryTest {
 
     private lateinit var sut: TermbaseRepository
@@ -28,73 +32,61 @@ class TermbaseRepositoryTest {
     }
 
     @Test
-    fun givenRepositoryWhenEmptyAndGetAllInvokedThenAllTermbasesAreReturned() {
-        runBlocking {
-            val res = sut.getAll()
-            assert(res.isEmpty())
-        }
+    fun givenEmptyRepositoryWhenGetAllInvokedThenAllTermbasesAreReturned() = runTest {
+        val res = sut.getAll()
+        assert(res.isEmpty())
     }
 
     @Test
-    fun givenRepositoryWhenCreateAndGetAllInvokedThenAllTermbasesAreReturned() {
-        runBlocking {
-            sut.create(TermbaseModel(name = "test tb"))
+    fun givenRepositoryWhenCreateAndGetAllInvokedThenAllTermbasesAreReturned() = runTest {
+        sut.create(TermbaseModel(name = "test tb"))
 
-            val res = sut.getAll()
-            assert(res.size == 1)
-            assert(res.first().name == "test tb")
-        }
+        val res = sut.getAll()
+        assert(res.size == 1)
+        assert(res.first().name == "test tb")
     }
 
     @Test
-    fun givenRepositoryWhenCreateThenItemIsCreated() {
-        runBlocking {
-            val res = sut.create(TermbaseModel(name = "test tb"))
+    fun givenRepositoryWhenCreateThenItemIsCreated() = runTest {
+        val res = sut.create(TermbaseModel(name = "test tb"))
 
-            assert(res > 0L)
-        }
+        assert(res > 0L)
     }
 
     @Test
-    fun givenExistingTermbaseWhenGetByIdInvokedThenCorrectDataIsReturned() {
-        runBlocking {
-            val id = sut.create(TermbaseModel(name = "test tb"))
+    fun givenExistingTermbaseWhenGetByIdInvokedThenCorrectDataIsReturned() = runTest {
+        val id = sut.create(TermbaseModel(name = "test tb"))
 
-            val res = sut.getById(id)
-            assert(res != null)
-            assert(res?.name == "test tb")
-        }
+        val res = sut.getById(id)
+        assert(res != null)
+        assert(res?.name == "test tb")
     }
 
     @Test
-    fun givenExistingTermbaseWhenUpdatedThenDataIsChangedAccordingly() {
-        runBlocking {
-            val model = TermbaseModel(name = "test tb")
-            val id = sut.create(model)
+    fun givenExistingTermbaseWhenUpdatedThenDataIsChangedAccordingly() = runTest {
+        val model = TermbaseModel(name = "test tb")
+        val id = sut.create(model)
 
-            sut.update(model.copy(id = id, name = "test updated"))
+        sut.update(model.copy(id = id, name = "test updated"))
 
-            val res = sut.getById(id)
-            assert(res?.name == "test updated")
-        }
+        val res = sut.getById(id)
+        assert(res?.name == "test updated")
     }
 
     @Test
-    fun givenExistingTermbaseWhenDeletedThenNoDataIsRetrieved() {
-        runBlocking {
-            val model = TermbaseModel(name = "test tb")
-            val id = sut.create(model)
+    fun givenExistingTermbaseWhenDeletedThenNoDataIsRetrieved() = runTest {
+        val model = TermbaseModel(name = "test tb")
+        val id = sut.create(model)
 
-            sut.delete(model.copy(id = id))
+        sut.delete(model.copy(id = id))
 
-            val res = sut.getById(id)
-            assert(res == null)
-        }
+        val res = sut.getById(id)
+        assert(res == null)
     }
 
     @Test
-    fun givenRepositoryWhenObservingAllTermbasesThenCorrectDataIsEmitted() {
-        runBlocking {
+    fun givenRepositoryWhenObservingAllTermbasesThenCorrectDataIsEmitted() = runTest {
+        withTimeout(5.seconds) {
             val flow = sut.all
             val list0 = flow.first()
             assert(list0.isEmpty())

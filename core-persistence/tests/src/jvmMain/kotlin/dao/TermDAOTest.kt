@@ -7,11 +7,14 @@ import data.LanguageModel
 import data.SearchCriterion
 import data.TermModel
 import data.TermbaseModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class TermDAOTest {
 
     private lateinit var appDb: AppDatabase
@@ -45,101 +48,87 @@ class TermDAOTest {
     }
 
     @Test
-    fun givenEmptyTermbaseWhenTermCreatedThenRowIsCreated() {
+    fun givenEmptyTermbaseWhenTermCreatedThenRowIsCreated() = runTest {
         val model = TermModel(entryId = entryId, lemma = "test")
-        runBlocking {
-            val id = sut.create(model)
-            assert(id > 0)
-        }
+        val id = sut.create(model)
+        assert(id > 0)
     }
 
     @Test
-    fun givenExistingTermWhenGeyByIdIsCalledThenValueIsReturned() {
+    fun givenExistingTermWhenGeyByIdIsCalledThenValueIsReturned() = runTest {
         val model = TermModel(entryId = entryId, lemma = "test")
-        runBlocking {
-            val id = sut.create(model)
+        val id = sut.create(model)
 
-            val res = sut.getById(id)
-            assert(res != null)
-            assert(res?.lemma == "test")
-        }
+        val res = sut.getById(id)
+        assert(res != null)
+        assert(res?.lemma == "test")
     }
 
     @Test
-    fun givenExistingTermWhenIsDeletedThenNoValueIsReturned() {
+    fun givenExistingTermWhenIsDeletedThenNoValueIsReturned() = runTest {
         val model = TermModel(entryId = entryId, lemma = "test")
-        runBlocking {
-            val id = sut.create(model)
-            val old = sut.getById(id)
-            assert(old != null)
+        val id = sut.create(model)
+        val old = sut.getById(id)
+        assert(old != null)
 
-            sut.delete(model.copy(id = id))
+        sut.delete(model.copy(id = id))
 
-            val res = sut.getById(id)
-            assert(res == null)
-        }
+        val res = sut.getById(id)
+        assert(res == null)
     }
 
     @Test
-    fun givenExistingTermWhenIsUpdatedThenValueIsReturned() {
+    fun givenExistingTermWhenIsUpdatedThenValueIsReturned() = runTest {
         val model = TermModel(entryId = entryId, lemma = "test")
-        runBlocking {
-            val id = sut.create(model)
-            val old = sut.getById(id)
-            assert(old != null)
+        val id = sut.create(model)
+        val old = sut.getById(id)
+        assert(old != null)
 
-            sut.update(model.copy(id = id, lemma = "test 2"))
+        sut.update(model.copy(id = id, lemma = "test 2"))
 
-            val res = sut.getById(id)
-            assert(res != null)
-            assert(res?.lemma == "test 2")
-        }
+        val res = sut.getById(id)
+        assert(res != null)
+        assert(res?.lemma == "test 2")
     }
 
     @Test
-    fun givenExistingTermsWhenGetAllIsCalledThenAllValuesReturned() {
+    fun givenExistingTermsWhenGetAllIsCalledThenAllValuesReturned() = runTest {
         val model = TermModel(entryId = entryId, lemma = "test")
         val model2 = TermModel(entryId = entryId, lemma = "test 2")
-        runBlocking {
-            sut.create(model)
-            sut.create(model2)
+        sut.create(model)
+        sut.create(model2)
 
-            val res = sut.getAll(entryId = entryId)
+        val res = sut.getAll(entryId = entryId)
 
-            assert(res.size == 2)
-        }
+        assert(res.size == 2)
     }
 
     @Test
-    fun givenExistingTermsWhenCountAllIsCalledThenCorrectResultIsReturned() {
+    fun givenExistingTermsWhenCountAllIsCalledThenCorrectResultIsReturned() = runTest {
         val model = TermModel(entryId = entryId, lemma = "test")
         val model2 = TermModel(entryId = entryId, lemma = "test 2")
-        runBlocking {
-            sut.create(model)
-            sut.create(model2)
+        sut.create(model)
+        sut.create(model2)
 
-            val res = sut.countAll(termbaseId = termbaseId)
+        val res = sut.countAll(termbaseId = termbaseId)
 
-            assert(res == 2L)
-        }
+        assert(res == 2L)
     }
 
     @Test
-    fun givenExistingTermsWhenCountByLanguageIsCalledThenCorrectResultIsReturned() {
+    fun givenExistingTermsWhenCountByLanguageIsCalledThenCorrectResultIsReturned() = runTest {
         val model = TermModel(entryId = entryId, lemma = "test", lang = "en")
         val model2 = TermModel(entryId = entryId, lemma = "test 2", lang = "it")
-        runBlocking {
-            sut.create(model)
-            sut.create(model2)
+        sut.create(model)
+        sut.create(model2)
 
-            val res = sut.countByLanguage(code = "en", termbaseId = termbaseId)
+        val res = sut.countByLanguage(code = "en", termbaseId = termbaseId)
 
-            assert(res == 1L)
-        }
+        assert(res == 1L)
     }
 
     @Test
-    fun givenExistingTermsWhenSearchedWithEmptyCriteriaThenCorrectResultsAreReturned() {
+    fun givenExistingTermsWhenSearchedWithEmptyCriteriaThenCorrectResultsAreReturned() = runTest {
         val terms = listOf(
             TermModel(entryId = entryId, lemma = "test", lang = "en"),
             TermModel(entryId = entryId, lemma = "test 2", lang = "en"),
@@ -147,22 +136,20 @@ class TermDAOTest {
             TermModel(entryId = entryId, lemma = "another 2", lang = "en"),
             TermModel(entryId = entryId, lemma = "test", lang = "it"),
         )
-        runBlocking {
-            for (t in terms) {
-                sut.create(t)
-            }
-
-            val res = sut.getAll(
-                termbaseId = termbaseId,
-                mainLang = "en",
-            )
-
-            assert(res.size == 4)
+        for (t in terms) {
+            sut.create(t)
         }
+
+        val res = sut.getAll(
+            termbaseId = termbaseId,
+            mainLang = "en",
+        )
+
+        assert(res.size == 4)
     }
 
     @Test
-    fun givenExistingTermsWhenSearchedWithLemmaFuzzyMatchThenCorrectResultsAreReturned() {
+    fun givenExistingTermsWhenSearchedWithLemmaFuzzyMatchThenCorrectResultsAreReturned() = runTest {
         val terms = listOf(
             TermModel(entryId = entryId, lemma = "test", lang = "en"),
             TermModel(entryId = entryId, lemma = "test 2", lang = "en"),
@@ -170,28 +157,26 @@ class TermDAOTest {
             TermModel(entryId = entryId, lemma = "another 2", lang = "en"),
             TermModel(entryId = entryId, lemma = "test", lang = "it"),
         )
-        runBlocking {
-            for (t in terms) {
-                sut.create(t)
-            }
+        for (t in terms) {
+            sut.create(t)
+        }
 
-            val res = sut.getAll(
-                termbaseId = termbaseId,
-                mainLang = "en",
-                criteria = listOf(
-                    SearchCriterion.FuzzyMatch(
-                        text = "test",
-                        matching = listOf(SearchCriterion.MatchDescriptor(lemma = true, lang = "en"))
-                    )
+        val res = sut.getAll(
+            termbaseId = termbaseId,
+            mainLang = "en",
+            criteria = listOf(
+                SearchCriterion.FuzzyMatch(
+                    text = "test",
+                    matching = listOf(SearchCriterion.MatchDescriptor(lemma = true, lang = "en"))
                 )
             )
+        )
 
-            assert(res.size == 2)
-        }
+        assert(res.size == 2)
     }
 
     @Test
-    fun givenExistingTermsWhenSearchedWithLemmaExactMatchThenCorrectResultsAreReturned() {
+    fun givenExistingTermsWhenSearchedWithLemmaExactMatchThenCorrectResultsAreReturned() = runTest {
         val terms = listOf(
             TermModel(entryId = entryId, lemma = "test", lang = "en"),
             TermModel(entryId = entryId, lemma = "test 2", lang = "en"),
@@ -199,23 +184,21 @@ class TermDAOTest {
             TermModel(entryId = entryId, lemma = "another 2", lang = "en"),
             TermModel(entryId = entryId, lemma = "test", lang = "it"),
         )
-        runBlocking {
-            for (t in terms) {
-                sut.create(t)
-            }
+        for (t in terms) {
+            sut.create(t)
+        }
 
-            val res = sut.getAll(
-                termbaseId = termbaseId,
-                mainLang = "en",
-                criteria = listOf(
-                    SearchCriterion.ExactMatch(
-                        text = "test",
-                        matching = listOf(SearchCriterion.MatchDescriptor(lemma = true, lang = "en"))
-                    )
+        val res = sut.getAll(
+            termbaseId = termbaseId,
+            mainLang = "en",
+            criteria = listOf(
+                SearchCriterion.ExactMatch(
+                    text = "test",
+                    matching = listOf(SearchCriterion.MatchDescriptor(lemma = true, lang = "en"))
                 )
             )
+        )
 
-            assert(res.size == 1)
-        }
+        assert(res.size == 1)
     }
 }
