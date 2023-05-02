@@ -1,12 +1,17 @@
 package ui
 
+import com.arkivanov.essenty.instancekeeper.InstanceKeeper
+import coroutines.CoroutineDispatcherProvider
 import data.EntryModel
 import data.LanguageModel
 import data.SearchCriterion
 import data.TermModel
 import data.TermbaseModel
 import data.includingSearch
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -20,15 +25,12 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.updateAndGet
 import kotlinx.coroutines.launch
 import log.LogManager
-import moe.tlaster.precompose.viewmodel.ViewModel
-import moe.tlaster.precompose.viewmodel.viewModelScope
 import notification.NotificationCenter
 import repository.EntryRepository
 import repository.LanguageNameRepository
 import repository.LanguageRepository
 import usecase.DeleteEntryUseCase
 import usecase.SearchTermsUseCase
-import coroutines.CoroutineDispatcherProvider
 
 class TermsViewModel(
     private val dispatcherProvider: CoroutineDispatcherProvider,
@@ -39,7 +41,7 @@ class TermsViewModel(
     private val deleteEntryUseCase: DeleteEntryUseCase,
     private val searchTermsUseCase: SearchTermsUseCase,
     private val log: LogManager,
-) : ViewModel() {
+) : InstanceKeeper.Instance {
 
     private val currentTermbase = MutableStateFlow<TermbaseModel?>(null)
     private val terms = MutableStateFlow(listOf<TermModel>())
@@ -53,6 +55,7 @@ class TermsViewModel(
     private val searchText = MutableStateFlow("")
     private var searchCriteria = MutableStateFlow<List<SearchCriterion>>(emptyList())
     private var termsJob: Job? = null
+    private val viewModelScope = CoroutineScope(SupervisorJob())
 
     val uiState = combine(
         currentTermbase,
@@ -158,6 +161,10 @@ class TermsViewModel(
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        viewModelScope.cancel()
     }
 
     fun load(termbase: TermbaseModel) {

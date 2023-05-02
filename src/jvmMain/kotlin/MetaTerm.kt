@@ -20,8 +20,11 @@ import androidx.compose.ui.input.key.KeyShortcut
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.MenuBar
+import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import com.arkivanov.essenty.instancekeeper.InstanceKeeperDispatcher
+import com.arkivanov.essenty.instancekeeper.getOrCreate
 import di.commonKoinModule
 import di.databaseKoinModule
 import di.mainKoinModule
@@ -31,11 +34,12 @@ import di.termsKoinModule
 import keystore.TemporaryKeyStore
 import kotlinx.coroutines.runBlocking
 import log.LogManager
-import moe.tlaster.precompose.PreComposeWindow
-import moe.tlaster.precompose.ui.viewModel
 import notification.NotificationCenter
 import org.koin.core.context.startKoin
 import ui.TermsViewModel
+import ui.components.CustomOpenFileDialog
+import ui.components.CustomSaveFileDialog
+import ui.components.CustomTabBar
 import ui.detail.TermDetailViewModel
 import ui.dialog.create.CreateTermbaseViewModel
 import ui.dialog.create.CreateTermbaseWizardDialog
@@ -44,14 +48,11 @@ import ui.dialog.create.stepthree.CreateTermbaseWizardStepThreeViewModel
 import ui.dialog.create.steptwo.CreateTermbaseWizardStepTwoViewModel
 import ui.dialog.edit.EditTermbaseDialog
 import ui.dialog.edit.EditTermbaseViewModel
+import ui.dialog.filter.TermFilterViewModel
 import ui.dialog.manage.ManageTermbasesDialog
 import ui.dialog.manage.ManageTermbasesViewModel
 import ui.dialog.statistics.TermbaseStatisticsDialog
 import ui.dialog.statistics.TermbaseStatisticsViewModel
-import ui.components.CustomOpenFileDialog
-import ui.components.CustomSaveFileDialog
-import ui.components.CustomTabBar
-import ui.dialog.filter.TermFilterViewModel
 import ui.screens.intro.IntroScreen
 import ui.screens.intro.IntroViewModel
 import ui.screens.main.MainScreen
@@ -59,7 +60,7 @@ import ui.screens.main.MainViewModel
 import ui.theme.MetaTermTheme
 import ui.theme.SelectedBackground
 import ui.theme.Spacing
-import java.util.Locale
+import java.util.*
 
 private val koin = startKoin {
     modules(
@@ -73,10 +74,15 @@ private val koin = startKoin {
     )
 }.koin
 
+private val instanceKeeper = InstanceKeeperDispatcher()
+
 
 @Composable
 @Preview
-private fun App(viewModel: AppViewModel) {
+private fun App() {
+    val viewModel: AppViewModel = instanceKeeper.getOrCreate {
+        koin.get()
+    }
     MetaTermTheme {
         val uiState by viewModel.uiState.collectAsState()
         val openedTermbases = uiState.openedTermbases
@@ -102,16 +108,16 @@ private fun App(viewModel: AppViewModel) {
                 },
             )
             if (termbase != null) {
-                val mainViewModel: MainViewModel = viewModel {
+                val mainViewModel: MainViewModel = instanceKeeper.getOrCreate {
                     koin.get()
                 }
-                val termsViewModel: TermsViewModel = viewModel {
+                val termsViewModel: TermsViewModel = instanceKeeper.getOrCreate {
                     koin.get()
                 }
-                val termDetailViewModel: TermDetailViewModel = viewModel {
+                val termDetailViewModel: TermDetailViewModel = instanceKeeper.getOrCreate {
                     koin.get()
                 }
-                val termFilterViewModel: TermFilterViewModel = viewModel {
+                val termFilterViewModel: TermFilterViewModel = instanceKeeper.getOrCreate {
                     koin.get()
                 }
                 MainScreen(
@@ -126,7 +132,7 @@ private fun App(viewModel: AppViewModel) {
                     termFilterViewModel = termFilterViewModel,
                 )
             } else {
-                val introViewModel: IntroViewModel = viewModel {
+                val introViewModel: IntroViewModel = instanceKeeper.getOrCreate {
                     koin.get()
                 }
                 introViewModel.reset()
@@ -154,12 +160,12 @@ fun main() = application {
         L10n.setLanguage(currentLang)
     }
 
-    PreComposeWindow(
+    Window(
         onCloseRequest = ::exitApplication,
         title = "app_name".localized(),
         state = rememberWindowState(size = DpSize.Unspecified),
     ) {
-        val appViewModel: AppViewModel = viewModel {
+        val appViewModel: AppViewModel = instanceKeeper.getOrCreate {
             koin.get()
         }
 
@@ -305,10 +311,10 @@ fun main() = application {
             }
         }
 
-        App(viewModel = appViewModel)
+        App()
 
         if (manageTermbasesDialogOpen) {
-            val viewModel: ManageTermbasesViewModel = viewModel {
+            val viewModel: ManageTermbasesViewModel = instanceKeeper.getOrCreate {
                 koin.get()
             }
             ManageTermbasesDialog(
@@ -327,19 +333,19 @@ fun main() = application {
         }
 
         if (newTermbaseWizardOpen) {
-            val viewModel: CreateTermbaseViewModel = viewModel {
+            val viewModel: CreateTermbaseViewModel = instanceKeeper.getOrCreate {
                 koin.get()
             }
             viewModel.reset()
-            val stepOneViewModel: CreateTermbaseWizardStepOneViewModel = viewModel {
+            val stepOneViewModel: CreateTermbaseWizardStepOneViewModel = instanceKeeper.getOrCreate {
                 koin.get()
             }
             stepOneViewModel.reset()
-            val stepTwoViewModel: CreateTermbaseWizardStepTwoViewModel = viewModel {
+            val stepTwoViewModel: CreateTermbaseWizardStepTwoViewModel = instanceKeeper.getOrCreate {
                 koin.get()
             }
             stepTwoViewModel.reset()
-            val stepThreeViewModel: CreateTermbaseWizardStepThreeViewModel = viewModel {
+            val stepThreeViewModel: CreateTermbaseWizardStepThreeViewModel = instanceKeeper.getOrCreate {
                 koin.get()
             }
             stepThreeViewModel.reset()
@@ -359,19 +365,19 @@ fun main() = application {
         if (editTermbaseWizardOpen) {
             val termbase = appViewModel.termbaseToEdit
             if (termbase != null) {
-                val viewModel: EditTermbaseViewModel = viewModel {
+                val viewModel: EditTermbaseViewModel = instanceKeeper.getOrCreate {
                     koin.get()
                 }
                 viewModel.reset()
-                val stepOneViewModel: CreateTermbaseWizardStepOneViewModel = viewModel {
+                val stepOneViewModel: CreateTermbaseWizardStepOneViewModel = instanceKeeper.getOrCreate {
                     koin.get()
                 }
                 stepOneViewModel.reset()
-                val stepTwoViewModel: CreateTermbaseWizardStepTwoViewModel = viewModel {
+                val stepTwoViewModel: CreateTermbaseWizardStepTwoViewModel = instanceKeeper.getOrCreate {
                     koin.get()
                 }
                 stepTwoViewModel.reset()
-                val stepThreeViewModel: CreateTermbaseWizardStepThreeViewModel = viewModel {
+                val stepThreeViewModel: CreateTermbaseWizardStepThreeViewModel = instanceKeeper.getOrCreate {
                     koin.get()
                 }
                 stepThreeViewModel.reset()
@@ -444,7 +450,7 @@ fun main() = application {
         }
 
         if (statisticsDialogOpen) {
-            val viewModel: TermbaseStatisticsViewModel = viewModel {
+            val viewModel: TermbaseStatisticsViewModel = instanceKeeper.getOrCreate {
                 koin.get()
             }
             uiState.currentTermbase?.also {

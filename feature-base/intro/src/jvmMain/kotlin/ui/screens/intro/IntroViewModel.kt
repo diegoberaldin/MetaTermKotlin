@@ -1,24 +1,27 @@
 package ui.screens.intro
 
+import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import data.TermbaseModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import moe.tlaster.precompose.viewmodel.ViewModel
-import moe.tlaster.precompose.viewmodel.viewModelScope
 import notification.NotificationCenter
 import repository.TermbaseRepository
 import coroutines.CoroutineDispatcherProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 
 class IntroViewModel(
     private val dispatcherProvider: CoroutineDispatcherProvider,
     private val termbaseRepository: TermbaseRepository,
     private val notificationCenter: NotificationCenter,
-) : ViewModel() {
+) : InstanceKeeper.Instance {
 
     private var termbases = MutableStateFlow<List<TermbaseModel>>(emptyList())
+    private val viewModelScope = CoroutineScope(SupervisorJob())
 
     val uiState = combine(termbases) {
         IntroUiState(
@@ -29,6 +32,10 @@ class IntroViewModel(
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = IntroUiState()
     )
+
+    override fun onDestroy() {
+        viewModelScope.cancel()
+    }
 
     fun reset() {
         viewModelScope.launch(dispatcherProvider.io) {

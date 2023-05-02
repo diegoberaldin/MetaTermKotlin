@@ -1,5 +1,6 @@
 package ui.dialog.statistics
 
+import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import data.TermbaseModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -8,14 +9,15 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import localized
-import moe.tlaster.precompose.viewmodel.ViewModel
-import moe.tlaster.precompose.viewmodel.viewModelScope
 import repository.EntryRepository
 import repository.FlagsRepository
 import repository.LanguageNameRepository
 import repository.LanguageRepository
 import repository.TermRepository
 import coroutines.CoroutineDispatcherProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 
 class TermbaseStatisticsViewModel(
     private val dispatcherProvider: CoroutineDispatcherProvider,
@@ -24,10 +26,11 @@ class TermbaseStatisticsViewModel(
     private val languageNameRepository: LanguageNameRepository,
     private val flagsRepository: FlagsRepository,
     private val termRepository: TermRepository,
-) : ViewModel() {
+) : InstanceKeeper.Instance {
 
     private val items = MutableStateFlow<List<TermbaseStatisticsItem>>(emptyList())
     private val loading = MutableStateFlow(false)
+    private val viewModelScope = CoroutineScope(SupervisorJob())
 
     val uiState = combine(items, loading) { items, loading ->
         TermbaseStatisticsUiState(
@@ -39,6 +42,10 @@ class TermbaseStatisticsViewModel(
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = TermbaseStatisticsUiState(),
     )
+
+    override fun onDestroy() {
+        viewModelScope.cancel()
+    }
 
     fun load(termbase: TermbaseModel) {
         val termbaseId = termbase.id

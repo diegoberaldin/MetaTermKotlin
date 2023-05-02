@@ -22,9 +22,7 @@ kotlin {
             dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation(compose.materialIconsExtended)
-
-                //implementation(libs.precompose)
-                implementation("moe.tlaster:precompose:1.3.14")
+                implementation(libs.essenty.instancekeeper)
 
                 implementation(project(":core-common"))
                 implementation(project(":core-data"))

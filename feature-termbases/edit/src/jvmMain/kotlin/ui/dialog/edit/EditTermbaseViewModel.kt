@@ -1,23 +1,25 @@
 package ui.dialog.edit
 
+import com.arkivanov.essenty.instancekeeper.InstanceKeeper
+import coroutines.CoroutineDispatcherProvider
 import data.InputDescriptorModel
 import data.LanguageModel
 import data.PropertyModel
 import data.TermbaseModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import moe.tlaster.precompose.viewmodel.ViewModel
-import moe.tlaster.precompose.viewmodel.viewModelScope
 import notification.NotificationCenter
 import repository.InputDescriptorRepository
 import repository.LanguageRepository
 import repository.PropertyRepository
 import repository.TermbaseRepository
 import usecase.DeleteTermbaseLanguageUseCase
-import coroutines.CoroutineDispatcherProvider
 
 class EditTermbaseViewModel(
     private val dispatcherProvider: CoroutineDispatcherProvider,
@@ -27,12 +29,13 @@ class EditTermbaseViewModel(
     private val inputDescriptorRepository: InputDescriptorRepository,
     private val deleteTermbaseLanguage: DeleteTermbaseLanguageUseCase,
     private val notificationCenter: NotificationCenter,
-) : ViewModel() {
+) : InstanceKeeper.Instance {
 
     private var termbase: TermbaseModel? = null
     private val step = MutableStateFlow(0)
     private val loading = MutableStateFlow(false)
     private val done = MutableStateFlow(false)
+    private val viewModelScope = CoroutineScope(SupervisorJob())
 
     val uiState = combine(
         step,
@@ -49,6 +52,10 @@ class EditTermbaseViewModel(
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = EditTermbaseUiState(),
     )
+
+    override fun onDestroy() {
+        viewModelScope.cancel()
+    }
 
     fun reset() {
         termbase = null
@@ -111,9 +118,8 @@ class EditTermbaseViewModel(
             }
 
             // removes unneeded properties
-            val propertiesToDelete =
-                propertyRepository.getAll(termbaseId = current.id)
-                    .filter { it.id !in properties.map { p -> p.id } && it.id !in newlyCreatedIds }
+            val propertiesToDelete = propertyRepository.getAll(termbaseId = current.id)
+                .filter { it.id !in properties.map { p -> p.id } && it.id !in newlyCreatedIds }
             for (property in propertiesToDelete) {
                 propertyRepository.delete(property)
             }
@@ -136,9 +142,8 @@ class EditTermbaseViewModel(
             }
 
             // removes unneeded properties
-            val descriptorsToDelete =
-                inputDescriptorRepository.getAll(termbaseId = current.id)
-                    .filter { it.id !in descriptors.map { p -> p.id } && it.id !in newlyCreatedIds }
+            val descriptorsToDelete = inputDescriptorRepository.getAll(termbaseId = current.id)
+                .filter { it.id !in descriptors.map { p -> p.id } && it.id !in newlyCreatedIds }
             for (descriptor in descriptorsToDelete) {
                 inputDescriptorRepository.delete(descriptor)
             }

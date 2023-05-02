@@ -49,12 +49,17 @@ Edit termbase
 
 ## Technologies
 
-This project was also created as a playground to experiment with some frameworks and libraries I wanted to learn (and play a little with). It is a pure Kotlin project taking advantage of the *Kotlin multiplatform* technology, even though no native code was needed and it's all in the JVM flavour.
-The UI layer is written in *Jetpack Compose*, using the desktop porting of the library which is still experimental (but reliable though).
-In order to have navigation and MVVM in a desktop/multiplatform, I chose the *Precomposed* library by [Tlaster](https://tlaster.github.io/PreCompose/).
-The persistence layer was written with JetBrains's *Exposed* library, combined with the JDBC driver and an embedded *H2 database*. Dependency injection is obtained with *Koin* but as a thin layer with no annotation processing and other bells and whistles.
+This project was also created as a playground to experiment with some frameworks and libraries I wanted to learn (and play a little with). It is a pure Kotlin project taking advantage of the **Kotlin multiplatform** technology, even though no native code was needed and it's all in the JVM flavour.
+The UI layer is written in **Jetpack Compose**, using the desktop porting of the library which is still experimental (but reliable though).
 
-Since this is an open field for experimentation, I am willing to accept change proposals/suggestions and even to rewrite entire layers of the application architecture just for fun (I already switched SQLite -> H2 for persistence and Kodein -> Koin for DI during the development stages).
+In order to have state and instance retention (ViewModels) in a desktop/multiplatform environment, I chose the **Decompose** library or at least, to keep things as simple as possible, the smallest subset of its functionalities that I needed, e.g. instance retention.  Dependency injection is obtained through the **Koin** framework, but as a thin layer with no annotation processing and other bells and whistles.
+
+The persistence layer was written with JetBrains **Exposed** ORM library, combined with the JDBC driver and an embedded **H2 database**, since it was crucial to me to keep data within the user's local machine.
+
+Since this is an open field for experimentation, I am willing to accept change proposals/suggestions and even to rewrite entire layers of the application architecture just for fun. During development I have already switched the following technologies:
+- SQLite ➞ H2 for persistence
+- Kodein ➞ Koin for DI
+- Precompose ➞ Decompose for MVVM and navigation
 
 ## Trivia
 

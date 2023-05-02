@@ -1,5 +1,6 @@
 package ui.detail
 
+import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import coroutines.CoroutineDispatcherProvider
 import data.InputDescriptorModel
 import data.LanguageModel
@@ -10,7 +11,10 @@ import data.PropertyValueModel
 import data.SearchCriterion
 import data.TermModel
 import files.FileManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -23,8 +27,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import log.LogManager
-import moe.tlaster.precompose.viewmodel.ViewModel
-import moe.tlaster.precompose.viewmodel.viewModelScope
 import notification.NotificationCenter
 import repository.EntryPropertyValueRepository
 import repository.FlagsRepository
@@ -52,7 +54,7 @@ class TermDetailViewModel(
     private val deleteTermUseCase: DeleteTermUseCase,
     private val notificationCenter: NotificationCenter,
     private val log: LogManager,
-) : ViewModel() {
+) : InstanceKeeper.Instance {
 
     private val items = MutableStateFlow<List<TermDetailItem>>(emptyList())
     private val loading = MutableStateFlow(false)
@@ -70,6 +72,7 @@ class TermDetailViewModel(
     private val termsToDelete = mutableListOf<Int>()
     private val propertiesToDelete = mutableListOf<Pair<Int, Int>>()
     private val mutex = Mutex()
+    private val viewModelScope = CoroutineScope(SupervisorJob())
 
     val uiState = combine(items, loading) { items, loading ->
         TermDetailUiState(
@@ -113,6 +116,10 @@ class TermDetailViewModel(
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        viewModelScope.cancel()
     }
 
     fun setEditMode(value: Boolean) {

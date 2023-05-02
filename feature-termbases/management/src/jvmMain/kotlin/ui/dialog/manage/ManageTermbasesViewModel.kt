@@ -1,29 +1,32 @@
 package ui.dialog.manage
 
+import com.arkivanov.essenty.instancekeeper.InstanceKeeper
+import coroutines.CoroutineDispatcherProvider
 import data.TermbaseModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.getAndUpdate
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import moe.tlaster.precompose.viewmodel.ViewModel
-import moe.tlaster.precompose.viewmodel.viewModelScope
 import notification.NotificationCenter
 import repository.TermbaseRepository
 import usecase.DeleteTermbaseUseCase
-import coroutines.CoroutineDispatcherProvider
 
 class ManageTermbasesViewModel(
     private val dispatcherProvider: CoroutineDispatcherProvider,
     private val termbaseRepository: TermbaseRepository,
     private val deleteTermbaseUseCase: DeleteTermbaseUseCase,
     private val notificationCenter: NotificationCenter,
-) : ViewModel() {
+) : InstanceKeeper.Instance {
 
     private val termbases = MutableStateFlow<List<TermbaseModel>>(emptyList())
     private val selectedTermbase = MutableStateFlow<TermbaseModel?>(null)
     private val loading = MutableStateFlow(false)
+    private val viewModelScope = CoroutineScope(SupervisorJob())
 
     val uiState = combine(
         termbases,
@@ -49,6 +52,10 @@ class ManageTermbasesViewModel(
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        viewModelScope.cancel()
     }
 
     fun selectTermbase(termbase: TermbaseModel) {

@@ -32,11 +32,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.rememberWindowState
 import data.TermbaseModel
 import kotlinx.coroutines.launch
 import localized
-import moe.tlaster.precompose.PreComposeWindow
 import ui.dialog.create.stepone.CreateTermbaseWizardStepOne
 import ui.dialog.create.stepone.CreateTermbaseWizardStepOneViewModel
 import ui.dialog.create.stepthree.CreateTermbaseWizardStepThree
@@ -59,7 +59,7 @@ fun EditTermbaseDialog(
     onClose: () -> Unit,
 ) {
     MetaTermTheme {
-        PreComposeWindow(
+        Window(
             title = "dialog_title_edit_termbase".localized(),
             state = rememberWindowState(width = Dp.Unspecified, height = Dp.Unspecified),
             resizable = false,

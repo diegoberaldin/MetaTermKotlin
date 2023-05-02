@@ -22,11 +22,11 @@ kotlin {
             dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation(compose.materialIconsExtended)
+                implementation(libs.essenty.instancekeeper)
 
                 implementation(compose.foundation)
                 implementation(compose.animation)
 
-                implementation(libs.precompose)
                 implementation(libs.koin)
 
                 implementation(project(":core-common"))
