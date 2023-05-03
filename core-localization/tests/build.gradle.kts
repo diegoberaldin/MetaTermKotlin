@@ -20,6 +20,7 @@ kotlin {
     sourceSets {
         val jvmMain by getting {
             dependencies {
+                implementation(compose.desktop.currentOs)
 
                 implementation(project(":core-localization"))
                 implementation(kotlin("test-junit5"))
