@@ -10,8 +10,8 @@ essenty = "1.1.0"
 redundent = "1.9.0"
 sl4j = "1.7.30"
 
-appVersion = "1.0.0"
-buildNumber = "1"
+appVersion = "1.0.1"
+buildNumber = "2"
 
 [libraries]
 # DI

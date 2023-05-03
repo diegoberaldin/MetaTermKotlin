@@ -1,8 +1,8 @@
-<p align="center"><img width="310" src="https://user-images.githubusercontent.com/2738294/235072055-603950db-78b3-4011-8a4e-2f870783f423.png" /></p>
+<p align="center"><img width="300" src="https://user-images.githubusercontent.com/2738294/235072055-603950db-78b3-4011-8a4e-2f870783f423.png" /></p>
 
-# MetaTermKotlin
+# MetaTerm
 
-An open soure terminology management solution.
+An open source terminology management solution. The main goal of this app is to help translators to manage their glossaries in a structured but at the same time highly configurable way. Termbases are a highly valuable resource and require time to be built and validated, they are key for professionals to adapt to their customers' and domain requirements while ensuring consistency and high quality. One of the main concerns of my approach to terminology management is that one's data must always reside on one's own machine, so terminological entries must be stored in a *local* database and be never sent over the network.
 
 ## Rationale
 
