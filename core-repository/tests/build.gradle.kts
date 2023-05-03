@@ -25,6 +25,7 @@ kotlin {
 
                 implementation(project(":core-common"))
                 implementation(project(":core-data"))
+                implementation(project(":core-localization"))
                 implementation(project(":core-persistence"))
                 implementation(project(":core-repository"))
                 implementation(kotlin("test-junit5"))
