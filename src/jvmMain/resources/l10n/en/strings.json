@@ -17,7 +17,7 @@
   },
   {
     "key": "menu_entry_new",
-    "value": "New entry…"
+    "value": "New entry"
   },
   {
     "key": "menu_entry_edit",
@@ -409,7 +409,11 @@
   },
   {
     "key": "app_intro",
-    "value": "You do not have any termbase opened. Please open a termbase to start."
+    "value": "Please open a termbase to start by choosing and item from the following list."
+  },
+  {
+    "key": "app_intro_empty",
+    "value": "It seems like you don't have have any termbase yet.\nYou can create a new one by using the \"Termbase > New…\" menu to start."
   },
   {
     "key": "dialog_title_termbase_statistics",
@@ -509,6 +513,6 @@
   },
   {
     "key": "term_detail_placeholder",
-    "value": "Please select a term to edit an exiting entry or create a new one."
+    "value": "Please select a term to edit an exiting entry or create a new one with the \"Entry > New entry\" menu."
   }
 ]
