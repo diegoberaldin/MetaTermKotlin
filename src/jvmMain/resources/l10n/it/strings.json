@@ -17,7 +17,7 @@
   },
   {
     "key": "menu_entry_new",
-    "value": "Nuova scheda…"
+    "value": "Nuova scheda"
   },
   {
     "key": "menu_entry_edit",
@@ -313,7 +313,11 @@
   },
   {
     "key": "app_intro",
-    "value": "Nessun database aperto. Apri un termbase per iniziare."
+    "value": "Per iniziare, apri un termbase selezionando una voce dalla seguente lista."
+  },
+  {
+    "key": "app_intro_empty",
+    "value": "Sembra che tu non abbia ancora nessun termbase.\nPuoi crearne uno utilizzando il menu \"Termbase > Nuovo…\" per iniziare."
   },
   {
     "key": "dialog_title_termbase_statistics",
@@ -413,6 +417,6 @@
   },
   {
     "key": "term_detail_placeholder",
-    "value": "Seleziona un termine per modificare una scheda esistente o creane una di nuova."
+    "value": "Seleziona un termine per modificare una scheda esistente o creane una di nuova con il menu \"Scheda > Nuova scheda\"."
   }
 ]
