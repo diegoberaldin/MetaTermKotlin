@@ -12,7 +12,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "feature-terms"
+rootProject.name = "MetaTerm"
 
 include(
     "core-common",
@@ -20,9 +20,9 @@ include(
     "core-persistence",
     "core-repository",
     "core-localization",
-    "filter",
     "detail",
-    "list"
+    "filter",
+    "list",
 )
 project(":core-common").projectDir = File("../core-common")
 project(":core-data").projectDir = File("../core-data")
@@ -30,6 +30,6 @@ project(":core-persistence").projectDir = File("../core-persistence")
 project(":core-repository").projectDir = File("../core-repository")
 project(":core-localization").projectDir = File("../core-localization")
 
-project(":filter").projectDir = File("./filter")
 project(":detail").projectDir = File("./detail")
+project(":filter").projectDir = File("./filter")
 project(":list").projectDir = File("./list")

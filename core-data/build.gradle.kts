@@ -22,7 +22,7 @@ kotlin {
             dependencies {
                 implementation(compose.desktop.currentOs)
 
-                implementation(project(":core-localization"))
+                implementation(projects.coreLocalization)
             }
         }
     }

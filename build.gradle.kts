@@ -31,23 +31,23 @@ kotlin {
 
                 implementation(libs.koin)
 
-                implementation(project(":core-common"))
-                implementation(project(":core-data"))
-                implementation(project(":core-localization"))
-                implementation(project(":core-persistence"))
-                implementation(project(":core-repository"))
+                implementation(projects.coreCommon)
+                implementation(projects.coreData)
+                implementation(projects.coreLocalization)
+                implementation(projects.corePersistence)
+                implementation(projects.coreRepository)
 
-                implementation(project(":feature-base"))
-                implementation(project(":feature-terms"))
-                implementation(project(":feature-termbases"))
+                implementation(projects.featureBase)
+                implementation(projects.featureTerms)
+                implementation(projects.featureTermbases)
             }
         }
         val jvmTest by getting {
             dependencies {
-                implementation(project(":core-common:tests"))
-                implementation(project(":core-localization:tests"))
-                implementation(project(":core-persistence:tests"))
-                implementation(project(":core-repository:tests"))
+                implementation(projects.coreCommon.tests)
+                implementation(projects.coreLocalization.tests)
+                implementation(projects.corePersistence.tests)
+                implementation(projects.coreRepository.tests)
             }
         }
     }

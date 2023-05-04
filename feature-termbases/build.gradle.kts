@@ -29,20 +29,20 @@ kotlin {
 
                 implementation(libs.koin)
 
-                implementation(project(":core-common"))
-                implementation(project(":core-data"))
-                implementation(project(":core-persistence"))
-                implementation(project(":core-repository"))
-                implementation(project(":core-localization"))
+                implementation(projects.coreCommon)
+                implementation(projects.coreData)
+                implementation(projects.corePersistence)
+                implementation(projects.coreRepository)
+                implementation(projects.coreLocalization)
 
-                api(project(":feature-termbases:statistics"))
-                api(project(":feature-termbases:management"))
-                api(project(":feature-termbases:create"))
-                api(project(":feature-termbases:edit"))
+                api(projects.featureTermbases.statistics)
+                api(projects.featureTermbases.management)
+                api(projects.featureTermbases.create)
+                api(projects.featureTermbases.edit)
 
-                api(project(":feature-termbases:metadata"))
-                api(project(":feature-termbases:definitionmodel"))
-                api(project(":feature-termbases:inputmodel"))
+                api(projects.featureTermbases.metadata)
+                api(projects.featureTermbases.definitionmodel)
+                api(projects.featureTermbases.inputmodel)
             }
         }
         val jvmTest by getting

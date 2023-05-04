@@ -24,13 +24,12 @@ kotlin {
 
                 implementation(libs.koin)
 
-                implementation(project(":core-common"))
-                implementation(project(":core-data"))
-                implementation(project(":core-persistence"))
-                implementation(project(":core-localization"))
-
-                api(project(":core-repository:repo"))
-                api(project(":core-repository:usecase"))
+                implementation(projects.coreCommon)
+                implementation(projects.coreData)
+                implementation(projects.corePersistence)
+                implementation(projects.coreLocalization)
+                api(projects.coreRepository.repo)
+                api(projects.coreRepository.usecase)
             }
         }
     }

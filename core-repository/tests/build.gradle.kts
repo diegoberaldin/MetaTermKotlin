@@ -23,11 +23,11 @@ kotlin {
                 implementation(compose.desktop.currentOs)
                 implementation(libs.kotlinx.coroutines.test)
 
-                implementation(project(":core-common"))
-                implementation(project(":core-data"))
-                implementation(project(":core-localization"))
-                implementation(project(":core-persistence"))
-                implementation(project(":core-repository"))
+                implementation(projects.coreCommon)
+                implementation(projects.coreData)
+                implementation(projects.coreLocalization)
+                implementation(projects.corePersistence)
+                implementation(projects.coreRepository)
                 implementation(kotlin("test-junit5"))
             }
         }

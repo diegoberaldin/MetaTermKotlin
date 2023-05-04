@@ -23,10 +23,10 @@ kotlin {
                 implementation(compose.desktop.currentOs)
                 implementation(compose.materialIconsExtended)
 
-                implementation(project(":core-common"))
-                implementation(project(":core-data"))
-                implementation(project(":core-persistence"))
-                implementation(project(":core-localization"))
+                implementation(projects.coreCommon)
+                implementation(projects.coreData)
+                implementation(projects.corePersistence)
+                implementation(projects.coreLocalization)
             }
         }
     }

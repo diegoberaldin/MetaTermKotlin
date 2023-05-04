@@ -13,6 +13,7 @@ pluginManagement {
 }
 
 enableFeaturePreview("VERSION_CATALOGS")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "MetaTerm"
 
@@ -28,8 +29,8 @@ include(
     ":feature-base:intro",
     ":feature-base:main",
     ":feature-terms",
-    ":feature-terms:filter",
     ":feature-terms:detail",
+    ":feature-terms:filter",
     ":feature-terms:list",
     ":feature-termbases",
     ":feature-termbases:statistics",

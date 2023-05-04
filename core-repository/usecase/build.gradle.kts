@@ -25,12 +25,12 @@ kotlin {
 
                 implementation(libs.redundent)
 
-                implementation(project(":core-common"))
-                implementation(project(":core-data"))
-                implementation(project(":core-persistence"))
-                implementation(project(":core-localization"))
+                implementation(projects.coreCommon)
+                implementation(projects.coreData)
+                implementation(projects.corePersistence)
+                implementation(projects.coreLocalization)
 
-                implementation(project(":core-repository:repo"))
+                implementation(projects.coreRepository.repo)
             }
         }
     }
