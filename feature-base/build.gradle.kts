@@ -29,14 +29,14 @@ kotlin {
 
                 implementation(libs.koin)
 
-                implementation(project(":core-common"))
-                implementation(project(":core-data"))
-                implementation(project(":core-persistence"))
-                implementation(project(":core-repository"))
-                implementation(project(":core-localization"))
+                implementation(projects.coreCommon)
+                implementation(projects.coreData)
+                implementation(projects.corePersistence)
+                implementation(projects.coreRepository)
+                implementation(projects.coreLocalization)
 
-                api(project(":feature-base:intro"))
-                api(project(":feature-base:main"))
+                api(projects.featureBase.intro)
+                api(projects.featureBase.main)
             }
         }
         val jvmTest by getting

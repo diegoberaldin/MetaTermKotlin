@@ -4,7 +4,11 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <option name="delegatedBuild" value="true" />
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="corretto-18" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -34,19 +38,6 @@
             <option value="$PROJECT_DIR$/feature-terms/detail" />
             <option value="$PROJECT_DIR$/feature-terms/filter" />
             <option value="$PROJECT_DIR$/feature-terms/list" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/feature-terms/filter" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/feature-terms/core-common" />
-            <option value="$PROJECT_DIR$/feature-terms/core-data" />
-            <option value="$PROJECT_DIR$/feature-terms/core-localization" />
-            <option value="$PROJECT_DIR$/feature-terms/core-persistence" />
-            <option value="$PROJECT_DIR$/feature-terms/core-repository" />
-            <option value="$PROJECT_DIR$/feature-terms/filter" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -23,7 +23,7 @@ kotlin {
                 implementation(compose.desktop.currentOs)
                 implementation(libs.kotlinx.coroutines.test)
 
-                implementation(project(":core-common"))
+                implementation(projects.coreCommon)
                 implementation(kotlin("test-junit5"))
             }
         }

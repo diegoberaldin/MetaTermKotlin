@@ -24,15 +24,15 @@ kotlin {
                 implementation(compose.materialIconsExtended)
                 implementation(libs.essenty.instancekeeper)
 
-                implementation(project(":core-common"))
-                implementation(project(":core-data"))
-                implementation(project(":core-persistence"))
-                implementation(project(":core-repository"))
-                implementation(project(":core-localization"))
+                implementation(projects.coreCommon)
+                implementation(projects.coreData)
+                implementation(projects.corePersistence)
+                implementation(projects.coreRepository)
+                implementation(projects.coreLocalization)
 
-                implementation(project(":feature-termbases:metadata"))
-                implementation(project(":feature-termbases:definitionmodel"))
-                implementation(project(":feature-termbases:inputmodel"))
+                implementation(projects.featureTermbases.metadata)
+                implementation(projects.featureTermbases.definitionmodel)
+                implementation(projects.featureTermbases.inputmodel)
             }
         }
         val jvmTest by getting
