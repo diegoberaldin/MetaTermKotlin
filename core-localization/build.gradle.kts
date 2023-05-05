@@ -23,8 +23,6 @@ kotlin {
             dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation(libs.kotlinx.serialization)
-
-                implementation(project(":core-common"))
             }
         }
     }
