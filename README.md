@@ -63,4 +63,4 @@ Since this is an open field for experimentation, I am willing to accept change p
 
 ## Trivia
 
-The name "MetaTerm" is a pun between the name of well known commercial solutions and the Greek verb μεταφράζω meaning "to translate". In my dreams, I would like to create a similar project MetaLine for text alignment and translation memory management but that's another story completely.
+The name "MetaTerm" is a pun between the name of well known commercial solutions and the Greek verb μεταφράζω meaning "to translate". This is part of a larger set of translation tools that I am creating in my spare time. If you like the idea, please check out [MetaLine](https://github.com/diegoberaldin/MetaLine) which is used for text alignment to create translation memories in TMX.
