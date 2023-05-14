@@ -7,12 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.Key
@@ -23,65 +18,54 @@ import androidx.compose.ui.window.MenuBar
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import com.arkivanov.essenty.instancekeeper.InstanceKeeperDispatcher
 import com.arkivanov.essenty.instancekeeper.getOrCreate
-import di.commonKoinModule
-import di.databaseKoinModule
-import di.mainKoinModule
-import di.repositoryKoinModule
-import di.termbasesKoinModule
-import di.termsKoinModule
+import di.*
 import keystore.TemporaryKeyStore
 import kotlinx.coroutines.runBlocking
 import log.LogManager
 import notification.NotificationCenter
 import org.koin.core.context.startKoin
-import ui.TermsViewModel
+import org.koin.java.KoinJavaComponent.inject
 import ui.components.CustomOpenFileDialog
 import ui.components.CustomSaveFileDialog
 import ui.components.CustomTabBar
-import ui.detail.TermDetailViewModel
-import ui.dialog.create.CreateTermbaseViewModel
 import ui.dialog.create.CreateTermbaseWizardDialog
 import ui.dialog.create.stepone.CreateTermbaseWizardStepOneViewModel
 import ui.dialog.create.stepthree.CreateTermbaseWizardStepThreeViewModel
 import ui.dialog.create.steptwo.CreateTermbaseWizardStepTwoViewModel
 import ui.dialog.edit.EditTermbaseDialog
 import ui.dialog.edit.EditTermbaseViewModel
-import ui.dialog.filter.TermFilterViewModel
 import ui.dialog.manage.ManageTermbasesDialog
-import ui.dialog.manage.ManageTermbasesViewModel
 import ui.dialog.statistics.TermbaseStatisticsDialog
-import ui.dialog.statistics.TermbaseStatisticsViewModel
 import ui.screens.intro.IntroScreen
-import ui.screens.intro.IntroViewModel
 import ui.screens.main.MainScreen
-import ui.screens.main.MainViewModel
 import ui.theme.MetaTermTheme
 import ui.theme.SelectedBackground
 import ui.theme.Spacing
+import utils.AppBusiness
 import java.util.*
 
-private val koin = startKoin {
-    modules(
-        commonKoinModule,
-        databaseKoinModule,
-        repositoryKoinModule,
+fun initKoin() {
+    startKoin {
+        modules(
+            commonKoinModule,
+            databaseKoinModule,
+            repositoryKoinModule,
 
-        mainKoinModule,
-        termbasesKoinModule,
-        termsKoinModule,
-    )
-}.koin
-
-private val instanceKeeper = InstanceKeeperDispatcher()
+            mainKoinModule,
+            termbasesKoinModule,
+            termsKoinModule,
+        )
+    }
+}
 
 
 @Composable
 @Preview
 private fun App() {
-    val viewModel: AppViewModel = instanceKeeper.getOrCreate {
-        koin.get()
+    val viewModel: AppViewModel = AppBusiness.instanceKeeper.getOrCreate {
+        val res: AppViewModel by inject(AppViewModel::class.java)
+        res
     }
     MetaTermTheme {
         val uiState by viewModel.uiState.collectAsState()
@@ -108,37 +92,17 @@ private fun App() {
                 },
             )
             if (termbase != null) {
-                val mainViewModel: MainViewModel = instanceKeeper.getOrCreate {
-                    koin.get()
-                }
-                val termsViewModel: TermsViewModel = instanceKeeper.getOrCreate {
-                    koin.get()
-                }
-                val termDetailViewModel: TermDetailViewModel = instanceKeeper.getOrCreate {
-                    koin.get()
-                }
-                val termFilterViewModel: TermFilterViewModel = instanceKeeper.getOrCreate {
-                    koin.get()
-                }
+
                 MainScreen(
                     modifier = Modifier.fillMaxWidth()
                         .weight(1f)
                         .background(color = SelectedBackground, shape = RoundedCornerShape(4.dp))
                         .padding(Spacing.xs),
                     termbase = termbase,
-                    mainViewModel = mainViewModel,
-                    termsViewModel = termsViewModel,
-                    termDetailViewModel = termDetailViewModel,
-                    termFilterViewModel = termFilterViewModel,
                 )
             } else {
-                val introViewModel: IntroViewModel = instanceKeeper.getOrCreate {
-                    koin.get()
-                }
-                introViewModel.reset()
-                IntroScreen(
-                    viewModel = introViewModel,
-                )
+
+                IntroScreen()
             }
         }
     }
@@ -146,15 +110,18 @@ private fun App() {
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() = application {
+    // init DI
+    initKoin()
+
     // init log
-    val log: LogManager = koin.get()
+    val log: LogManager by inject(LogManager::class.java)
     log.debug("App initialized")
     Thread.setDefaultUncaughtExceptionHandler { t, e ->
         log.exception("Exception in ${t.name}", cause = e)
     }
 
     // init l10n
-    val keyStore: TemporaryKeyStore = koin.get()
+    val keyStore: TemporaryKeyStore by inject(TemporaryKeyStore::class.java)
     runBlocking {
         val currentLang = keyStore.get("lang", Locale.getDefault().language)
         L10n.setLanguage(currentLang)
@@ -165,8 +132,9 @@ fun main() = application {
         title = "app_name".localized(),
         state = rememberWindowState(size = DpSize.Unspecified),
     ) {
-        val appViewModel: AppViewModel = instanceKeeper.getOrCreate {
-            koin.get()
+        val appViewModel: AppViewModel = AppBusiness.instanceKeeper.getOrCreate {
+            val res: AppViewModel by inject(AppViewModel::class.java)
+            res
         }
 
         val uiState by appViewModel.uiState.collectAsState()
@@ -195,7 +163,7 @@ fun main() = application {
             mutableStateOf(false)
         }
 
-        val notificationCenter: NotificationCenter = koin.get()
+        val notificationCenter: NotificationCenter by inject(NotificationCenter::class.java)
 
         MenuBar {
             Menu("menu_termbase".localized()) {
@@ -203,14 +171,59 @@ fun main() = application {
                     text = "menu_termbase_new".localized(),
                     shortcut = KeyShortcut(key = Key.N, meta = true),
                 ) {
+                    val viewModel: EditTermbaseViewModel = AppBusiness.instanceKeeper.getOrCreate {
+                        val res: EditTermbaseViewModel by inject(EditTermbaseViewModel::class.java)
+                        res
+                    }
+                    viewModel.reset()
+                    val stepOneViewModel: CreateTermbaseWizardStepOneViewModel = AppBusiness.instanceKeeper.getOrCreate {
+                        val res: CreateTermbaseWizardStepOneViewModel by inject(CreateTermbaseWizardStepOneViewModel::class.java)
+                        res
+                    }
+                    stepOneViewModel.reset()
+                    val stepTwoViewModel: CreateTermbaseWizardStepTwoViewModel = AppBusiness.instanceKeeper.getOrCreate {
+                        val res: CreateTermbaseWizardStepTwoViewModel by inject(CreateTermbaseWizardStepTwoViewModel::class.java)
+                        res
+                    }
+                    stepTwoViewModel.reset()
+                    val stepThreeViewModel: CreateTermbaseWizardStepThreeViewModel =
+                        AppBusiness.instanceKeeper.getOrCreate {
+                            val res: CreateTermbaseWizardStepThreeViewModel by inject(
+                                CreateTermbaseWizardStepThreeViewModel::class.java)
+                            res
+                        }
+                    stepThreeViewModel.reset()
                     appViewModel.shouldOpenNewTermbaseOnDialogClose = true
                     newTermbaseWizardOpen = true
                 }
                 Item(
                     text = "menu_termbase_edit".localized(),
                     shortcut = KeyShortcut(key = Key.D, meta = true),
+                    enabled = uiState.currentTermbase != null,
                 ) {
                     appViewModel.termbaseToEdit = uiState.currentTermbase
+                    val viewModel: EditTermbaseViewModel = AppBusiness.instanceKeeper.getOrCreate {
+                        val res: EditTermbaseViewModel by inject(EditTermbaseViewModel::class.java)
+                        res
+                    }
+                    viewModel.reset()
+                    val stepOneViewModel: CreateTermbaseWizardStepOneViewModel = AppBusiness.instanceKeeper.getOrCreate {
+                        val res: CreateTermbaseWizardStepOneViewModel by inject(CreateTermbaseWizardStepOneViewModel::class.java)
+                        res
+                    }
+                    stepOneViewModel.reset()
+                    val stepTwoViewModel: CreateTermbaseWizardStepTwoViewModel = AppBusiness.instanceKeeper.getOrCreate {
+                        val res: CreateTermbaseWizardStepTwoViewModel by inject(CreateTermbaseWizardStepTwoViewModel::class.java)
+                        res
+                    }
+                    stepTwoViewModel.reset()
+                    val stepThreeViewModel: CreateTermbaseWizardStepThreeViewModel =
+                        AppBusiness.instanceKeeper.getOrCreate {
+                            val res: CreateTermbaseWizardStepThreeViewModel by inject(
+                                CreateTermbaseWizardStepThreeViewModel::class.java)
+                            res
+                        }
+                    stepThreeViewModel.reset()
                     editTermbaseWizardOpen = true
                 }
                 Item(
@@ -227,6 +240,7 @@ fun main() = application {
                 Item(
                     text = "menu_termbase_statistics".localized(),
                     shortcut = KeyShortcut(key = Key.Period, meta = true),
+                    enabled = uiState.currentTermbase != null,
                 ) {
                     statisticsDialogOpen = true
                 }
@@ -263,6 +277,7 @@ fun main() = application {
                 Item(
                     text = "button_close".localized(),
                     shortcut = KeyShortcut(key = Key.W, meta = true),
+                    enabled = uiState.currentTermbase != null,
                 ) {
                     exitApplication()
                 }
@@ -314,12 +329,30 @@ fun main() = application {
         App()
 
         if (manageTermbasesDialogOpen) {
-            val viewModel: ManageTermbasesViewModel = instanceKeeper.getOrCreate {
-                koin.get()
-            }
             ManageTermbasesDialog(
-                viewModel = viewModel,
                 onNew = {
+                    val viewModel: EditTermbaseViewModel = AppBusiness.instanceKeeper.getOrCreate {
+                        val res: EditTermbaseViewModel by inject(EditTermbaseViewModel::class.java)
+                        res
+                    }
+                    viewModel.reset()
+                    val stepOneViewModel: CreateTermbaseWizardStepOneViewModel = AppBusiness.instanceKeeper.getOrCreate {
+                        val res: CreateTermbaseWizardStepOneViewModel by inject(CreateTermbaseWizardStepOneViewModel::class.java)
+                        res
+                    }
+                    stepOneViewModel.reset()
+                    val stepTwoViewModel: CreateTermbaseWizardStepTwoViewModel = AppBusiness.instanceKeeper.getOrCreate {
+                        val res: CreateTermbaseWizardStepTwoViewModel by inject(CreateTermbaseWizardStepTwoViewModel::class.java)
+                        res
+                    }
+                    stepTwoViewModel.reset()
+                    val stepThreeViewModel: CreateTermbaseWizardStepThreeViewModel =
+                        AppBusiness.instanceKeeper.getOrCreate {
+                            val res: CreateTermbaseWizardStepThreeViewModel by inject(
+                                CreateTermbaseWizardStepThreeViewModel::class.java)
+                            res
+                        }
+                    stepThreeViewModel.reset()
                     newTermbaseWizardOpen = true
                 },
                 onClose = {
@@ -327,34 +360,36 @@ fun main() = application {
                 },
                 onEdit = {
                     appViewModel.termbaseToEdit = it
+                    val viewModel: EditTermbaseViewModel = AppBusiness.instanceKeeper.getOrCreate {
+                        val res: EditTermbaseViewModel by inject(EditTermbaseViewModel::class.java)
+                        res
+                    }
+                    viewModel.reset()
+                    val stepOneViewModel: CreateTermbaseWizardStepOneViewModel = AppBusiness.instanceKeeper.getOrCreate {
+                        val res: CreateTermbaseWizardStepOneViewModel by inject(CreateTermbaseWizardStepOneViewModel::class.java)
+                        res
+                    }
+                    stepOneViewModel.reset()
+                    val stepTwoViewModel: CreateTermbaseWizardStepTwoViewModel = AppBusiness.instanceKeeper.getOrCreate {
+                        val res: CreateTermbaseWizardStepTwoViewModel by inject(CreateTermbaseWizardStepTwoViewModel::class.java)
+                        res
+                    }
+                    stepTwoViewModel.reset()
+                    val stepThreeViewModel: CreateTermbaseWizardStepThreeViewModel =
+                        AppBusiness.instanceKeeper.getOrCreate {
+                            val res: CreateTermbaseWizardStepThreeViewModel by inject(
+                                CreateTermbaseWizardStepThreeViewModel::class.java)
+                            res
+                        }
+                    stepThreeViewModel.reset()
                     editTermbaseWizardOpen = true
                 },
             )
         }
 
         if (newTermbaseWizardOpen) {
-            val viewModel: CreateTermbaseViewModel = instanceKeeper.getOrCreate {
-                koin.get()
-            }
-            viewModel.reset()
-            val stepOneViewModel: CreateTermbaseWizardStepOneViewModel = instanceKeeper.getOrCreate {
-                koin.get()
-            }
-            stepOneViewModel.reset()
-            val stepTwoViewModel: CreateTermbaseWizardStepTwoViewModel = instanceKeeper.getOrCreate {
-                koin.get()
-            }
-            stepTwoViewModel.reset()
-            val stepThreeViewModel: CreateTermbaseWizardStepThreeViewModel = instanceKeeper.getOrCreate {
-                koin.get()
-            }
-            stepThreeViewModel.reset()
             CreateTermbaseWizardDialog(
                 openNewlyCreated = appViewModel.shouldOpenNewTermbaseOnDialogClose,
-                viewModel = viewModel,
-                stepOneViewModel = stepOneViewModel,
-                stepTwoViewModel = stepTwoViewModel,
-                stepThreeViewModel = stepThreeViewModel,
                 onClose = {
                     newTermbaseWizardOpen = false
                     appViewModel.shouldOpenNewTermbaseOnDialogClose = false
@@ -365,28 +400,8 @@ fun main() = application {
         if (editTermbaseWizardOpen) {
             val termbase = appViewModel.termbaseToEdit
             if (termbase != null) {
-                val viewModel: EditTermbaseViewModel = instanceKeeper.getOrCreate {
-                    koin.get()
-                }
-                viewModel.reset()
-                val stepOneViewModel: CreateTermbaseWizardStepOneViewModel = instanceKeeper.getOrCreate {
-                    koin.get()
-                }
-                stepOneViewModel.reset()
-                val stepTwoViewModel: CreateTermbaseWizardStepTwoViewModel = instanceKeeper.getOrCreate {
-                    koin.get()
-                }
-                stepTwoViewModel.reset()
-                val stepThreeViewModel: CreateTermbaseWizardStepThreeViewModel = instanceKeeper.getOrCreate {
-                    koin.get()
-                }
-                stepThreeViewModel.reset()
                 EditTermbaseDialog(
                     initialTermbase = termbase,
-                    viewModel = viewModel,
-                    stepOneViewModel = stepOneViewModel,
-                    stepTwoViewModel = stepTwoViewModel,
-                    stepThreeViewModel = stepThreeViewModel,
                     onClose = {
                         appViewModel.termbaseToEdit = null
                         editTermbaseWizardOpen = false
@@ -450,13 +465,9 @@ fun main() = application {
         }
 
         if (statisticsDialogOpen) {
-            val viewModel: TermbaseStatisticsViewModel = instanceKeeper.getOrCreate {
-                koin.get()
-            }
             uiState.currentTermbase?.also {
                 TermbaseStatisticsDialog(
                     termbase = it,
-                    viewModel = viewModel,
                     onClose = {
                         statisticsDialogOpen = false
                     },

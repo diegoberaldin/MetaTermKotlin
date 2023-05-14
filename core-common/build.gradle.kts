@@ -23,6 +23,7 @@ kotlin {
                 implementation(compose.desktop.currentOs)
 
                 implementation(libs.koin)
+                implementation(libs.essenty.instancekeeper)
                 implementation(libs.androidx.datastore)
 
                 api(libs.bundles.log4j)

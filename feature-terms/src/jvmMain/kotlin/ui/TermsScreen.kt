@@ -21,21 +21,29 @@ import androidx.compose.ui.input.key.KeyEventType.Companion.KeyDown
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
+import com.arkivanov.essenty.instancekeeper.getOrCreate
+import org.koin.java.KoinJavaComponent
 import ui.detail.TermDetail
 import ui.detail.TermDetailViewModel
 import ui.dialog.filter.TermFilterDialog
 import ui.dialog.filter.TermFilterViewModel
 import ui.list.TermsList
 import ui.theme.Spacing
+import utils.AppBusiness
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun TermsScreen(
-    viewModel: TermsViewModel,
-    termDetailViewModel: TermDetailViewModel,
-    termFilterViewModel: TermFilterViewModel,
     modifier: Modifier = Modifier,
 ) {
+    val viewModel: TermsViewModel = AppBusiness.instanceKeeper.getOrCreate {
+        val res: TermsViewModel by KoinJavaComponent.inject(TermsViewModel::class.java)
+        res
+    }
+    val termDetailViewModel: TermDetailViewModel = AppBusiness.instanceKeeper.getOrCreate {
+        val res: TermDetailViewModel by KoinJavaComponent.inject(TermDetailViewModel::class.java)
+        res
+    }
     val uiState by viewModel.uiState.collectAsState()
     val toolbarUiState by viewModel.toolbarUiState.collectAsState()
     val searchUiState by viewModel.searchUiState.collectAsState()
@@ -147,7 +155,6 @@ fun TermsScreen(
                 modifier = Modifier.weight(1f),
                 entry = uiState.selectedEntry,
                 editMode = uiState.entryEditMode,
-                viewModel = termDetailViewModel,
                 searchCriteria = searchUiState.searchCriteria,
             )
         }
@@ -158,7 +165,6 @@ fun TermsScreen(
         if (termbase != null) {
             TermFilterDialog(
                 termbase = termbase,
-                viewModel = termFilterViewModel,
                 sourceLanguage = toolbarUiState.sourceLanguage,
                 criteria = searchUiState.searchCriteria,
                 onConfirm = { criteria ->

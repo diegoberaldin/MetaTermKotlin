@@ -1,17 +1,7 @@
 package ui.dialog.statistics
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
@@ -28,18 +18,25 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.rememberWindowState
+import com.arkivanov.essenty.instancekeeper.getOrCreate
 import data.TermbaseModel
 import localized
+import org.koin.java.KoinJavaComponent.inject
 import ui.components.CustomProgressIndicator
 import ui.theme.MetaTermTheme
 import ui.theme.Spacing
+import utils.AppBusiness
 
 @Composable
 fun TermbaseStatisticsDialog(
     termbase: TermbaseModel,
-    viewModel: TermbaseStatisticsViewModel,
     onClose: () -> Unit,
 ) {
+    val viewModel: TermbaseStatisticsViewModel = AppBusiness.instanceKeeper.getOrCreate {
+        val res: TermbaseStatisticsViewModel by inject(TermbaseStatisticsViewModel::class.java)
+        res
+    }
+
     MetaTermTheme {
         Window(
             title = "dialog_title_termbase_statistics".localized(),
