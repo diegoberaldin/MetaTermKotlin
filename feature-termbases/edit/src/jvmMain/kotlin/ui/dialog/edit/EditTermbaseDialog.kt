@@ -1,28 +1,9 @@
 package ui.dialog.edit
 
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.with
+import androidx.compose.animation.*
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.Button
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -34,30 +15,47 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.rememberWindowState
+import com.arkivanov.essenty.instancekeeper.getOrCreate
 import data.TermbaseModel
 import kotlinx.coroutines.launch
 import localized
+import org.koin.java.KoinJavaComponent.inject
+import ui.components.CustomTabBar
 import ui.dialog.create.stepone.CreateTermbaseWizardStepOne
 import ui.dialog.create.stepone.CreateTermbaseWizardStepOneViewModel
 import ui.dialog.create.stepthree.CreateTermbaseWizardStepThree
 import ui.dialog.create.stepthree.CreateTermbaseWizardStepThreeViewModel
 import ui.dialog.create.steptwo.CreateTermbaseWizardStepTwo
 import ui.dialog.create.steptwo.CreateTermbaseWizardStepTwoViewModel
-import ui.components.CustomTabBar
 import ui.theme.MetaTermTheme
 import ui.theme.SelectedBackground
 import ui.theme.Spacing
+import utils.AppBusiness
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun EditTermbaseDialog(
     initialTermbase: TermbaseModel,
-    viewModel: EditTermbaseViewModel,
-    stepOneViewModel: CreateTermbaseWizardStepOneViewModel,
-    stepTwoViewModel: CreateTermbaseWizardStepTwoViewModel,
-    stepThreeViewModel: CreateTermbaseWizardStepThreeViewModel,
     onClose: () -> Unit,
 ) {
+    val viewModel: EditTermbaseViewModel = AppBusiness.instanceKeeper.getOrCreate {
+        val res: EditTermbaseViewModel by inject(EditTermbaseViewModel::class.java)
+        res
+    }
+    val stepOneViewModel: CreateTermbaseWizardStepOneViewModel = AppBusiness.instanceKeeper.getOrCreate {
+        val res: CreateTermbaseWizardStepOneViewModel by inject(CreateTermbaseWizardStepOneViewModel::class.java)
+        res
+    }
+    val stepTwoViewModel: CreateTermbaseWizardStepTwoViewModel = AppBusiness.instanceKeeper.getOrCreate {
+        val res: CreateTermbaseWizardStepTwoViewModel by inject(CreateTermbaseWizardStepTwoViewModel::class.java)
+        res
+    }
+    val stepThreeViewModel: CreateTermbaseWizardStepThreeViewModel =
+        AppBusiness.instanceKeeper.getOrCreate {
+            val res: CreateTermbaseWizardStepThreeViewModel by inject(CreateTermbaseWizardStepThreeViewModel::class.java)
+            res
+        }
+
     MetaTermTheme {
         Window(
             title = "dialog_title_edit_termbase".localized(),
@@ -132,7 +130,6 @@ fun EditTermbaseDialog(
                                 0 -> {
                                     CreateTermbaseWizardStepOne(
                                         modifier = Modifier.weight(1f).fillMaxWidth(),
-                                        viewModel = stepOneViewModel,
                                     )
 
                                     Spacer(modifier = Modifier.height(Spacing.xs))
@@ -147,7 +144,6 @@ fun EditTermbaseDialog(
                                 1 -> {
                                     CreateTermbaseWizardStepTwo(
                                         modifier = Modifier.weight(1f).fillMaxWidth(),
-                                        viewModel = stepTwoViewModel,
                                     )
 
                                     Spacer(modifier = Modifier.height(Spacing.xs))
@@ -162,7 +158,6 @@ fun EditTermbaseDialog(
                                 else -> {
                                     CreateTermbaseWizardStepThree(
                                         modifier = Modifier.weight(1f).fillMaxWidth(),
-                                        viewModel = stepThreeViewModel,
                                     )
 
                                     Spacer(modifier = Modifier.height(Spacing.xs))

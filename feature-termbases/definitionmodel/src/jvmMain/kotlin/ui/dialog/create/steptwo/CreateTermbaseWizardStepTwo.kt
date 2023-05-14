@@ -50,23 +50,29 @@ import androidx.compose.ui.input.pointer.onPointerEvent
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.arkivanov.essenty.instancekeeper.getOrCreate
 import data.PropertyLevel
 import data.PropertyType
 import data.toReadableString
 import localized
+import org.koin.java.KoinJavaComponent.inject
 import ui.components.CustomSpinner
 import ui.components.CustomTextField
 import ui.components.StyledLabel
 import ui.components.TreeItem
 import ui.theme.Purple800
 import ui.theme.Spacing
+import utils.AppBusiness
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalComposeUiApi::class)
 @Composable
 fun CreateTermbaseWizardStepTwo(
     modifier: Modifier = Modifier,
-    viewModel: CreateTermbaseWizardStepTwoViewModel,
 ) {
+    val viewModel: CreateTermbaseWizardStepTwoViewModel = AppBusiness.instanceKeeper.getOrCreate {
+        val res: CreateTermbaseWizardStepTwoViewModel by inject(CreateTermbaseWizardStepTwoViewModel::class.java)
+        res
+    }
     val uiState by viewModel.uiState.collectAsState()
     Box(modifier = modifier) {
         Column(modifier = Modifier.padding(horizontal = Spacing.s, vertical = Spacing.s)) {

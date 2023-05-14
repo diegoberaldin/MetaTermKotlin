@@ -33,11 +33,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.rememberWindowState
+import com.arkivanov.essenty.instancekeeper.getOrCreate
 import data.LanguageModel
 import data.SearchCriterion
 import data.TermbaseModel
 import kotlinx.coroutines.launch
 import localized
+import org.koin.java.KoinJavaComponent.inject
 import ui.components.CustomSpinner
 import ui.components.CustomTextField
 import ui.components.CustomTooltipArea
@@ -45,17 +47,22 @@ import ui.components.StyledLabel
 import ui.theme.Indigo800
 import ui.theme.MetaTermTheme
 import ui.theme.Spacing
+import utils.AppBusiness
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TermFilterDialog(
     termbase: TermbaseModel,
-    viewModel: TermFilterViewModel,
     sourceLanguage: LanguageModel?,
     criteria: List<SearchCriterion> = emptyList(),
     onConfirm: (List<SearchCriterion>) -> Unit,
     onClose: () -> Unit,
 ) {
+    val viewModel: TermFilterViewModel = AppBusiness.instanceKeeper.getOrCreate {
+        val res: TermFilterViewModel by inject(TermFilterViewModel::class.java)
+        res
+    }
+
     MetaTermTheme {
         Window(
             title = "dialog_title_filter".localized(),

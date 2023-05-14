@@ -37,7 +37,7 @@ class IntroViewModel(
         viewModelScope.cancel()
     }
 
-    fun reset() {
+    fun load() {
         viewModelScope.launch(dispatcherProvider.io) {
             val values = termbaseRepository.getAll()
             termbases.value = values

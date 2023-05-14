@@ -15,16 +15,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.arkivanov.essenty.instancekeeper.getOrCreate
 import localized
+import org.koin.java.KoinJavaComponent.inject
 import ui.components.CustomDialog
 import ui.components.CustomTextField
 import ui.theme.Spacing
+import utils.AppBusiness
 
 @Composable
 fun CreateTermbaseWizardStepOne(
-    viewModel: CreateTermbaseWizardStepOneViewModel,
     modifier: Modifier = Modifier,
 ) {
+    val viewModel: CreateTermbaseWizardStepOneViewModel = AppBusiness.instanceKeeper.getOrCreate {
+        val res: CreateTermbaseWizardStepOneViewModel by inject(CreateTermbaseWizardStepOneViewModel::class.java)
+        res
+    }
     val uiState by viewModel.uiState.collectAsState()
     val errorState by viewModel.errorUiState.collectAsState()
     val languageState by viewModel.languagesUiState.collectAsState()

@@ -28,18 +28,25 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.rememberWindowState
+import com.arkivanov.essenty.instancekeeper.getOrCreate
 import data.TermbaseModel
 import localized
+import org.koin.java.KoinJavaComponent.inject
 import ui.theme.MetaTermTheme
 import ui.theme.Spacing
+import utils.AppBusiness
 
 @Composable
 fun ManageTermbasesDialog(
-    viewModel: ManageTermbasesViewModel,
     onNew: () -> Unit,
     onClose: () -> Unit,
     onEdit: (TermbaseModel) -> Unit,
 ) {
+    val viewModel: ManageTermbasesViewModel = AppBusiness.instanceKeeper.getOrCreate {
+        val res: ManageTermbasesViewModel by inject(ManageTermbasesViewModel::class.java)
+        res
+    }
+
     MetaTermTheme {
         Window(
             title = "dialog_title_manage_termbases".localized(),

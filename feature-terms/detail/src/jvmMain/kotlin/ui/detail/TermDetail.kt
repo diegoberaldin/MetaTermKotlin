@@ -30,10 +30,12 @@ import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.onPointerEvent
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.arkivanov.essenty.instancekeeper.getOrCreate
 import data.EntryModel
 import data.PropertyModel
 import data.SearchCriterion
 import localized
+import org.koin.java.KoinJavaComponent.inject
 import ui.detail.widgets.CreateButton
 import ui.detail.widgets.EntryIdWidget
 import ui.detail.widgets.LanguageTitleWidget
@@ -46,6 +48,7 @@ import ui.theme.DeepPurple800
 import ui.theme.Indigo800
 import ui.theme.Purple800
 import ui.theme.Spacing
+import utils.AppBusiness
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -54,8 +57,11 @@ fun TermDetail(
     modifier: Modifier = Modifier,
     editMode: Boolean = false,
     searchCriteria: List<SearchCriterion> = emptyList(),
-    viewModel: TermDetailViewModel,
 ) {
+    val viewModel: TermDetailViewModel = AppBusiness.instanceKeeper.getOrCreate {
+        val res: TermDetailViewModel by inject(TermDetailViewModel::class.java)
+        res
+    }
     LaunchedEffect(entry, searchCriteria) {
         viewModel.load(
             entryId = entry?.id,

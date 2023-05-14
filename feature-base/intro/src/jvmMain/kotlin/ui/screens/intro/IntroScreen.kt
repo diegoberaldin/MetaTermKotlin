@@ -13,22 +13,31 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Token
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.arkivanov.essenty.instancekeeper.getOrCreate
 import localized
+import org.koin.java.KoinJavaComponent.inject
 import ui.theme.SelectedBackground
 import ui.theme.Spacing
+import utils.AppBusiness
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun IntroScreen(
-    viewModel: IntroViewModel,
-) {
+fun IntroScreen() {
+    val viewModel: IntroViewModel = AppBusiness.instanceKeeper.getOrCreate {
+        val res: IntroViewModel by inject(IntroViewModel::class.java)
+        res
+    }
+    SideEffect {
+        viewModel.load()
+    }
+
     Column(
         modifier = Modifier.fillMaxSize()
             .background(MaterialTheme.colors.background)

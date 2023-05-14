@@ -24,17 +24,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.arkivanov.essenty.instancekeeper.getOrCreate
 import data.PropertyLevel
 import data.toReadableString
 import localized
+import org.koin.java.KoinJavaComponent.inject
 import ui.components.TreeItem
 import ui.theme.Spacing
+import utils.AppBusiness
 
 @Composable
 fun CreateTermbaseWizardStepThree(
     modifier: Modifier = Modifier,
-    viewModel: CreateTermbaseWizardStepThreeViewModel,
 ) {
+    val viewModel: CreateTermbaseWizardStepThreeViewModel = AppBusiness.instanceKeeper.getOrCreate {
+        val res: CreateTermbaseWizardStepThreeViewModel by inject(CreateTermbaseWizardStepThreeViewModel::class.java)
+        res
+    }
+
     Box(modifier = modifier) {
         Column(modifier = Modifier.padding(horizontal = Spacing.s, vertical = Spacing.s)) {
             Spacer(modifier = Modifier.height(Spacing.s))
