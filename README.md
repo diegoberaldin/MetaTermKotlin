@@ -64,3 +64,10 @@ Since this is an open field for experimentation, I am willing to accept change p
 ## Trivia
 
 The name "MetaTerm" is a pun between the name of well known commercial solutions and the Greek verb μεταφράζω meaning "to translate". This is part of a larger set of translation tools that I am creating in my spare time. If you like the idea, please check out [MetaLine](https://github.com/diegoberaldin/MetaLine) which is used for text alignment to create translation memories in TMX.
+
+## Wanna build yourself?
+
+If you are willing to compile the project yourself, this is a Gradle project so you can run Gradle tasks by using the gradlew (Gradle wrapper) executable present in the root directory of the project.
+The Gradle version used is 7.5.1 so at least Java 18 is required (reference [here](https://docs.gradle.org/current/userguide/compatibility.html)) so make sure you have a suitable version of the JDK, especially if you are using pre-bundled OpenJDK versions on GNU/Linux distros.
+
+And if you are reading this: thanks 🙏
