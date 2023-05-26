@@ -1,26 +1,29 @@
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.decodeFromStream
+import java.io.InputStream
 
-@OptIn(ExperimentalSerializationApi::class)
-class DefaultLocalization : Localization {
+internal class DefaultLocalization(
+    private val parseResource: ParseXmlResourceUseCase = DefaultParseXmlResourceUseCase()
+) : Localization {
 
     private val defaultValues: List<LocalizableString> =
-        DefaultLocalization::class.java.getResourceAsStream("l10n/en/strings.json")?.use {
-            Json.decodeFromStream(it)
+        DefaultLocalization::class.java.getResourceAsStream(getPathForL10nResource("en"))?.use {
+            load(it)
         } ?: emptyList()
     private var localizables: List<LocalizableString> = emptyList()
 
     override fun setLanguage(lang: String) {
-        localizables = DefaultLocalization::class.java.getResourceAsStream("l10n/$lang/strings.json")?.use {
-            Json.decodeFromStream(it)
+        val path = getPathForL10nResource(lang)
+        localizables = DefaultLocalization::class.java.getResourceAsStream(path)?.use {
+            load(it)
         } ?: defaultValues
     }
+
+    override fun getLanguage(): String = "lang".localized()
 
     override fun get(key: String) = localizables.firstOrNull { it.key == key }?.value
         ?: defaultValues.firstOrNull { it.key == key }?.value
         ?: key
+
+    private fun getPathForL10nResource(lang: String) = "l10n/$lang/strings.xml"
+
+    private fun load(inputStream: InputStream): List<LocalizableString> = parseResource(inputStream)
 }
-
-
-
