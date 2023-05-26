@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>	<string name="app_name">MetaTerm</string>
+	<string name="menu_termbase">Termbase</string>
+	<string name="menu_termbase_new">New…</string>
+	<string name="menu_termbase_edit">Edit…</string>
+	<string name="menu_entry_new">New entry</string>
+	<string name="menu_entry_edit">Edit</string>
+	<string name="menu_entry_save">Save</string>
+	<string name="menu_entry_close_edit">Close edit</string>
+	<string name="menu_entry_delete">Delete</string>
+	<string name="menu_termbase_manage">Manage termbases…</string>
+	<string name="menu_termbase_settings">Settings…</string>
+	<string name="menu_termbase_statistics">Statistics…</string>
+	<string name="menu_termbase_import">Import</string>
+	<string name="menu_termbase_import_csv">From CSV…</string>
+	<string name="menu_termbase_import_tbx">From TBX…</string>
+	<string name="menu_termbase_export">Export</string>
+	<string name="menu_termbase_export_csv">To CSV…</string>
+	<string name="menu_termbase_export_tbx">To TBX…</string>
+	<string name="menu_entry">Entry</string>
+	<string name="button_close">Close</string>
+	<string name="button_cancel">Cancel</string>
+	<string name="button_ok">OK</string>
+	<string name="button_prev">Previous</string>
+	<string name="button_next">Next</string>
+	<string name="button_edit">Edit</string>
+	<string name="button_delete">Delete</string>
+	<string name="button_open">Open</string>
+	<string name="button_apply">Apply</string>
+	<string name="context_menu_edit">Edit</string>
+	<string name="context_menu_delete">Delete</string>
+	<string name="status_bar_termbase">Termbase</string>
+	<string name="status_bar_entry">entry</string>
+	<string name="status_bar_entries">entries</string>
+	<string name="language_english" translatable="false">English</string>
+	<string name="language_italian" translatable="false">Italiano</string>
+	<string name="language_spanish" translatable="false">Español</string>
+	<string name="language_french" translatable="false">Français</string>
+	<string name="language_german" translatable="false">Deutsch</string>
+	<string name="language_greek" translatable="false">Ελληνικά</string>
+	<string name="language_romanian" translatable="false">Română</string>
+	<string name="language_dutch" translatable="false">Nederlands</string>
+	<string name="language_danish" translatable="false">Dansk</string>
+	<string name="language_portuguese" translatable="false">Português</string>
+	<string name="language_finnish" translatable="false">Suomi</string>
+	<string name="language_swedish" translatable="false">Svenska</string>
+	<string name="language_czech" translatable="false">Čeština</string>
+	<string name="language_estonian" translatable="false">Eesti</string>
+	<string name="language_hungarian" translatable="false">Magyar</string>
+	<string name="language_latvian" translatable="false">Latviešu</string>
+	<string name="language_lithuanian">Lietuvių</string>
+	<string name="language_maltese" translatable="false">Malti</string>
+	<string name="language_polish" translatable="false">Polski</string>
+	<string name="language_slovak" translatable="false">Slovenčina</string>
+	<string name="language_slovenian" translatable="false">Slovenščina</string>
+	<string name="language_bulgarian" translatable="false">Вългарски</string>
+	<string name="language_irish" translatable="false">Gaeilge</string>
+	<string name="language_croatian" translatable="false">Hrvatski</string>
+	<string name="toolbar_switch_languages_tooltip">Switch source and target languages</string>
+	<string name="toolbar_entry_title">Entry</string>
+	<string name="toolbar_create_entry_tooltip">Create new entry</string>
+	<string name="toolbar_delete_entry_tooltip">Delete entry</string>
+	<string name="toolbar_entry_save">Save current entry</string>
+	<string name="term_detail_add_term">Add term</string>
+	<string name="term_detail_add_property">Add property</string>
+	<string name="term_detail_title_lemma">Lemma</string>
+	<string name="term_detail_title_entry">Entry</string>
+	<string name="term_detail_title_property">Property</string>
+	<string name="dialog_title_error">Error</string>
+	<string name="dialog_title_create_termbase">Create termbase</string>
+	<string name="dialog_title_edit_termbase">Edit termbase</string>
+	<string name="create_termbase_step1_field_name">Name</string>
+	<string name="create_termbase_step1_field_description">Description</string>
+	<string name="create_termbase_step1_field_languages">Languages</string>
+	<string name="dialog_title_manage_termbases">Manage termbases</string>
+	<string name="error_missing_name">Please insert a name for the termbase</string>
+	<string name="error_missing_language">Please select at least one language</string>
+	<string name="definition_model_add_property">Add property</string>
+	<string name="definition_model_property_name">Name</string>
+	<string name="definition_model_property_type">Type</string>
+	<string name="definition_model_type_text">Text</string>
+	<string name="definition_model_type_image">Image</string>
+	<string name="definition_model_type_picklist">Picklist</string>
+	<string name="definition_model_property_picklist_values">Picklist values</string>
+	<string name="toolbar_search_title">Search</string>
+	<string name="toolbar_search_placeholder">Search…</string>
+	<string name="definition_model_property_level">Level</string>
+	<string name="property_level_entry">Entry</string>
+	<string name="property_level_language">Language</string>
+	<string name="property_level_term">Term</string>
+	<string name="toolbar_enter_edit_mode">Open edit mode</string>
+	<string name="toolbar_exit_edit_mode">Exit edit mode</string>
+	<string name="toolbar_open_filter">Change filter configuration</string>
+	<string name="empty_properties_placeholder">(no available properties)</string>
+	<string name="empty_term_placeholder">(no term)</string>
+	<string name="term_detail_button_pick_image">Pick an image</string>
+	<string name="dialog_title_select_image">Select image</string>
+	<string name="insert_value_placeholder">Insert value</string>
+	<string name="dialog_title_export">Choose export destination</string>
+	<string name="dialog_create_termbase_step_2_title">Define the entry structure for the termbase</string>
+	<string name="insert_value_placeholder">Insert</string>
+	<string name="manage_termbase_intro">Please select a termbase from the list to open and edit it.</string>
+	<string name="app_intro_title">Thank you for using MetaTerm!</string>
+	<string name="app_intro">Please open a termbase to start by choosing and item from the following list.</string>
+	<string name="app_intro_empty">It seems like you don\'t have any termbase yet.\nYou can create a new one by using the "Termbase > New…" menu to start.</string>
+	<string name="dialog_title_termbase_statistics">Termbase statistics</string>
+	<string name="dialog_statistics_section_general">General data</string>
+	<string name="dialog_statistics_section_languages">Languages</string>
+	<string name="dialog_statistics_item_total_languages">Total number of languages:</string>
+	<string name="dialog_statistics_item_total_entries">Total number of entries:</string>
+	<string name="dialog_statistics_item_total_terms">Total number or terms:</string>
+	<string name="dialog_statistics_item_language_terms">Number or terms:</string>
+	<string name="dialog_statistics_item_language_completion">Completion:</string>
+	<string name="dialog_edit_termbase_tab_1">Metadata</string>
+	<string name="dialog_edit_termbase_tab_2">Definition model</string>
+	<string name="dialog_edit_termbase_tab_3">Input model</string>
+	<string name="dialog_create_termbase_step_3_title">Choose the properties to include when creating new entries</string>
+	<string name="dialog_title_filter">Filter termbase</string>
+	<string name="dialog_filter_intro">Select the properties you wish your terms to be filtered against and configure the match filters.</string>
+	<string name="dialog_filter_property_placeholder">Please select a lemma or a property to configure the corresponding filter.</string>
+	<string name="dialog_filter_header_field_descriptor">Field descriptor</string>
+	<string name="dialog_filter_header_match_config">Match configuration</string>
+	<string name="dialog_filter_header_match_value_title">Value</string>
+	<string name="dialog_filter_header_match_value_placeholder">Insert a value</string>
+	<string name="dialog_filter_header_match_picklist_placeholder">(select a value)</string>
+	<string name="dialog_filter_message_no_filter">No filter configuration for available type</string>
+	<string name="tooltip_clear_current_filter">Clear current filter</string>
+	<string name="tooltip_clear_all_filters">Clear all filters</string>
+	<string name="definition_model_placeholder">Please select an existing property or create a new one.</string>
+	<string name="term_detail_placeholder">Please select a term to edit an exiting entry or create a new one with the "Entry > New entry" menu.</string>
+</resources>
