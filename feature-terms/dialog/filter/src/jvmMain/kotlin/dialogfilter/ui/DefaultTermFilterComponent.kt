@@ -11,10 +11,10 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import localized
-import repo.FlagsRepository
 import repo.LanguageNameRepository
 import repo.LanguageRepository
 import repo.PropertyRepository
+import usecase.GetCompleteLanguageUseCase
 import kotlin.coroutines.CoroutineContext
 
 internal class DefaultTermFilterComponent(
@@ -23,8 +23,8 @@ internal class DefaultTermFilterComponent(
     private val dispatcherProvider: CoroutineDispatcherProvider,
     private val propertyRepository: PropertyRepository,
     private val languageRepository: LanguageRepository,
-    private val flagsRepository: FlagsRepository,
     private val languageNameRepository: LanguageNameRepository,
+    private val getCompleteLanguage: GetCompleteLanguageUseCase,
 ) : TermFilterComponent, ComponentContext by componentContext {
 
     private var termbaseId: Int = 0
@@ -180,7 +180,7 @@ internal class DefaultTermFilterComponent(
                 this += FilterableItem.SectionHeader(level = PropertyLevel.LANGUAGE)
                 for (language in languages) {
                     val code = language.code
-                    val name = "${flagsRepository.getFlag(code)} ${languageNameRepository.getName(code)}"
+                    val name = getCompleteLanguage(language).name
                     this += FilterableItem.LanguageHeader(name = name, lang = code)
                     val languageProperties = properties.filter { it.level == PropertyLevel.LANGUAGE }.sortedBy { it.id }
                     for (property in languageProperties) {

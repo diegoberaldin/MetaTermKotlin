@@ -12,8 +12,7 @@ val dialogStatisticsModule = module {
             dispatcherProvider = get(),
             entryRepository = get(),
             languageRepository = get(),
-            languageNameRepository = get(),
-            flagsRepository = get(),
+            getCompleteLanguage = get(),
             termRepository = get(),
         )
     }

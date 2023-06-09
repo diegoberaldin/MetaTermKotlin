@@ -32,6 +32,7 @@ import usecase.ExportTbxUseCase
 import usecase.ImportCsvUseCase
 import usecase.ImportTbxUseCase
 import common.utils.getByInjection
+import dialogsettings.ui.SettingsComponent
 import java.io.File
 import kotlin.coroutines.CoroutineContext
 
@@ -86,6 +87,11 @@ internal class DefaultRootComponent(
                 )
 
                 RootComponent.DialogConfig.Statistics -> getByInjection<TermbaseStatisticsComponent>(
+                    context,
+                    coroutineContext
+                )
+
+                RootComponent.DialogConfig.Settings -> getByInjection<SettingsComponent>(
                     context,
                     coroutineContext
                 )

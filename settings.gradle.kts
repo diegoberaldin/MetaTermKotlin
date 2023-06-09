@@ -26,6 +26,7 @@ include(
     ":core-repository:usecase",
     ":core-localization",
     ":feature-base",
+    ":feature-base:dialog:settings",
     ":feature-base:intro",
     ":feature-base:main",
     ":feature-terms",

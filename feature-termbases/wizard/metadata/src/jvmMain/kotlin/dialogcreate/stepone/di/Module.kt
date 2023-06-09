@@ -11,8 +11,7 @@ val createTermbaseStepOneModule = module {
             coroutineContext = it[1],
             dispatcherProvider = get(),
             languageRepository = get(),
-            languageNameRepository = get(),
-            flagsRepository = get(),
+            getCompleteLanguage = get(),
         )
     }
 }

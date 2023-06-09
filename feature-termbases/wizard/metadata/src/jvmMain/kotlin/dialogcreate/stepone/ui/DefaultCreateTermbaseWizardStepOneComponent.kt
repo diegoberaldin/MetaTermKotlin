@@ -12,9 +12,8 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import localized
-import repo.FlagsRepository
-import repo.LanguageNameRepository
 import repo.LanguageRepository
+import usecase.GetCompleteLanguageUseCase
 import kotlin.coroutines.CoroutineContext
 
 internal class DefaultCreateTermbaseWizardStepOneComponent(
@@ -22,8 +21,7 @@ internal class DefaultCreateTermbaseWizardStepOneComponent(
     coroutineContext: CoroutineContext,
     private val dispatcherProvider: CoroutineDispatcherProvider,
     private val languageRepository: LanguageRepository,
-    private val languageNameRepository: LanguageNameRepository,
-    private val flagsRepository: FlagsRepository,
+    private val getCompleteLanguage: GetCompleteLanguageUseCase,
 ) : CreateTermbaseWizardStepOneComponent, ComponentContext by componentContext {
 
     private val name = MutableStateFlow("")
@@ -100,11 +98,7 @@ internal class DefaultCreateTermbaseWizardStepOneComponent(
 
     override fun reset() {
         val languages = languageRepository.getDefaultLanguages().map {
-            val flag = flagsRepository.getFlag(it.code)
-            val name = languageNameRepository.getName(it.code)
-            it.copy(
-                name = "$flag $name",
-            )
+            getCompleteLanguage(it)
         }.sortedBy { e -> e.name }
         availableLanguages.value = languages
         name.value = ""
@@ -122,9 +116,7 @@ internal class DefaultCreateTermbaseWizardStepOneComponent(
 
         viewModelScope.launch(dispatcherProvider.io) {
             val languages = languageRepository.getAll(termbase.id).map {
-                val flag = flagsRepository.getFlag(it.code)
-                val name = languageNameRepository.getName(it.code)
-                it.copy(termbaseId = 0, id = 0, name = "$flag $name")
+                getCompleteLanguage(it)
             }
             for (language in languages) {
                 selectedLanguages.update {

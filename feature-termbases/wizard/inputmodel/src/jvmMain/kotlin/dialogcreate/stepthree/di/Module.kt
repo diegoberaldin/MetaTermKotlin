@@ -12,8 +12,7 @@ val createTermbaseStepThreeModule = module {
             dispatcherProvider = get(),
             propertyRepository = get(),
             languageRepository = get(),
-            languageNameRepository = get(),
-            flagsRepository = get(),
+            getCompleteLanguage = get(),
             inputDescriptorRepository = get(),
         )
     }

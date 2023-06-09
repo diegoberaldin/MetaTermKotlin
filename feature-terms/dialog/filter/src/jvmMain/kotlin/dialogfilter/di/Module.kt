@@ -11,7 +11,7 @@ val dialogFilterModule = module {
             dispatcherProvider = get(),
             propertyRepository = get(),
             languageRepository = get(),
-            flagsRepository = get(),
+            getCompleteLanguage = get(),
             languageNameRepository = get(),
         )
     }

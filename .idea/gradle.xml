@@ -4,9 +4,6 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="delegatedBuild" value="true" />
-        <option name="testRunner" value="GRADLE" />
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleJvm" value="corretto-18" />
         <option name="modules">
@@ -24,20 +21,33 @@
             <option value="$PROJECT_DIR$/core-repository/tests" />
             <option value="$PROJECT_DIR$/core-repository/usecase" />
             <option value="$PROJECT_DIR$/feature-base" />
+            <option value="$PROJECT_DIR$/feature-base/dialog" />
             <option value="$PROJECT_DIR$/feature-base/intro" />
             <option value="$PROJECT_DIR$/feature-base/main" />
             <option value="$PROJECT_DIR$/feature-termbases" />
-            <option value="$PROJECT_DIR$/feature-termbases/create" />
-            <option value="$PROJECT_DIR$/feature-termbases/definitionmodel" />
-            <option value="$PROJECT_DIR$/feature-termbases/edit" />
-            <option value="$PROJECT_DIR$/feature-termbases/inputmodel" />
-            <option value="$PROJECT_DIR$/feature-termbases/management" />
-            <option value="$PROJECT_DIR$/feature-termbases/metadata" />
-            <option value="$PROJECT_DIR$/feature-termbases/statistics" />
+            <option value="$PROJECT_DIR$/feature-termbases/dialog" />
+            <option value="$PROJECT_DIR$/feature-termbases/dialog/create" />
+            <option value="$PROJECT_DIR$/feature-termbases/dialog/edit" />
+            <option value="$PROJECT_DIR$/feature-termbases/dialog/management" />
+            <option value="$PROJECT_DIR$/feature-termbases/dialog/statistics" />
+            <option value="$PROJECT_DIR$/feature-termbases/wizard" />
+            <option value="$PROJECT_DIR$/feature-termbases/wizard/definitionmodel" />
+            <option value="$PROJECT_DIR$/feature-termbases/wizard/inputmodel" />
+            <option value="$PROJECT_DIR$/feature-termbases/wizard/metadata" />
             <option value="$PROJECT_DIR$/feature-terms" />
             <option value="$PROJECT_DIR$/feature-terms/detail" />
-            <option value="$PROJECT_DIR$/feature-terms/filter" />
+            <option value="$PROJECT_DIR$/feature-terms/dialog" />
+            <option value="$PROJECT_DIR$/feature-terms/dialog/filter" />
             <option value="$PROJECT_DIR$/feature-terms/list" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/feature-base/dialog/settings" />
+        <option name="gradleJvm" value="corretto-18" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/feature-base/dialog/settings" />
           </set>
         </option>
       </GradleProjectSettings>

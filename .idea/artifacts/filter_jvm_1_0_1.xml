@@ -1,8 +1,8 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="filter-jvm-1.0.1">
-    <output-path>$PROJECT_DIR$/feature-terms/filter/build/libs</output-path>
+    <output-path>$PROJECT_DIR$/feature-terms/dialog/filter/build/libs</output-path>
     <root id="archive" name="filter-jvm-1.0.1.jar">
-      <element id="module-output" name="MetaTerm.feature-terms.filter.jvmMain" />
+      <element id="module-output" name="MetaTerm.feature-terms.dialog.filter.jvmMain" />
     </root>
   </artifact>
 </component>

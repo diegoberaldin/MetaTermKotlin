@@ -20,39 +20,16 @@ import androidx.compose.ui.window.MenuBar
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import base.di.baseModule
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetbrains.lifecycle.LifecycleController
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import common.di.commonModule
-import data.ExportType
-import dialogcreate.ui.CreateTermbaseComponent
-import dialogcreate.ui.CreateTermbaseWizardDialog
-import dialogedit.ui.EditTermbaseComponent
-import dialogedit.ui.EditTermbaseDialog
-import dialogmanage.ui.ManageTermbasesComponent
-import dialogmanage.ui.ManageTermbasesDialog
-import dialogstatistics.ui.TermbaseStatisticsComponent
-import dialogstatistics.ui.TermbaseStatisticsDialog
-import intro.ui.IntroComponent
-import intro.ui.IntroScreen
 import common.keystore.TemporaryKeyStore
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.runBlocking
 import common.log.LogManager
-import main.ui.MainComponent
-import main.ui.MainScreen
 import common.notification.NotificationCenter
-import org.koin.core.context.startKoin
-import org.koin.java.KoinJavaComponent.inject
-import persistence.di.databaseModule
-import repository.di.repositoryModule
-import root.di.rootModule
-import termbases.di.termbasesModule
-import terms.di.termsModule
-import ui.RootComponent
 import common.ui.components.CustomOpenFileDialog
 import common.ui.components.CustomSaveFileDialog
 import common.ui.components.CustomTabBar
@@ -61,6 +38,31 @@ import common.ui.theme.SelectedBackground
 import common.ui.theme.Spacing
 import common.utils.getByInjection
 import common.utils.runOnUiThread
+import data.ExportType
+import dialogcreate.ui.CreateTermbaseComponent
+import dialogcreate.ui.CreateTermbaseWizardDialog
+import dialogedit.ui.EditTermbaseComponent
+import dialogedit.ui.EditTermbaseDialog
+import dialogmanage.ui.ManageTermbasesComponent
+import dialogmanage.ui.ManageTermbasesDialog
+import dialogsettings.ui.SettingsComponent
+import dialogsettings.ui.SettingsDialog
+import dialogstatistics.ui.TermbaseStatisticsComponent
+import dialogstatistics.ui.TermbaseStatisticsDialog
+import intro.ui.IntroComponent
+import intro.ui.IntroScreen
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.runBlocking
+import main.ui.MainComponent
+import main.ui.MainScreen
+import org.koin.core.context.startKoin
+import persistence.di.databaseModule
+import repository.di.repositoryModule
+import root.di.rootModule
+import termbases.di.termbasesModule
+import terms.di.termsModule
+import ui.RootComponent
 import java.util.*
 
 fun initKoin() {
@@ -71,6 +73,7 @@ fun initKoin() {
             repositoryModule,
 
             rootModule,
+            baseModule,
             termbasesModule,
             termsModule,
         )
@@ -124,7 +127,7 @@ fun main() {
             val uiState by rootComponent.uiState.collectAsState()
             val dialog by rootComponent.dialog.subscribeAsState()
 
-            val notificationCenter: NotificationCenter by inject(NotificationCenter::class.java)
+            val notificationCenter: NotificationCenter = getByInjection()
 
             MenuBar {
                 Menu("menu_termbase".localized()) {
@@ -365,6 +368,16 @@ fun main() {
                             },
                         )
                     }
+                }
+
+                RootComponent.DialogConfig.Settings -> {
+                    val childComponent = dialog.child?.instance as SettingsComponent
+                    SettingsDialog(
+                        component = childComponent,
+                        onClose = {
+                            rootComponent.closeDialog()
+                        }
+                    )
                 }
 
                 else -> Unit
