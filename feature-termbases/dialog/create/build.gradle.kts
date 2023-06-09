@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.compose")
 }
 
-group = "feature.termbases"
+group = "feature.termbases.create"
 version = libs.versions.appVersion.get()
 
 repositories {
@@ -22,11 +22,9 @@ kotlin {
             dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation(compose.materialIconsExtended)
-
-                implementation(compose.foundation)
-                implementation(compose.animation)
-
                 implementation(libs.koin)
+                implementation(libs.decompose)
+                implementation(libs.decompose.extensions)
 
                 implementation(projects.coreCommon)
                 implementation(projects.coreData)
@@ -34,14 +32,9 @@ kotlin {
                 implementation(projects.coreRepository)
                 implementation(projects.coreLocalization)
 
-                api(projects.featureTermbases.dialog.statistics)
-                api(projects.featureTermbases.dialog.management)
-                api(projects.featureTermbases.dialog.create)
-                api(projects.featureTermbases.dialog.edit)
-
-                api(projects.featureTermbases.wizard.metadata)
-                api(projects.featureTermbases.wizard.definitionmodel)
-                api(projects.featureTermbases.wizard.inputmodel)
+                implementation(projects.featureTermbases.wizard.metadata)
+                implementation(projects.featureTermbases.wizard.definitionmodel)
+                implementation(projects.featureTermbases.wizard.inputmodel)
             }
         }
         val jvmTest by getting
