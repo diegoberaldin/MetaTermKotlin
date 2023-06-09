@@ -3,9 +3,9 @@ package usecase
 import data.EntryModel
 import data.TermModel
 import data.TermbaseModel
-import repository.EntryRepository
-import repository.LanguageRepository
-import repository.TermRepository
+import repo.EntryRepository
+import repo.LanguageRepository
+import repo.TermRepository
 import java.io.File
 import java.io.FileWriter
 import kotlin.math.max

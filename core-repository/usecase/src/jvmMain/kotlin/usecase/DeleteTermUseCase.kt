@@ -1,7 +1,7 @@
 package usecase
 
-import repository.TermPropertyValueRepository
-import repository.TermRepository
+import repo.TermPropertyValueRepository
+import repo.TermRepository
 
 class DeleteTermUseCase(
     private val termRepository: TermRepository,

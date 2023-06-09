@@ -24,12 +24,12 @@ kotlin {
             dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation(compose.materialIconsExtended)
-                implementation(libs.essenty.instancekeeper)
-
                 implementation(compose.foundation)
                 implementation(compose.animation)
 
                 implementation(libs.koin)
+                implementation(libs.decompose)
+                implementation(libs.decompose.extensions)
 
                 implementation(projects.coreCommon)
                 implementation(projects.coreData)
@@ -55,7 +55,7 @@ kotlin {
 
 compose.desktop {
     application {
-        mainClass = "MetaTermKt"
+        mainClass = "MainKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "MetaTerm"

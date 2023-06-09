@@ -22,7 +22,6 @@ kotlin {
             dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation(compose.materialIconsExtended)
-                implementation(libs.essenty.instancekeeper)
 
                 implementation(compose.foundation)
                 implementation(compose.animation)
@@ -35,14 +34,14 @@ kotlin {
                 implementation(projects.coreRepository)
                 implementation(projects.coreLocalization)
 
-                api(projects.featureTermbases.statistics)
-                api(projects.featureTermbases.management)
-                api(projects.featureTermbases.create)
-                api(projects.featureTermbases.edit)
+                api(projects.featureTermbases.dialog.statistics)
+                api(projects.featureTermbases.dialog.management)
+                api(projects.featureTermbases.dialog.create)
+                api(projects.featureTermbases.dialog.edit)
 
-                api(projects.featureTermbases.metadata)
-                api(projects.featureTermbases.definitionmodel)
-                api(projects.featureTermbases.inputmodel)
+                api(projects.featureTermbases.wizard.metadata)
+                api(projects.featureTermbases.wizard.definitionmodel)
+                api(projects.featureTermbases.wizard.inputmodel)
             }
         }
         val jvmTest by getting

@@ -23,6 +23,7 @@ kotlin {
                 implementation(compose.desktop.currentOs)
                 implementation(compose.materialIconsExtended)
 
+                implementation(libs.koin)
                 implementation(libs.redundent)
 
                 implementation(projects.coreCommon)

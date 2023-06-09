@@ -22,7 +22,8 @@ kotlin {
             dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation(compose.materialIconsExtended)
-                implementation(libs.essenty.instancekeeper)
+                implementation(libs.decompose)
+                implementation(libs.decompose.extensions)
 
                 implementation(compose.foundation)
                 implementation(compose.animation)
@@ -36,8 +37,8 @@ kotlin {
                 implementation(projects.coreLocalization)
 
                 api(projects.featureTerms.list)
-                api(projects.featureTerms.filter)
                 api(projects.featureTerms.detail)
+                api(projects.featureTerms.dialog.filter)
             }
         }
         val jvmTest by getting

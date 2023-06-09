@@ -28,6 +28,7 @@ kotlin {
                 implementation(projects.coreData)
                 implementation(projects.corePersistence)
                 implementation(projects.coreLocalization)
+
                 api(projects.coreRepository.repo)
                 api(projects.coreRepository.usecase)
             }

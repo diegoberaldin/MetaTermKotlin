@@ -2,7 +2,7 @@ package usecase
 
 import data.SearchCriterion
 import data.TermModel
-import repository.TermRepository
+import repo.TermRepository
 
 class SearchTermsUseCase(
     private val termRepository: TermRepository,

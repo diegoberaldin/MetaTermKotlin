@@ -9,11 +9,11 @@ import kotlinx.coroutines.CompletableDeferred
 import org.xml.sax.Attributes
 import org.xml.sax.InputSource
 import org.xml.sax.helpers.DefaultHandler
-import repository.EntryRepository
-import repository.LanguageRepository
-import repository.PropertyRepository
-import repository.TermPropertyValueRepository
-import repository.TermRepository
+import repo.EntryRepository
+import repo.LanguageRepository
+import repo.PropertyRepository
+import repo.TermPropertyValueRepository
+import repo.TermRepository
 import usecase.dto.TermWithDefinition
 import java.io.File
 import javax.xml.parsers.SAXParserFactory
