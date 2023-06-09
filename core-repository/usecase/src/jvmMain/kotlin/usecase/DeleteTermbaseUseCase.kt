@@ -3,14 +3,14 @@ package usecase
 import data.EntryModel
 import data.PropertyType
 import data.TermbaseModel
-import repository.EntryPropertyValueRepository
-import repository.EntryRepository
-import repository.LanguagePropertyValueRepository
-import repository.LanguageRepository
-import repository.PropertyRepository
-import repository.TermPropertyValueRepository
-import repository.TermRepository
-import repository.TermbaseRepository
+import repo.EntryPropertyValueRepository
+import repo.EntryRepository
+import repo.LanguagePropertyValueRepository
+import repo.LanguageRepository
+import repo.PropertyRepository
+import repo.TermPropertyValueRepository
+import repo.TermRepository
+import repo.TermbaseRepository
 import java.io.File
 
 class DeleteTermbaseUseCase(

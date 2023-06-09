@@ -22,7 +22,8 @@ kotlin {
             dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation(compose.materialIconsExtended)
-                implementation(libs.essenty.instancekeeper)
+                implementation(libs.decompose)
+                implementation(libs.decompose.extensions)
 
                 implementation(compose.foundation)
                 implementation(compose.animation)

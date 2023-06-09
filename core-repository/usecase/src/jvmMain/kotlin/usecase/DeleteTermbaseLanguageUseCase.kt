@@ -1,10 +1,10 @@
 package usecase
 
-import repository.EntryRepository
-import repository.LanguagePropertyValueRepository
-import repository.LanguageRepository
-import repository.TermPropertyValueRepository
-import repository.TermRepository
+import repo.EntryRepository
+import repo.LanguagePropertyValueRepository
+import repo.LanguageRepository
+import repo.TermPropertyValueRepository
+import repo.TermRepository
 
 class DeleteTermbaseLanguageUseCase(
     private val entryRepository: EntryRepository,

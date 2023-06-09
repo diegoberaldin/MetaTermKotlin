@@ -4,10 +4,10 @@ import data.EntryModel
 import data.PropertyLevel
 import data.TermbaseModel
 import org.redundent.kotlin.xml.xml
-import repository.EntryRepository
-import repository.PropertyRepository
-import repository.TermPropertyValueRepository
-import repository.TermRepository
+import repo.EntryRepository
+import repo.PropertyRepository
+import repo.TermPropertyValueRepository
+import repo.TermRepository
 import usecase.dto.TermWithDefinition
 import java.io.File
 import java.io.FileWriter

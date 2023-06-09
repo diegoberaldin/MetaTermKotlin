@@ -23,7 +23,7 @@ kotlin {
                 implementation(compose.desktop.currentOs)
                 implementation(compose.materialIconsExtended)
                 implementation(libs.koin)
-                implementation(libs.essenty.instancekeeper)
+                implementation(libs.decompose)
 
                 implementation(projects.coreCommon)
                 implementation(projects.coreData)
