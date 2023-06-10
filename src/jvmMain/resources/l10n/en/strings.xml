@@ -40,6 +40,10 @@
 	<string name="dialog_filter_intro">Select the properties you wish your terms to be filtered against and configure the match filters.</string>
 	<string name="dialog_filter_message_no_filter">No filter configuration for available type</string>
 	<string name="dialog_filter_property_placeholder">Please select a lemma or a property to configure the corresponding filter.</string>
+	<string name="dialog_title_settings">Settings</string>
+	<string name="dialog_settings_language">App language</string>
+	<string name="dialog_settings_spellcheck_enabled">Enable spellcheck</string>
+	<string name="dialog_settings_version">App version</string>
 	<string name="dialog_statistics_item_language_completion">Completion:</string>
 	<string name="dialog_statistics_item_language_terms">Number or terms:</string>
 	<string name="dialog_statistics_item_total_entries">Total number of entries:</string>

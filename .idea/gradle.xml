@@ -22,6 +22,7 @@
             <option value="$PROJECT_DIR$/core-repository/usecase" />
             <option value="$PROJECT_DIR$/feature-base" />
             <option value="$PROJECT_DIR$/feature-base/dialog" />
+            <option value="$PROJECT_DIR$/feature-base/dialog/settings" />
             <option value="$PROJECT_DIR$/feature-base/intro" />
             <option value="$PROJECT_DIR$/feature-base/main" />
             <option value="$PROJECT_DIR$/feature-termbases" />
@@ -39,15 +40,6 @@
             <option value="$PROJECT_DIR$/feature-terms/dialog" />
             <option value="$PROJECT_DIR$/feature-terms/dialog/filter" />
             <option value="$PROJECT_DIR$/feature-terms/list" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/feature-base/dialog/settings" />
-        <option name="gradleJvm" value="corretto-18" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/feature-base/dialog/settings" />
           </set>
         </option>
       </GradleProjectSettings>

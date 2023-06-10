@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -124,6 +125,10 @@ fun main() {
             title = "app_name".localized(),
             state = rememberWindowState(size = DpSize.Unspecified),
         ) {
+            // needed to respond to l10n changes
+            val lang by L10n.currentLanguage.collectAsState("lang".localized())
+            LaunchedEffect(lang) {}
+
             val uiState by rootComponent.uiState.collectAsState()
             val dialog by rootComponent.dialog.subscribeAsState()
 

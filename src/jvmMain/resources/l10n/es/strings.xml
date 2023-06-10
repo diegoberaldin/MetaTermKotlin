@@ -6,9 +6,9 @@
 	<string name="app_name">MetaTerm</string>
 	<string name="button_apply">Aplicar</string>
 	<string name="button_cancel">Cancelar</string>
-	<string name="button_close"/>
-	<string name="button_delete"/>
-	<string name="button_edit"/>
+	<string name="button_close">Cerrar</string>
+	<string name="button_delete">Eliminar</string>
+	<string name="button_edit">Modificar</string>
 	<string name="button_next">Siguiente</string>
 	<string name="button_ok">OK</string>
 	<string name="button_open">Abrir</string>
@@ -40,6 +40,10 @@
 	<string name="dialog_filter_intro">Seleccionar las propiedades para confrontar los términos y configurar los filtros de correspondencia.</string>
 	<string name="dialog_filter_message_no_filter">Ninguna configuración de filtro disponible para el tipo</string>
 	<string name="dialog_filter_property_placeholder">Seleccionar un lema o una propiedad para configurar el filtro correspondiente.</string>
+	<string name="dialog_title_settings">Ajustes</string>
+	<string name="dialog_settings_language">Idioma de la aplicación</string>
+	<string name="dialog_settings_spellcheck_enabled">Activar corrector ortográfico</string>
+	<string name="dialog_settings_version">Versión de la aplicación</string>
 	<string name="dialog_statistics_item_language_completion">Terminación</string>
 	<string name="dialog_statistics_item_language_terms">Número de términos:</string>
 	<string name="dialog_statistics_item_total_entries">Número total de entradas:</string>
