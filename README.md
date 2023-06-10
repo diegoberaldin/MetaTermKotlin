@@ -17,22 +17,46 @@ Entries can be filtered according to a fuzzy or exact match on their descriptive
 
 ### Entry management
 
-Entry browsing
+#### Entry browsing
+
 <img width="1552" alt="main_screen" src="https://user-images.githubusercontent.com/2738294/234402080-8a4963a3-3d86-4695-92dc-cf680a06f8ca.png">
 
-New entry
+This is the main application screen where entries can be browsed and opened.
+
+#### New entry
+
 <img width="1552" alt="new_entry" src="https://user-images.githubusercontent.com/2738294/234402245-c77d4100-6d8b-4716-ad9d-2c29f0e8e913.png">
 
-Edit entry
+When entering input mode, new entries can be added. The number of fields displayed by default without having to add terms or properties is defined in the input model (step 3 of the creation wizard). The input model can be changed at a later stage in the Edit termbase dialog.
+
+#### Edit entry
+
 <img width="1552" alt="edit_entry" src="https://user-images.githubusercontent.com/2738294/234402265-a7f3a72a-8d07-40af-8383-9b8e26deca5c.png">
 
-Filtering
+This is very similar to the input mode, but instead allows to edit existing entries adding/deleting properties or terms for individual languages.
+
+#### Filtering
+
 <img width="912" alt="dialog_filter" src="https://user-images.githubusercontent.com/2738294/234403179-4a0e59fb-3baf-49ec-a8db-f9b99ae6f7c4.png">
+
+This allows to configure filtering for the current list of entries displayed. By default the lemma of the source language is the only currently included field (with fuzzy match in the search field of the toolbar) but other fields can be included either in the global display (fuzzy or exact match) or the toolbar search (fuzzy).
 
 
 ### Statistics
 
+<div align="center">
 <img width="712" alt="dialog_statistics" src="https://user-images.githubusercontent.com/2738294/234402313-fea6f748-52b0-46ba-9c9b-14eb562cd42c.png">
+</div>
+
+This dialog shows some aggregate statistics about the current termbase, plus the completion rate of each language. A language is considered complete depending on the number of entries it appears on (synonyms or parasynonyms in a langauge are counted just once).
+
+### Settings
+
+<div align="center">
+<img width="632" alt="Schermata 2023-06-10 alle 09 13 36" src="https://github.com/diegoberaldin/MetaTerm/assets/2738294/f56bf9fb-047f-4c11-8450-1656d6db9a81">
+</div>
+  
+The settings dialog allows to change the application language (currenty supported: English, Italian and Spanish).
 
 ### Termbase management
 
@@ -52,14 +76,16 @@ Edit termbase
 This project was also created as a playground to experiment with some frameworks and libraries I wanted to learn (and play a little with). It is a pure Kotlin project taking advantage of the **Kotlin multiplatform** technology, even though no native code was needed and it's all in the JVM flavour.
 The UI layer is written in **Jetpack Compose**, using the desktop porting of the library which is still experimental (but reliable though).
 
-In order to have state and instance retention (ViewModels) in a desktop/multiplatform environment, I chose the **Decompose** library or at least, to keep things as simple as possible, the smallest subset of its functionalities that I needed, e.g. instance retention.  Dependency injection is obtained through the **Koin** framework, but as a thin layer with no annotation processing and other bells and whistles.
+In order to have state mapping and retention (aka ViewModels) and navigation in a desktop/multiplatform environment, I chose the **Decompose** library which gives the ability to create a tree or arbitrary depth of components with each layer only knowing and managing its direct subchildren. Dependency injection, on the other hand, is obtained through the **Koin** framework.
 
 The persistence layer was written with JetBrains **Exposed** ORM library, combined with the JDBC driver and an embedded **H2 database**, since it was crucial to me to keep data within the user's local machine.
 
-Since this is an open field for experimentation, I am willing to accept change proposals/suggestions and even to rewrite entire layers of the application architecture just for fun. During development I have already switched the following technologies:
+Since this is an open field for experimentation, I am willing to accept change proposals/suggestions and even to rewrite entire layers of the application architecture just for fun.
+
+During development I have already switched the following technologies:
 - SQLite ➞ H2 for persistence
 - Kodein ➞ Koin for DI
-- Precompose ➞ Decompose for MVVM and navigation
+- Precompose ➞ Decompose for MVVM and navigation (progressively, with the refactoring of #36)
 
 ## Trivia
 
