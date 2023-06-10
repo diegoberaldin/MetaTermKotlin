@@ -38,8 +38,16 @@ kotlin {
                 implementation(projects.coreRepository)
 
                 implementation(projects.featureBase)
+                implementation(projects.featureBase.intro)
+                implementation(projects.featureBase.main)
+                implementation(projects.featureBase.dialog.settings)
                 implementation(projects.featureTerms)
                 implementation(projects.featureTermbases)
+
+                implementation(projects.featureTermbases.dialog.create)
+                implementation(projects.featureTermbases.dialog.edit)
+                implementation(projects.featureTermbases.dialog.management)
+                implementation(projects.featureTermbases.dialog.statistics)
             }
         }
         val jvmTest by getting {

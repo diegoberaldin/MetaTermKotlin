@@ -34,14 +34,14 @@ kotlin {
                 implementation(projects.coreRepository)
                 implementation(projects.coreLocalization)
 
-                api(projects.featureTermbases.dialog.statistics)
-                api(projects.featureTermbases.dialog.management)
-                api(projects.featureTermbases.dialog.create)
-                api(projects.featureTermbases.dialog.edit)
+                implementation(projects.featureTermbases.dialog.statistics)
+                implementation(projects.featureTermbases.dialog.management)
+                implementation(projects.featureTermbases.dialog.create)
+                implementation(projects.featureTermbases.dialog.edit)
 
-                api(projects.featureTermbases.wizard.metadata)
-                api(projects.featureTermbases.wizard.definitionmodel)
-                api(projects.featureTermbases.wizard.inputmodel)
+                implementation(projects.featureTermbases.wizard.metadata)
+                implementation(projects.featureTermbases.wizard.definitionmodel)
+                implementation(projects.featureTermbases.wizard.inputmodel)
             }
         }
         val jvmTest by getting

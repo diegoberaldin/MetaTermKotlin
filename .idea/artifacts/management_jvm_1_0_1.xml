@@ -1,8 +1,8 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="management-jvm-1.0.1">
-    <output-path>$PROJECT_DIR$/feature-termbases/management/build/libs</output-path>
+    <output-path>$PROJECT_DIR$/feature-termbases/dialog/management/build/libs</output-path>
     <root id="archive" name="management-jvm-1.0.1.jar">
-      <element id="module-output" name="MetaTerm.feature-termbases.management.jvmMain" />
+      <element id="module-output" name="MetaTerm.feature-termbases.dialog.management.jvmMain" />
     </root>
   </artifact>
 </component>

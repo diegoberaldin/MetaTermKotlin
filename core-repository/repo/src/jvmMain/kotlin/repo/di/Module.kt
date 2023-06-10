@@ -25,45 +25,35 @@ import repo.TermbaseRepository
 
 val repoModule = module {
     single {
-        val dao: LanguageDAO by inject()
-        LanguageRepository(languageDAO = dao)
+        LanguageRepository(languageDAO = get())
     }
     single { FlagsRepository() }
     single { LanguageNameRepository() }
     single {
-        val dao: TermbaseDAO by inject()
-        TermbaseRepository(termbaseDAO = dao)
+        TermbaseRepository(termbaseDAO = get())
     }
     single {
-        val dao: EntryDAO by inject()
-        EntryRepository(entryDAO = dao)
+        EntryRepository(entryDAO = get())
     }
     single {
-        val dao: TermDAO by inject()
-        TermRepository(termDAO = dao)
+        TermRepository(termDAO = get())
     }
     single {
-        val dao: EntryPropertyValueDAO by inject()
-        EntryPropertyValueRepository(entryPropertyValueDAO = dao)
+        EntryPropertyValueRepository(entryPropertyValueDAO = get())
     }
     single {
-        val dao: LanguagePropertyValueDAO by inject()
-        LanguagePropertyValueRepository(languagePropertyValueDAO = dao)
+        LanguagePropertyValueRepository(languagePropertyValueDAO = get())
     }
     single {
-        val dao: TermPropertyValueDAO by inject()
-        TermPropertyValueRepository(termPropertyValueDAO = dao)
+        TermPropertyValueRepository(termPropertyValueDAO = get())
     }
     single {
-        val dao: PropertyDAO by inject()
-        val valueDao: PicklistValueDAO by inject()
         PropertyRepository(
-            propertyDAO = dao,
-            picklistValueDAO = valueDao,
+            propertyDAO = get(),
+            picklistValueDAO = get(),
         )
     }
     single {
-        val dao: InputDescriptorDAO by inject()
-        InputDescriptorRepository(inputDescriptorDAO = dao)
+        InputDescriptorRepository(inputDescriptorDAO = get())
     }
 }

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="dialog-jvm-1.0.1">
+    <output-path>$PROJECT_DIR$/feature-terms/dialog/build/libs</output-path>
+    <root id="archive" name="dialog-jvm-1.0.1.jar">
+      <element id="module-output" name="MetaTerm.feature-terms.dialog.jvmMain" />
+    </root>
+  </artifact>
+</component>

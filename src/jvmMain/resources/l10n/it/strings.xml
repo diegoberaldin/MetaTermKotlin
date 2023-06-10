@@ -40,6 +40,10 @@
 	<string name="dialog_filter_intro">Seleziona le proprietà su cui filtrare i termini e configura le corrispondenze sui campi.</string>
 	<string name="dialog_filter_message_no_filter">Nessuna configurazione di filtraggio disponibile per il tipo</string>
 	<string name="dialog_filter_property_placeholder">Seleziona un lemma o una proprietà per configurare il filtro corrispondente.</string>
+	<string name="dialog_title_settings">Impostazioni</string>
+	<string name="dialog_settings_language">Lingua applicazione</string>
+	<string name="dialog_settings_spellcheck_enabled">Abilita controllo ortografico</string>
+	<string name="dialog_settings_version">Versione applicazione</string>
 	<string name="dialog_statistics_item_language_completion">Completamento:</string>
 	<string name="dialog_statistics_item_language_terms">Numero di termini:</string>
 	<string name="dialog_statistics_item_total_entries">Numero totale di schede:</string>

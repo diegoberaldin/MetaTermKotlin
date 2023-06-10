@@ -4,21 +4,16 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.essenty.lifecycle.doOnCreate
 import com.arkivanov.essenty.lifecycle.doOnDestroy
 import common.coroutines.CoroutineDispatcherProvider
-import data.InputDescriptorModel
-import data.LanguageModel
-import data.PropertyLevel
-import data.PropertyModel
-import data.TermbaseModel
+import data.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import repo.FlagsRepository
 import repo.InputDescriptorRepository
-import repo.LanguageNameRepository
 import repo.LanguageRepository
 import repo.PropertyRepository
+import usecase.GetCompleteLanguageUseCase
 import kotlin.coroutines.CoroutineContext
 
 internal class DefaultCreateTermbaseWizardStepThreeComponent(
@@ -27,8 +22,7 @@ internal class DefaultCreateTermbaseWizardStepThreeComponent(
     private val dispatcherProvider: CoroutineDispatcherProvider,
     private val propertyRepository: PropertyRepository,
     private val languageRepository: LanguageRepository,
-    private val languageNameRepository: LanguageNameRepository,
-    private val flagsRepository: FlagsRepository,
+    private val getCompleteLanguage: GetCompleteLanguageUseCase,
     private val inputDescriptorRepository: InputDescriptorRepository,
 ) : CreateTermbaseWizardStepThreeComponent, ComponentContext by componentContext {
 
@@ -94,7 +88,7 @@ internal class DefaultCreateTermbaseWizardStepThreeComponent(
                 this += CreateTermbaseWizardStepThreeItem.SectionHeader(level = PropertyLevel.LANGUAGE)
                 for (language in languages) {
                     val code = language.code
-                    val name = "${flagsRepository.getFlag(code)} ${languageNameRepository.getName(code)}"
+                    val name = getCompleteLanguage(language).name
                     this += CreateTermbaseWizardStepThreeItem.LanguageHeader(name = name, lang = code)
                     val languageProperties = properties.filter { it.level == PropertyLevel.LANGUAGE }.sortedBy { it.id }
                     for (property in languageProperties) {

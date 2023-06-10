@@ -34,8 +34,9 @@ kotlin {
                 implementation(projects.coreRepository)
                 implementation(projects.coreLocalization)
 
-                api(projects.featureBase.intro)
-                api(projects.featureBase.main)
+                implementation(projects.featureBase.intro)
+                implementation(projects.featureBase.main)
+                implementation(projects.featureBase.dialog.settings)
             }
         }
         val jvmTest by getting

@@ -1,8 +1,8 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="edit-jvm-1.0.1">
-    <output-path>$PROJECT_DIR$/feature-termbases/edit/build/libs</output-path>
+    <output-path>$PROJECT_DIR$/feature-termbases/dialog/edit/build/libs</output-path>
     <root id="archive" name="edit-jvm-1.0.1.jar">
-      <element id="module-output" name="MetaTerm.feature-termbases.edit.jvmMain" />
+      <element id="module-output" name="MetaTerm.feature-termbases.dialog.edit.jvmMain" />
     </root>
   </artifact>
 </component>

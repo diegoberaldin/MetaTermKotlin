@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import localized
 import repo.*
+import usecase.GetCompleteLanguageUseCase
 import kotlin.coroutines.CoroutineContext
 
 internal class DefaultTermbaseStatisticsComponent(
@@ -20,8 +21,7 @@ internal class DefaultTermbaseStatisticsComponent(
     private val dispatcherProvider: CoroutineDispatcherProvider,
     private val entryRepository: EntryRepository,
     private val languageRepository: LanguageRepository,
-    private val languageNameRepository: LanguageNameRepository,
-    private val flagsRepository: FlagsRepository,
+    private val getCompleteLanguage: GetCompleteLanguageUseCase,
     private val termRepository: TermRepository,
 ) : TermbaseStatisticsComponent, ComponentContext by componentContext {
 
@@ -57,11 +57,7 @@ internal class DefaultTermbaseStatisticsComponent(
         loading.value = true
         viewModelScope.launch(dispatcherProvider.io) {
             val languages = languageRepository.getAll(termbaseId).map {
-                val name = languageNameRepository.getName(it.code)
-                val flag = flagsRepository.getFlag(it.code)
-                it.copy(
-                    name = "$flag $name",
-                )
+               getCompleteLanguage(it)
             }.sortedBy { it.code }
             items.update {
                 buildList {
