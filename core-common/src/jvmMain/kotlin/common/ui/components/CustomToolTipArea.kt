@@ -15,15 +15,23 @@ import common.ui.theme.Spacing
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CustomTooltipArea(text: String, content: @Composable () -> Unit) {
-    TooltipArea(tooltip = {
-        Text(
-            modifier = Modifier
-                .background(color = Color.DarkGray, shape = RoundedCornerShape(4.dp))
-                .padding(Spacing.s),
-            text = text,
-            style = MaterialTheme.typography.caption,
-            color = Color.White,
-        )
-    }, content = content)
+fun CustomTooltipArea(
+    text: String,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    TooltipArea(
+        modifier = modifier,
+        tooltip = {
+            Text(
+                modifier = Modifier
+                    .background(color = Color.DarkGray, shape = RoundedCornerShape(4.dp))
+                    .padding(Spacing.s),
+                text = text,
+                style = MaterialTheme.typography.caption,
+                color = Color.White,
+            )
+        },
+        content = content,
+    )
 }
